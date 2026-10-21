@@ -1,0 +1,303 @@
+/* ═══════════════════════════════════════════════════════════════
+   TEMAS DE COLOR DE OPENLEAF (paleta centralizada)
+   ───────────────────────────────────────────────────────────────
+   Aquí viven las variables de acento y borde que usan la landing,
+   los modales, la barra de StreamVerse, el reproductor flotante y el
+   panel de administración. El tema activo se aplica con el atributo
+   data-theme en <html> (lo gestiona ThemeContext).
+
+   IMPORTANTE: GameZone NO usa estas variables (tiene su propio
+   gamezone.css con colores fijos), así que su diseño no cambia.
+
+   Los temas "purpura" y "azul" comparten el mismo fondo oscuro y solo
+   cambian el matiz de los acentos. El tema "claro" invierte las
+   superficies a tonos claros (ver bloque final).
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Tema por defecto / morado (el actual) ── */
+:root,
+[data-theme="purpura"] {
+  --sv-primary: #6366f1;
+  --sv-purple: #8b5cf6;
+  --sv-pink: #ec4899;
+  --sv-violeta: #a78bfa;
+  --sv-dark: #050810;
+  --sv-glass: rgba(15, 18, 35, .82);
+  --sv-border: rgba(102, 126, 234, .18);
+  --sv-grad: linear-gradient(135deg, #667eea, #764ba2);
+
+  /* Canales RGB para construir tintes: rgba(var(--x), opacidad) */
+  --sv-accent-rgb: 99, 102, 241;
+  --sv-accent2-rgb: 139, 92, 246;
+  --sv-violeta-rgb: 167, 139, 250;
+  --sv-pink-rgb: 236, 72, 153;
+  --sv-accent-light: #a5b4fc;
+  --sv-accent-light2: #c084fc;
+}
+
+/* ── Tema azul neón (misma luminosidad que el morado, solo cambia el matiz) ── */
+[data-theme="azul"] {
+  --sv-primary: #3b82f6;
+  --sv-purple: #0ea5e9;
+  --sv-pink: #22d3ee;
+  --sv-violeta: #60a5fa;
+  --sv-dark: #050810;
+  --sv-glass: rgba(10, 20, 38, .82);
+  --sv-border: rgba(59, 130, 246, .20);
+  --sv-grad: linear-gradient(135deg, #3b82f6, #0ea5e9);
+
+  --sv-accent-rgb: 59, 130, 246;
+  --sv-accent2-rgb: 14, 165, 233;
+  --sv-violeta-rgb: 96, 165, 250;
+  --sv-pink-rgb: 34, 211, 238;
+  --sv-accent-light: #93c5fd;
+  --sv-accent-light2: #67e8f9;
+}
+
+/* ── Utilidades de acento (para JSX que necesita colores del tema) ── */
+.sv-accent-text { color: var(--sv-primary); }
+.sv-accent-soft { color: var(--sv-accent-light); }
+.sv-accent-border { border-color: rgba(var(--sv-accent-rgb), .25); }
+.sv-accent-ring { border-color: rgba(var(--sv-accent-rgb), .4); }
+.sv-accent-bg { background: rgba(var(--sv-accent-rgb), .1); }
+
+/* ═══════════════════════════════════════════════════════════════
+   TEMA CLARO
+   ───────────────────────────────────────────────────────────────
+   Invierte las superficies oscuras de OpenLeaf a tonos claros.
+   Solo afecta a la app de streaming/admin y a la landing
+   (.sv-root / .op-landing-root). GameZone (.gz-root) conserva su
+   diseño oscuro porque no está dentro de esos contenedores y sus
+   clases tienen prefijo gz-.
+   ═══════════════════════════════════════════════════════════════ */
+
+[data-theme="claro"] {
+  --sv-primary: #4f46e5;
+  --sv-purple: #7c3aed;
+  --sv-pink: #db2777;
+  --sv-violeta: #6d28d9;
+  --sv-dark: #eef2ff;
+  --sv-glass: rgba(255, 255, 255, .86);
+  --sv-border: rgba(79, 70, 229, .18);
+  --sv-grad: linear-gradient(135deg, #4f46e5, #7c3aed);
+
+  --sv-accent-rgb: 79, 70, 229;
+  --sv-accent2-rgb: 124, 58, 237;
+  --sv-violeta-rgb: 109, 40, 217;
+  --sv-pink-rgb: 219, 39, 119;
+  --sv-accent-light: #4338ca;
+  --sv-accent-light2: #6d28d9;
+}
+
+/* ── Lienzo de la app ── */
+[data-theme="claro"] .sv-root {
+  background: #eef2ff !important;
+  color: #1e293b;
+}
+
+[data-theme="claro"] .sv-bg { background: #eef2ff; }
+[data-theme="claro"] .sv-bg .sv-orb { opacity: .4; }
+[data-theme="claro"] .sv-bg .sv-particles { opacity: .5; }
+[data-theme="claro"] .sv-bg .sv-grid-lines { opacity: .45; }
+
+/* ── Superficies ── */
+[data-theme="claro"] .sv-quick-card,
+[data-theme="claro"] .sv-sidebar,
+[data-theme="claro"] .sv-section,
+[data-theme="claro"] .sv-flip-front,
+[data-theme="claro"] .sv-modal-card,
+[data-theme="claro"] .sv-lbox-card,
+[data-theme="claro"] .sv-user-drop,
+[data-theme="claro"] .sv-drawer,
+[data-theme="claro"] .sv-toast {
+  background: #ffffff;
+  color: #1e293b;
+}
+
+[data-theme="claro"] .sv-video-card,
+[data-theme="claro"] .sv-music-card { background: #f8fafc; }
+
+[data-theme="claro"] .sv-flip-back {
+  background: linear-gradient(145deg, #ffffff, #eef2ff);
+  color: #1e293b;
+}
+
+[data-theme="claro"] .sv-footer,
+[data-theme="claro"] .sv-root footer { background: #e8ecf9 !important; }
+
+/* ── Títulos y textos ── */
+[data-theme="claro"] .sv-section-title,
+[data-theme="claro"] .sv-card-title,
+[data-theme="claro"] .sv-back-title,
+[data-theme="claro"] .sv-feat h6,
+[data-theme="claro"] .sv-platform-title,
+[data-theme="claro"] .sv-modal-title,
+[data-theme="claro"] .sv-lbox-title,
+[data-theme="claro"] .sv-drawer-brand,
+[data-theme="claro"] .sv-footer-brand-title,
+[data-theme="claro"] .sv-theme-name {
+  color: #0f172a;
+}
+
+[data-theme="claro"] .sv-card-desc,
+[data-theme="claro"] .sv-back-desc,
+[data-theme="claro"] .sv-feat p,
+[data-theme="claro"] .sv-platform-desc,
+[data-theme="claro"] .sv-modal-sub,
+[data-theme="claro"] .sv-lbox-desc,
+[data-theme="claro"] .sv-page-header p,
+[data-theme="claro"] .sv-footer-desc,
+[data-theme="claro"] .sv-footer-bottom,
+[data-theme="claro"] .sv-theme-desc {
+  color: #475569;
+}
+
+/* Los degradados con blanco se ven invisibles sobre claro: texto sólido. */
+[data-theme="claro"] .sv-hero-title,
+[data-theme="claro"] .sv-page-header h1 {
+  background: none;
+  -webkit-text-fill-color: currentColor;
+  color: #0f172a;
+}
+
+/* ── Navegación y controles ── */
+[data-theme="claro"] .nav-link,
+[data-theme="claro"] .sv-sidebar-link,
+[data-theme="claro"] .sv-drawer-link,
+[data-theme="claro"] .sv-user-item,
+[data-theme="claro"] .sv-admin-link,
+[data-theme="claro"] .sv-filter-pill,
+[data-theme="claro"] .sv-admin-mini,
+[data-theme="claro"] .sv-quick-card,
+[data-theme="claro"] .sv-icon-btn,
+[data-theme="claro"] .sv-search-input,
+[data-theme="claro"] .sv-modal-close,
+[data-theme="claro"] .sv-lbox-close,
+[data-theme="claro"] .sv-drawer-close,
+[data-theme="claro"] .sv-eye,
+[data-theme="claro"] .sv-footer-link,
+[data-theme="claro"] .sv-footer-heading,
+[data-theme="claro"] .sv-social {
+  color: #475569;
+}
+
+[data-theme="claro"] .nav-link:hover,
+[data-theme="claro"] .nav-link.active,
+[data-theme="claro"] .sv-quick-card:hover,
+[data-theme="claro"] .sv-sidebar-link:hover,
+[data-theme="claro"] .sv-drawer-link:hover,
+[data-theme="claro"] .sv-user-item:hover,
+[data-theme="claro"] .sv-admin-link:hover,
+[data-theme="claro"] .sv-admin-mini:hover,
+[data-theme="claro"] .sv-filter-pill:hover,
+[data-theme="claro"] .sv-icon-btn:hover,
+[data-theme="claro"] .sv-footer-link:hover {
+  color: #0f172a;
+}
+
+[data-theme="claro"] .nav-link.active,
+[data-theme="claro"] .sv-footer-link:hover { color: var(--sv-primary); }
+
+/* ── Formularios ── */
+[data-theme="claro"] .sv-input,
+[data-theme="claro"] .form-control,
+[data-theme="claro"] .form-select {
+  background: #ffffff;
+  color: #0f172a;
+}
+
+[data-theme="claro"] .sv-input::placeholder,
+[data-theme="claro"] .form-control::placeholder { color: #94a3b8; }
+
+[data-theme="claro"] .sv-input option,
+[data-theme="claro"] .form-select option { background: #ffffff; color: #0f172a; }
+
+[data-theme="claro"] .sv-label,
+[data-theme="claro"] .form-label,
+[data-theme="claro"] .sv-check,
+[data-theme="claro"] .sv-note,
+[data-theme="claro"] .sv-divider p,
+[data-theme="claro"] .sv-drop-ui,
+[data-theme="claro"] .sv-range-labels { color: #475569; }
+
+/* ── Tablas del panel ── */
+[data-theme="claro"] .sv-admin-table th { color: #475569; }
+[data-theme="claro"] .sv-admin-table td { color: #334155; border-bottom-color: rgba(100, 116, 139, .18); }
+[data-theme="claro"] .sv-admin-table tr:hover td { background: rgba(79, 70, 229, .06); }
+
+/* ── Utilidades Tailwind con colores pensados para fondo oscuro ──
+   Se limitan a .sv-root / .op-landing-root para no tocar GameZone. */
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="bg-[rgba(15,18,35"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="bg-[rgba(12,15,30"] {
+  background: #ffffff !important;
+}
+
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#cbd5e1]"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#e2e8f0]"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-slate-100"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-slate-200"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-slate-300"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-gray-100"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-gray-200"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-gray-300"] {
+  color: #0f172a !important;
+}
+
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#94a3b8]"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[rgba(148,163,184"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-slate-400"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-gray-400"] {
+  color: #475569 !important;
+}
+
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#64748b]"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-slate-500"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-gray-500"] {
+  color: #64748b !important;
+}
+
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#a5b4fc]"],
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [class*="text-[#8ea2ff]"] {
+  color: #4338ca !important;
+}
+
+/* text-white: oscuro por defecto; blanco solo sobre fondos de color inline
+   (insignias de marca, promo) para no perder contraste. */
+[data-theme="claro"] :is(.sv-root, .op-landing-root) .text-white { color: #0f172a !important; }
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [style*="background"] .text-white,
+[data-theme="claro"] :is(.sv-root, .op-landing-root) [style*="background"].text-white,
+[data-theme="claro"] :is(.sv-root, .op-landing-root) .sv-sidebar-promo .text-white {
+  color: #ffffff !important;
+}
+
+[data-theme="claro"] :is(.sv-root, .op-landing-root) .hover\:text-white:hover {
+  color: #0f172a !important;
+}
+
+/* ── Landing pública ── */
+[data-theme="claro"] .op-landing-root {
+  --op-bg: #f5f7ff;
+  --op-texto: #1e293b;
+  --op-suave: #475569;
+}
+
+[data-theme="claro"] .op-landing-root::before { opacity: .35; }
+[data-theme="claro"] .op-topbar { background: rgba(255, 255, 255, .86); }
+[data-theme="claro"] .op-topbar-link:hover { color: #0f172a; }
+[data-theme="claro"] .op-stream-card,
+[data-theme="claro"] .op-step { background: #ffffff; }
+[data-theme="claro"] .op-gamezone { background: linear-gradient(180deg, rgba(255, 255, 255, .8), rgba(238, 242, 255, .92)); }
+[data-theme="claro"] .op-cover-card { background: linear-gradient(160deg, #ffffff, #eef2ff); }
+[data-theme="claro"] .op-cover-meta { background: linear-gradient(180deg, transparent, rgba(238, 242, 255, .95)); }
+[data-theme="claro"] .op-footer { background: #e8ecf9; }
+
+/* ── Reproductor flotante ── */
+[data-theme="claro"] .op-player-shell {
+  background: linear-gradient(180deg, #ffffff, #eef2ff);
+  color: #1e293b;
+  box-shadow: 0 18px 48px rgba(30, 41, 59, .16);
+}
+
+[data-theme="claro"] .op-player-title { color: #0f172a; }
+[data-theme="claro"] .op-player-sub,
+[data-theme="claro"] .op-player-time { color: #475569; }

@@ -1,0 +1,93 @@
+
+
+/* Body: radial gradients + noise */
+body {
+    background-color: #080808;
+    background-image:
+        radial-gradient(circle at 20% 30%, rgba(187, 134, 252, .15) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(3, 218, 198, .12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 50%, rgba(153, 101, 244, .08) 0%, transparent 60%);
+    background-attachment: fixed;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: .04;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Sidebar link: cubic-bezier custom */
+.sidebar-link {
+    transition: all .35s cubic-bezier(.175, .885, .32, 1.275);
+}
+
+.sidebar-link:hover {
+    transform: translateX(7px);
+}
+
+/* Lightbox y Modal: :target no existe en Tailwind */
+.lightbox {
+    opacity: 0;
+    pointer-events: none;
+    transition: all .5s cubic-bezier(.4, 0, .2, 1);
+}
+
+.lightbox:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.lb-img {
+    transform: scale(.88);
+    transition: transform .5s ease;
+}
+
+.lightbox:target .lb-img {
+    transform: scale(1);
+}
+
+.modal-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: .3s ease;
+}
+
+.modal-overlay:target {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(.92)
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1)
+    }
+}
+
+.modal-box {
+    animation: zoomIn .3s ease;
+}
+
+/* Animaciones de entrada */
+@keyframes slideRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

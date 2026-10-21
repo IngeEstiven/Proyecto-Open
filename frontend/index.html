@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      (function () {
+        try {
+          var tema = localStorage.getItem('openleaf-theme');
+          if (tema !== 'azul' && tema !== 'purpura' && tema !== 'claro') tema = 'purpura';
+          document.documentElement.setAttribute('data-theme', tema);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'purpura');
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="preconnect" href="https://www.google.com" />
+    <title>OpenLeaf — Entretenimiento y videojuegos</title>
+    <link rel="icon" type="image/png" href="/img/streaming/logo.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;700;900&family=Rajdhani:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

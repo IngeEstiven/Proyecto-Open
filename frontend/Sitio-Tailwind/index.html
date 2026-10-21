@@ -1,0 +1,1312 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameZone | Tu portal de Videojuegos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/index.css" />
+  </head>
+
+  <body class="min-h-screen overflow-x-hidden text-gray-200 font-sans">
+    <!-- INTRO SCREEN -->
+    <div id="intro-screen">
+      <span class="intro-logo"
+        ><i class="bi bi-joystick" style="margin-right: 10px"></i>GameZone</span
+      >
+      <div class="intro-bar"></div>
+      <span class="intro-sub">Cargando experiencia gamer...</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav
+      class="sticky top-0 z-50 h-[68px] flex items-center bg-black/75 backdrop-blur-2xl border-b border-primary/25 shadow-[0_4px_30px_rgba(0,0,0,.6)]"
+    >
+      <div class="w-full px-5 flex items-center justify-between">
+        <a
+          href="index.html"
+          class="flex items-center gap-2 font-display text-3xl tracking-widest text-primary drop-shadow-[0_0_14px_rgba(187,134,252,.6)]"
+        >
+          <i class="bi bi-joystick text-2xl"></i>GameZone
+        </a>
+        <button
+          id="navToggle"
+          class="lg:hidden border border-primary/40 rounded p-1 text-gray-200"
+        >
+          <i class="bi bi-list text-2xl"></i>
+        </button>
+        <ul
+          id="navMenu"
+          class="hidden lg:flex flex-col lg:flex-row items-start lg:items-center gap-1 absolute lg:static top-[68px] left-0 w-full lg:w-auto bg-black/95 lg:bg-transparent px-4 lg:px-0 py-3 lg:py-0 z-50"
+        >
+          <li>
+            <a
+              href="#modal-mapa"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              ><i class="bi bi-geo-alt-fill"></i> Encuéntranos</a
+            >
+          </li>
+          <li>
+            <a
+              href="https://steamcommunity.com/?l=spanish"
+              target="_blank"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              ><i class="bi bi-steam me-1"></i>Steam</a
+            >
+          </li>
+          <li>
+            <a
+              href="index.html"
+              class="block px-3 py-2 text-sm font-bold rounded border border-primary text-primary bg-primary/10 shadow-[0_0_10px_rgba(187,134,252,.4)]"
+              >Inicio</a
+            >
+          </li>
+          <li>
+            <a
+              href="accion.html"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              >Acción</a
+            >
+          </li>
+          <li>
+            <a
+              href="terror.html"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              >Terror</a
+            >
+          </li>
+          <li>
+            <a
+              href="deportes.html"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              >Deportes</a
+            >
+          </li>
+          <li>
+            <a
+              href="cooperativo.html"
+              class="block px-3 py-2 text-sm font-bold rounded border border-transparent transition-all hover:text-primary hover:bg-primary/10 hover:border-primary"
+              >Co-op</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- FULL-WIDTH HEADER -->
+    <header class="site-header">
+      <div class="header-bg"></div>
+
+      <!-- header-content: estilos en CSS porque necesita padding responsivo complejo -->
+      <div class="header-content">
+        <!-- eyebrow: animación en CSS, estilos visuales con Tailwind -->
+        <span
+          class="header-eyebrow inline-flex items-center gap-2 font-sans text-[.72rem] font-bold tracking-[4px] uppercase text-accent border-l-[3px] border-accent pl-2.5 mb-3.5"
+        >
+          <i class="bi bi-controller"></i> Portal de Videojuegos &mdash; 2026
+        </span>
+
+        <!-- title: animación en CSS, estilos visuales con Tailwind -->
+        <h1
+          class="header-title font-display leading-none tracking-widest text-white mb-4"
+          style="
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            text-shadow:
+              0 0 60px rgba(187, 134, 252, 0.4),
+              0 4px 20px rgba(0, 0, 0, 0.9);
+          "
+        >
+          <span class="text-primary">Zona</span><br />Gamer
+        </h1>
+
+        <p
+          class="header-desc font-sans text-base text-white/60 leading-relaxed max-w-[460px] mb-6"
+        >
+          Explora nuestra colección con los mejores títulos del gaming.
+          Analizamos jugabilidad, gráficos e historia para traerte solo lo
+          mejor.
+        </p>
+
+        <div class="header-badges flex flex-wrap gap-2">
+          <span
+            class="inline-flex items-center gap-1 border border-accent text-accent bg-accent/10 rounded-full px-4 py-1 text-xs font-bold font-sans tracking-wide transition-all hover:bg-accent/20 hover:shadow-[0_0_16px_rgba(3,218,198,.4)]"
+            ><i class="bi bi-joystick"></i> 12 Juegos</span
+          >
+          <span
+            class="inline-flex items-center gap-1 border border-accent text-accent bg-accent/10 rounded-full px-4 py-1 text-xs font-bold font-sans tracking-wide transition-all hover:bg-accent/20 hover:shadow-[0_0_16px_rgba(3,218,198,.4)]"
+            ><i class="bi bi-star-fill"></i> Top Rated</span
+          >
+          <span
+            class="inline-flex items-center gap-1 border border-accent text-accent bg-accent/10 rounded-full px-4 py-1 text-xs font-bold font-sans tracking-wide transition-all hover:bg-accent/20 hover:shadow-[0_0_16px_rgba(3,218,198,.4)]"
+            ><i class="bi bi-lightning-fill"></i> Actualizado 2026</span
+          >
+          <span
+            class="inline-flex items-center gap-1 border border-accent text-accent bg-accent/10 rounded-full px-4 py-1 text-xs font-bold font-sans tracking-wide transition-all hover:bg-accent/20 hover:shadow-[0_0_16px_rgba(3,218,198,.4)]"
+            ><i class="bi bi-globe"></i> Multi-plataforma</span
+          >
+        </div>
+      </div>
+
+      <!-- SEARCH BAR: posicionamiento absoluto + animación en CSS -->
+      <div
+        class="header-search-wrap absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-[4] flex-col items-center gap-2.5 w-[340px]"
+      >
+        <span
+          class="font-sans text-[.65rem] font-bold tracking-[3px] uppercase text-white/35"
+        >
+          <i class="bi bi-search me-1"></i>Buscar juego
+        </span>
+        <div class="search-box relative w-full">
+          <input
+            type="text"
+            id="gameSearch"
+            placeholder="Ej: God of War, FIFA..."
+            autocomplete="off"
+            class="w-full bg-black/55 border border-primary/35 rounded-full py-3 pl-5 pr-12 font-sans text-[.95rem] font-semibold text-white outline-none backdrop-blur-xl placeholder:text-white/30 transition-all focus:border-primary focus:shadow-[0_0_20px_rgba(187,134,252,.35),0_0_40px_rgba(187,134,252,.1)]"
+          />
+          <i
+            class="bi bi-search search-icon absolute right-4 top-1/2 -translate-y-1/2 text-primary/60 pointer-events-none transition-colors"
+          ></i>
+        </div>
+        <span
+          id="searchCount"
+          class="font-sans text-[.72rem] font-semibold text-accent/70 tracking-wide min-h-[18px]"
+        ></span>
+      </div>
+
+      <!-- FLOATING DECO: posicionamiento y animaciones en CSS -->
+      <div class="header-deco absolute right-20 top-1/2 -translate-y-1/2 z-[3]">
+        <div class="header-deco-ring"></div>
+        <div class="header-deco-ring2"></div>
+        <i class="bi bi-controller header-deco-icon"></i>
+      </div>
+
+      <!-- STATS STRIP: posicionamiento absoluto en CSS, estilos con Tailwind -->
+      <div
+        class="header-stats-strip absolute bottom-0 left-0 right-0 z-[3] flex border-t border-primary/15 bg-black/60 backdrop-blur-xl"
+      >
+        <div class="flex-1 text-center py-3 px-4 border-r border-white/[.07]">
+          <span
+            class="block font-display text-[1.55rem] text-primary tracking-widest leading-none"
+            >12</span
+          >
+          <span
+            class="font-sans text-[.58rem] text-white/40 uppercase tracking-widest"
+            >Juegos</span
+          >
+        </div>
+        <div class="flex-1 text-center py-3 px-4 border-r border-white/[.07]">
+          <span
+            class="block font-display text-[1.55rem] text-primary tracking-widest leading-none"
+            >5</span
+          >
+          <span
+            class="font-sans text-[.58rem] text-white/40 uppercase tracking-widest"
+            >Categorías</span
+          >
+        </div>
+        <div class="flex-1 text-center py-3 px-4 border-r border-white/[.07]">
+          <span
+            class="block font-display text-[1.55rem] text-primary tracking-widest leading-none"
+            >9.8</span
+          >
+          <span
+            class="font-sans text-[.58rem] text-white/40 uppercase tracking-widest"
+            >Puntuación máx.</span
+          >
+        </div>
+        <div class="flex-1 text-center py-3 px-4 border-r border-white/[.07]">
+          <span
+            class="block font-display text-[1.55rem] text-primary tracking-widest leading-none"
+            >4</span
+          >
+          <span
+            class="font-sans text-[.58rem] text-white/40 uppercase tracking-widest"
+            >Plataformas</span
+          >
+        </div>
+        <div class="flex-1 text-center py-3 px-4">
+          <span
+            class="block font-display text-[1.55rem] text-primary tracking-widest leading-none"
+            >2026</span
+          >
+          <span
+            class="font-sans text-[.58rem] text-white/40 uppercase tracking-widest"
+            >Temporada</span
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- LAYOUT -->
+    <div class="flex">
+      <!-- SIDEBAR TOGGLE -->
+      <button id="sidebarToggle">
+        <i id="sidebarToggleIcon" class="bi bi-layout-sidebar"></i>
+        <span class="toggle-label"></span>
+      </button>
+
+      <!-- SIDEBAR -->
+      <aside
+        class="gz-sidebar hidden md:flex flex-col sticky top-[68px] h-[calc(100vh-68px)] w-[240px] shrink-0 overflow-y-auto bg-[rgba(12,12,12,.88)] backdrop-blur-lg border-r border-primary/20 px-4 py-6"
+      >
+        <p
+          class="text-accent text-[.68rem] uppercase tracking-[3px] pb-3 border-b border-accent/25 mb-4 font-bold"
+        >
+          Categorías
+        </p>
+
+        <nav class="flex flex-col gap-1.5">
+          <a
+            href="index.html"
+            class="sidebar-link flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold border-l-4 border-primary bg-gradient-to-r from-primary/15 to-transparent text-primary"
+          >
+            <i class="bi bi-grid-fill"></i>Todos los Juegos</a
+          >
+          <a
+            href="accion.html"
+            class="sidebar-link flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold border-l-4 border-transparent bg-white/[.04] text-gray-400 hover:border-accent hover:bg-accent/10 hover:text-white"
+          >
+            <i class="bi bi-crosshair"></i>Acción / Shooter</a
+          >
+          <a
+            href="terror.html"
+            class="sidebar-link flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold border-l-4 border-transparent bg-white/[.04] text-gray-400 hover:border-accent hover:bg-accent/10 hover:text-white"
+          >
+            <i class="bi bi-moon-stars"></i>Terror / Suspenso</a
+          >
+          <a
+            href="deportes.html"
+            class="sidebar-link flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold border-l-4 border-transparent bg-white/[.04] text-gray-400 hover:border-accent hover:bg-accent/10 hover:text-white"
+          >
+            <i class="bi bi-trophy"></i>Deportes / Carreras</a
+          >
+          <a
+            href="cooperativo.html"
+            class="sidebar-link flex items-center gap-2 px-3 py-2.5 rounded-lg text-sm font-semibold border-l-4 border-transparent bg-white/[.04] text-gray-400 hover:border-accent hover:bg-accent/10 hover:text-white"
+          >
+            <i class="bi bi-people"></i>Co-op / Puzzle</a
+          >
+        </nav>
+
+        <div
+          class="mt-auto bg-white/[.04] border border-primary/25 rounded-xl p-3.5"
+        >
+          <span class="block text-gray-400 mb-1 text-xs"
+            ><i class="bi bi-award-fill me-1" style="color: gold"></i>GOTY
+            2025</span
+          >
+          <span
+            class="text-primary font-display text-xl tracking-widest leading-snug"
+            >Clair Obscur:<br />Expedition 33</span
+          >
+        </div>
+      </aside>
+
+      <!-- MAIN -->
+      <main class="flex-1 p-4 xl:p-8 min-w-0">
+        <div class="section-heading-wrap flex items-center gap-3 mb-5">
+          <i class="bi bi-grid-3x3-gap-fill text-lg text-accent"></i>
+          <h2 class="font-display text-3xl text-primary tracking-widest">
+            Todos los Juegos
+          </h2>
+          <div
+            class="flex-1 h-px bg-gradient-to-r from-primary/40 to-transparent"
+          ></div>
+          <span class="text-gray-500 text-xs">12 títulos</span>
+        </div>
+
+        <div class="game-grid">
+          <!-- 1 HERO: God of War -->
+          <div class="slot-hero">
+            <div
+              class="gcard hero-card relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22),0_8px_24px_rgba(0,0,0,.5)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <span
+                class="featured-badge absolute top-3.5 left-0 z-10 inline-flex items-center gap-1.5 bg-gradient-to-r from-accent/20 to-transparent border-l-[3px] border-accent text-accent text-[.68rem] font-bold tracking-widest uppercase px-2.5 py-0.5 rounded-r-[4px]"
+              >
+                <i class="bi bi-star-fill"></i>DESTACADO
+              </span>
+              <a href="#lb-gow"
+                ><img
+                  src="img/kratos-atreus1.png"
+                  alt="God of War Ragnarök"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-6">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Acción</span
+                >
+                <h3
+                  class="font-display text-[2.6rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  God of War<br />Ragnarök
+                </h3>
+                <p
+                  class="gcard-desc hero-card font-sans text-white/75 text-[.9rem] leading-snug mb-2"
+                >
+                  Kratos y Atreus se adentran en los reinos nórdicos para
+                  enfrentar el destino de los dioses en una épica odisea
+                  mitológica.
+                </p>
+                <a
+                  href="game_gow.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver Juego</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 2 TALL: Horizon -->
+          <div class="slot-tall">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-horizon"
+                ><img
+                  src="img/Horizon1.png"
+                  alt="Horizon Zero Dawn"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Acción</span
+                >
+                <h3
+                  class="font-display text-[1.55rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  Horizon Zero Dawn
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-sm leading-snug mb-2"
+                >
+                  Un mundo abierto salvaje lleno de peligros y misterios
+                  oscuros.
+                </p>
+                <a
+                  href="game_horizon.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver Juego</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 3 SMALL: Resident Evil -->
+          <div class="slot-small">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-re"
+                ><img
+                  src="img/resident.jpg"
+                  alt="Resident Evil"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-2.5">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Terror</span
+                >
+                <h3
+                  class="font-display text-base leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  Resident Evil Village
+                </h3>
+                <a
+                  href="game_residentevil.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 4 WIDE: Halo -->
+          <div class="slot-wide">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-halo"
+                ><img
+                  src="img/Infinite1.png"
+                  alt="Halo Infinite"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Acción</span
+                >
+                <h3
+                  class="font-display text-[1.7rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  Halo Infinite
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-sm leading-snug mb-2"
+                >
+                  El Jefe Maestro regresa para enfrentarse a los Desterrados en
+                  el conflicto más épico del universo.
+                </p>
+                <a
+                  href="game_halo.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver Juego</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 5 MED: It Takes Two -->
+          <div class="slot-med">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-itt"
+                ><img
+                  src="img/it takes.jpg"
+                  alt="It Takes Two"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Co-op</span
+                >
+                <h3
+                  class="font-display text-[1.25rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  It Takes Two
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-sm leading-snug mb-2"
+                >
+                  Embárcate en la aventura cooperativa de tu vida.
+                </p>
+                <a
+                  href="game_ittakestwo.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 6 THIN: A Way Out -->
+          <div class="slot-thin">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-away"
+                ><img
+                  src="img/a way 1.png"
+                  alt="A Way Out"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-2.5">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Co-op</span
+                >
+                <h3
+                  class="font-display text-base leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  A Way Out
+                </h3>
+                <a
+                  href="game_awayout.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 7 THIN2: CoD -->
+          <div class="slot-thin2">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-cod"
+                ><img
+                  src="img/cod.jpg"
+                  alt="Call of Duty WWII"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-2.5">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Acción</span
+                >
+                <h3
+                  class="font-display text-base leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  Call of Duty WWII
+                </h3>
+                <a
+                  href="game_callofduty.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 8 FC 2026 -->
+          <div class="slot-quarter">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-fc"
+                ><img
+                  src="img/FC1.jpg"
+                  alt="FC 2026"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Deportes</span
+                >
+                <h3
+                  class="font-display text-[1.15rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  FC 2026
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-[.78rem] leading-snug mb-2"
+                >
+                  La simulación de fútbol más realista hasta la fecha.
+                </p>
+                <a
+                  href="game_fc.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 9 eFootball -->
+          <div class="slot-quarter">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-efb"
+                ><img
+                  src="img/efootball.jpg"
+                  alt="eFootball"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Deportes</span
+                >
+                <h3
+                  class="font-display text-[1.15rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  eFootball
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-[.78rem] leading-snug mb-2"
+                >
+                  Una evolución del clásico PES con motor renovado.
+                </p>
+                <a
+                  href="game_efootball.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 12 BANNER: Uncharted -->
+          <div class="slot-quarter">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-unc"
+                ><img
+                  src="img/uncharted.jpg"
+                  alt="Uncharted: Legacy of Thieves"
+                  class="w-full h-full object-cover block"
+                  style="object-position: center 30%"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Acción</span
+                >
+                <h3
+                  class="font-display text-[1.15rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  Uncharted: Legacy of Thieves
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-[.78rem] leading-snug mb-2"
+                >
+                  Colección remasterizada de dos joyas de la saga Uncharted.
+                </p>
+                <a
+                  href="game_uncharted4.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver Juego</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 10 GRID Legends -->
+          <div class="slot-quarter">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-grid"
+                ><img
+                  src="img/grid.jpg"
+                  alt="GRID Legends"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Deportes</span
+                >
+                <h3
+                  class="font-display text-[1.15rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  GRID Legends
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-[.78rem] leading-snug mb-2"
+                >
+                  Carreras arcade de alta velocidad y adrenalina pura.
+                </p>
+                <a
+                  href="game_gridlegends.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- 11 NBA2K -->
+          <div class="slot-quarter">
+            <div
+              class="gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]"
+            >
+              <a href="#lb-nba"
+                ><img
+                  src="img/nba.jpg"
+                  alt="NBA2K 2026"
+                  class="w-full h-full object-cover block"
+              /></a>
+              <div
+                class="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"
+              ></div>
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <span
+                  class="inline-block text-[.62rem] font-bold tracking-[1.8px] uppercase border border-primary text-primary bg-black/55 px-2.5 py-0.5 rounded-full mb-1"
+                  >Deportes</span
+                >
+                <h3
+                  class="font-display text-[1.15rem] leading-none text-white mb-1"
+                  style="text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9)"
+                >
+                  NBA2K 2026
+                </h3>
+                <p
+                  class="gcard-desc font-sans text-white/75 text-[.78rem] leading-snug mb-2"
+                >
+                  La simulación de baloncesto más realista del año.
+                </p>
+                <a
+                  href="game_nba2k26.html"
+                  class="inline-flex items-center gap-1 bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-3.5 py-1.5 rounded-full text-xs font-bold transition-all hover:brightness-125 hover:scale-105"
+                  ><i class="bi bi-play-fill"></i>Ver</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- /game-grid -->
+
+        <p class="text-gray-600 text-xs mt-8 pt-3 border-t border-white/[.05]">
+          Desarrollado por:
+          <strong class="text-gray-400">Sebastian Niño</strong>
+        </p>
+      </main>
+    </div>
+
+    <!-- LIGHTBOXES -->
+    <div
+      id="lb-horizon"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/Horizon1.png"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-halo"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/Infinite1.png"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-gow"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/kratos-atreus1.png"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+
+    <div
+      id="lb-fc"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/FC1.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-away"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/a way 1.png"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-cod"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/cod.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-efb"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/efootball.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-grid"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/grid.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-itt"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/it takes.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-nba"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/nba.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+    <div
+      id="lb-re"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/resident.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+
+    <div
+      id="lb-unc"
+      class="lightbox fixed inset-0 z-[2000] flex justify-center items-center bg-black/55 backdrop-blur-2xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div class="relative w-[80vw] max-w-[700px] text-center z-10">
+        <img
+          src="img/uncharted.jpg"
+          alt=""
+          class="lb-img w-full rounded-2xl border-2 border-primary shadow-[0_0_60px_rgba(187,134,252,.4)]"
+        /><a
+          href="#close"
+          class="block mt-3 text-gray-400 font-bold no-underline hover:text-primary text-sm"
+          >&#x2715; Cerrar</a
+        >
+      </div>
+    </div>
+
+    <!-- MODAL MAPA -->
+    <div
+      id="modal-mapa"
+      class="modal-overlay fixed inset-0 z-[9999] flex justify-center items-center bg-black/88 backdrop-blur-xl"
+    >
+      <a href="#close" class="absolute inset-0 cursor-default"></a>
+      <div
+        class="modal-box relative bg-[#1a1a1a] w-[95%] max-w-[580px] p-7 rounded-2xl border-2 border-primary shadow-[0_0_40px_rgba(187,134,252,.3)]"
+      >
+        <a
+          href="#close"
+          class="absolute top-4 right-5 text-2xl text-gray-400 no-underline hover:text-white leading-none"
+          >&times;</a
+        >
+        <h2 class="text-accent mt-0 mb-1 font-display text-2xl tracking-widest">
+          <i class="bi bi-geo-alt-fill me-2"></i>Nuestra Sede
+        </h2>
+        <p class="text-gray-400 text-sm mb-4">
+          C.C. Viva Tunja:
+          <strong class="text-gray-200">Av Universitaria, Tunja, Boyacá</strong>
+        </p>
+        <div class="rounded-xl overflow-hidden aspect-video">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1180.605448591356!2d-73.34544206593492!3d5.5570047166545224!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e6a7d6072b25591%3A0xa1b4bf6452764811!2sCentro%20Comercial%20Viva%20Tunja!5e0!3m2!1ses-419!2sco!4v1772168506457!5m2!1ses-419!2sco"
+            class="w-full h-full border-0"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+        <div class="text-center mt-4">
+          <a
+            href="#close"
+            class="inline-block bg-gradient-to-r from-primary to-[#9965f4] text-white no-underline px-6 py-2 rounded-full text-sm font-bold hover:brightness-125 transition-all"
+            >Entendido</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer
+      class="relative mt-8 overflow-hidden border-t border-primary/20"
+      style="
+        background: linear-gradient(
+          135deg,
+          rgba(10, 10, 10, 0.98) 0%,
+          rgba(20, 10, 30, 0.98) 100%
+        );
+      "
+    >
+      <!-- top glow line -->
+      <div
+        class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/60 to-transparent"
+      ></div>
+
+      <!-- grid lines decoration -->
+      <div
+        class="absolute inset-0 pointer-events-none opacity-[.03]"
+        style="
+          background-image:
+            repeating-linear-gradient(
+              0deg,
+              transparent,
+              transparent 39px,
+              #bb86fc 40px
+            ),
+            repeating-linear-gradient(
+              90deg,
+              transparent,
+              transparent 39px,
+              #bb86fc 40px
+            );
+        "
+      ></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 pt-12 pb-6">
+        <!-- 3 COLUMNS -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
+          <!-- COL 1: Brand + Contacto -->
+          <div>
+            <a
+              href="index.html"
+              class="inline-flex items-center gap-2 font-display text-2xl tracking-widest text-primary mb-4 block drop-shadow-[0_0_12px_rgba(187,134,252,.5)]"
+            >
+              <i class="bi bi-joystick"></i>GameZone
+            </a>
+            <p class="font-sans text-gray-400 text-sm leading-relaxed mb-5">
+              Tu portal de videojuegos. Analizamos jugabilidad, gráficos e
+              historia para traerte solo lo mejor del gaming.
+            </p>
+            <h4
+              class="font-sans text-[.65rem] font-bold uppercase tracking-[3px] text-accent mb-3 border-b border-accent/20 pb-2"
+            >
+              Contacto
+            </h4>
+            <ul class="flex flex-col gap-2">
+              <li
+                class="flex items-center gap-2 font-sans text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="bi bi-telephone-fill text-primary text-xs"></i>
+                <a
+                  href="tel:3107528655"
+                  class="no-underline text-gray-400 hover:text-white transition-colors"
+                  >310 752 8655</a
+                >
+              </li>
+              <li
+                class="flex items-center gap-2 font-sans text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <i class="bi bi-envelope-fill text-primary text-xs"></i>
+                <a
+                  href="mailto:sebastian.nino@usantoto.edu.co"
+                  class="no-underline text-gray-400 hover:text-white transition-colors break-all"
+                  >sebastian.nino@usantoto.edu.co</a
+                >
+              </li>
+              <li
+                class="flex items-center gap-2 font-sans text-sm text-gray-400"
+              >
+                <i class="bi bi-geo-alt-fill text-primary text-xs"></i>
+                <a
+                  href="#modal-mapa"
+                  class="no-underline text-gray-400 hover:text-white transition-colors"
+                  >C.C. Viva Tunja, Boyacá</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- COL 2: Links rápidos -->
+          <div>
+            <h4
+              class="font-sans text-[.65rem] font-bold uppercase tracking-[3px] text-accent mb-4 border-b border-accent/20 pb-2"
+            >
+              Categorías
+            </h4>
+            <ul class="flex flex-col gap-2">
+              <li>
+                <a
+                  href="index.html"
+                  class="footer-link font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-grid-fill text-xs text-primary/50"></i>Todos
+                  los Juegos</a
+                >
+              </li>
+              <li>
+                <a
+                  href="accion.html"
+                  class="footer-link font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-crosshair text-xs text-primary/50"></i>Acción
+                  / Shooter</a
+                >
+              </li>
+              <li>
+                <a
+                  href="terror.html"
+                  class="footer-link font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-moon-stars text-xs text-primary/50"></i
+                  >Terror / Suspenso</a
+                >
+              </li>
+              <li>
+                <a
+                  href="deportes.html"
+                  class="footer-link font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-trophy text-xs text-primary/50"></i>Deportes
+                  / Carreras</a
+                >
+              </li>
+              <li>
+                <a
+                  href="cooperativo.html"
+                  class="footer-link font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-people text-xs text-primary/50"></i>Co-op /
+                  Puzzle</a
+                >
+              </li>
+            </ul>
+
+            <h4
+              class="font-sans text-[.65rem] font-bold uppercase tracking-[3px] text-accent mt-7 mb-3 border-b border-accent/20 pb-2"
+            >
+              Comunidad
+            </h4>
+            <ul class="flex flex-col gap-2">
+              <li>
+                <a
+                  href="https://steamcommunity.com/?l=spanish"
+                  target="_blank"
+                  class="font-sans text-sm text-gray-400 no-underline hover:text-primary transition-colors flex items-center gap-2"
+                  ><i class="bi bi-steam text-xs text-primary/50"></i>Comunidad
+                  Steam</a
+                >
+              </li>
+            </ul>
+          </div>
+
+          <!-- COL 3: Redes sociales + Créditos -->
+          <div>
+            <h4
+              class="font-sans text-[.65rem] font-bold uppercase tracking-[3px] text-accent mb-4 border-b border-accent/20 pb-2"
+            >
+              Redes Sociales
+            </h4>
+            <div class="flex flex-col gap-3">
+              <a
+                href="https://twitter.com/game_zone2026"
+                target="_blank"
+                class="flex items-center gap-3 p-3 rounded-xl border border-white/[.06] bg-white/[.03] hover:border-primary/40 hover:bg-primary/5 transition-all group no-underline"
+              >
+                <div
+                  class="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center border border-white/10 group-hover:border-primary/40 transition-colors"
+                >
+                  <i
+                    class="bi bi-twitter-x text-sm text-gray-300 group-hover:text-primary transition-colors"
+                  ></i>
+                </div>
+                <div>
+                  <p
+                    class="font-sans text-xs text-gray-500 m-0 leading-none mb-0.5"
+                  >
+                    Twitter / X
+                  </p>
+                  <p
+                    class="font-sans text-sm text-gray-300 m-0 group-hover:text-white transition-colors"
+                  >
+                    @game_zone2026
+                  </p>
+                </div>
+              </a>
+
+              <a
+                href="https://instagram.com/Ur_gamezone_place"
+                target="_blank"
+                class="flex items-center gap-3 p-3 rounded-xl border border-white/[.06] bg-white/[.03] hover:border-pink-500/40 hover:bg-pink-500/5 transition-all group no-underline"
+              >
+                <div
+                  class="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center border border-white/10 group-hover:border-pink-500/40 transition-colors"
+                >
+                  <i
+                    class="bi bi-instagram text-sm text-gray-300 group-hover:text-pink-400 transition-colors"
+                  ></i>
+                </div>
+                <div>
+                  <p
+                    class="font-sans text-xs text-gray-500 m-0 leading-none mb-0.5"
+                  >
+                    Instagram
+                  </p>
+                  <p
+                    class="font-sans text-sm text-gray-300 m-0 group-hover:text-white transition-colors"
+                  >
+                    @Ur_gamezone_place
+                  </p>
+                </div>
+              </a>
+
+              <a
+                href="https://tiktok.com/@GAME_ZONE2026"
+                target="_blank"
+                class="flex items-center gap-3 p-3 rounded-xl border border-white/[.06] bg-white/[.03] hover:border-accent/40 hover:bg-accent/5 transition-all group no-underline"
+              >
+                <div
+                  class="w-8 h-8 rounded-lg bg-black/40 flex items-center justify-center border border-white/10 group-hover:border-accent/40 transition-colors"
+                >
+                  <i
+                    class="bi bi-tiktok text-sm text-gray-300 group-hover:text-accent transition-colors"
+                  ></i>
+                </div>
+                <div>
+                  <p
+                    class="font-sans text-xs text-gray-500 m-0 leading-none mb-0.5"
+                  >
+                    TikTok
+                  </p>
+                  <p
+                    class="font-sans text-sm text-gray-300 m-0 group-hover:text-white transition-colors"
+                  >
+                    @GAME_ZONE2026
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- BOTTOM BAR -->
+        <div
+          class="border-t border-white/[.06] pt-5 flex flex-col sm:flex-row items-center justify-between gap-3"
+        >
+          <p class="font-sans text-xs text-gray-600 m-0">
+            &copy; 2026 GameZone &middot; Pasión por los videojuegos
+          </p>
+          <p class="font-sans text-xs text-gray-600 m-0">
+            Desarrollado por
+            <strong class="text-gray-400 font-semibold">Sebastian Niño</strong>
+            &middot; <span class="text-primary/60">USANTOTO</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="app.js"></script>
+  </body>
+</html>

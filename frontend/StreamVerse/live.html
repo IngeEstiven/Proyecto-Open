@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Imagenes/Logo.png" type="image/png">
+  <title>En Vivo - StreamVerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#050810] text-slate-100 overflow-x-hidden">
+
+  <div class="sv-bg live">
+    <div class="sv-orb sv-orb1"></div>
+    <div class="sv-orb sv-orb2"></div>
+    <div class="sv-orb sv-orb3"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <input type="checkbox" id="nav-toggle" class="hidden peer/nav">
+  <nav class="sv-navbar sticky top-0 z-50 px-4 lg:px-6">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-between py-3 gap-3">
+      <a href="index.html" class="flex items-center gap-2 no-underline flex-shrink-0">
+        <span class="sv-brand-icon text-[2rem]"><i class="fas fa-play-circle"></i></span>
+        <div>
+          <p class="sv-brand-title text-2xl font-black tracking-widest m-0 leading-none">StreamVerse</p>
+          <p class="text-[0.68rem] text-[#94a3b8] tracking-wider m-0">Infinito Entretenimiento</p>
+        </div>
+      </a>
+      <ul class="hidden lg:flex items-center gap-1 list-none m-0 p-0">
+        <li><a href="index.html" class="nav-link"><i class="fas fa-home mr-1"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link"><i class="fas fa-film mr-1"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link"><i class="fas fa-music mr-1"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link active"><i class="fas fa-satellite-dish mr-1"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link"><i class="fas fa-futbol mr-1"></i>Deportes</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <div class="sv-search-wrap">
+          <input type="search" id="search-bar" class="sv-search-input" placeholder="Buscar stream…">
+          <label for="search-bar" class="sv-icon-btn cursor-pointer"><i class="fas fa-search"></i></label>
+        </div>
+        <a href="#modal-login" class="sv-icon-btn"><i class="fas fa-user-circle"></i></a>
+        <label for="nav-toggle" class="lg:hidden sv-icon-btn cursor-pointer"><i class="fas fa-bars"></i></label>
+      </div>
+    </div>
+    <div class="sv-nav-mobile">
+      <ul class="list-none m-0 p-0 flex flex-col gap-1">
+        <li><a href="index.html" class="nav-link block"><i class="fas fa-home mr-2"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link block"><i class="fas fa-film mr-2"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link block"><i class="fas fa-music mr-2"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link active block"><i class="fas fa-satellite-dish mr-2"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link block"><i class="fas fa-futbol mr-2"></i>Deportes</a></li>
+        <li>
+          <div class="sv-search-wrap sv-search-mobile">
+            <input type="search" id="search-bar-m" class="sv-search-input w-full" placeholder="Buscar stream…">
+            <label for="search-bar-m" class="sv-icon-btn cursor-pointer"><i class="fas fa-search"></i></label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="max-w-[1400px] mx-auto px-4 lg:px-6 py-6">
+
+    <div class="sv-page-header">
+      <h1><i class="fas fa-satellite-dish mr-2"></i>Video en Vivo</h1>
+      <p>Las mejores plataformas de streaming en directo del mundo</p>
+    </div>
+
+    <!-- CARRUSEL -->
+    <div class="sv-car-wrap">
+      <div class="sv-car-scroll">
+        <div class="sv-car-slide" id="ls1">
+          <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1400&q=85" alt="TWITCH">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#9146FF;color:#fff">TWITCH</span>
+            <h5>Gaming · IRL · Arte · Música</h5>
+            <p>Millones de streams en vivo cada día en todas las categorías</p>
+            <a href="https://www.twitch.tv" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fab fa-twitch mr-1"></i>Ir a Twitch</a>
+          </div>
+          <a href="#ls3" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ls2" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="sv-car-slide" id="ls2">
+          <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=1400&q=85" alt="YOUTUBE LIVE">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#ff0000;color:#fff">YOUTUBE LIVE</span>
+            <h5>Transmisiones en Directo</h5>
+            <p>Conciertos, noticias, tutoriales y entretenimiento en vivo</p>
+            <a href="https://www.youtube.com" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fab fa-youtube mr-1"></i>Ver en YouTube</a>
+          </div>
+          <a href="#ls1" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ls3" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="sv-car-slide" id="ls3">
+          <img src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=1400&q=85" alt="KICK.COM">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#53fc18;color:#000">KICK.COM</span>
+            <h5>La Nueva Plataforma de Streaming</h5>
+            <p>Sin censura, con 95% de ingresos para creadores</p>
+            <a href="https://kick.com" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fas fa-bolt mr-1"></i>Ir a Kick</a>
+          </div>
+          <a href="#ls2" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ls1" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="sv-car-dots">
+      <a href="#ls1" class="sv-car-dot-a" title="Slide 1"></a>
+      <a href="#ls2" class="sv-car-dot-a" title="Slide 2"></a>
+      <a href="#ls3" class="sv-car-dot-a" title="Slide 3"></a>
+    </div>
+
+    ACCESOS RÁPIDOS -->
+    <div class="mb-8">
+      <h5 class="font-bold text-base mb-3 sv-text-gradient"><i class="fas fa-bolt mr-2"></i>Accesos Rápidos</h5>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <a href="https://www.youtube.com" target="_blank" class="sv-quick-card"><span
+            class="sv-quick-icon text-[#ff0000]"><i class="fab fa-youtube"></i></span><span
+            class="sv-quick-label">YouTube</span></a>
+        <a href="https://www.twitch.tv" target="_blank" class="sv-quick-card"><span
+            class="sv-quick-icon text-[#9146FF]"><i class="fab fa-twitch"></i></span><span
+            class="sv-quick-label">Twitch</span></a>
+        <a href="https://www.facebook.com/gaming" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fab fa-facebook"></i></span><span class="sv-quick-label">FB Gaming</span></a>
+        <a href="https://vimeo.com" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fab fa-vimeo"></i></span><span class="sv-quick-label">Vimeo</span></a>
+        <a href="https://kick.com" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-bolt"></i></span><span class="sv-quick-label">Kick</span></a>
+        <a href="https://www.tiktok.com/live" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fab fa-tiktok"></i></span><span class="sv-quick-label">TikTok Live</span></a>
+      </div>
+    </div>
+
+    <!-- YOUTUBE -->
+    <div class="sv-section">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+            alt="YouTube" class="sv-platform-logo">
+          <div>
+            <h2 class="sv-platform-title">YouTube</h2>
+            <p class="sv-platform-desc">La plataforma de video más grande del mundo con contenido en vivo 24/7</p>
+          </div>
+        </div>
+        <a href="https://www.youtube.com" target="_blank" class="btn-sv-visit"><i class="fab fa-youtube"></i>
+          Visitar</a>
+      </div>
+      <div class="sv-video-grid">
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/5qap5aO4i9A" allowfullscreen></iframe>
+          <h6>Lofi Hip Hop Radio 24/7</h6>
+        </div>
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/jfKfPfyJRdk" allowfullscreen></iframe>
+          <h6>Lofi Girl · Study Radio</h6>
+        </div>
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/DWcJFNfaw9c" allowfullscreen></iframe>
+          <h6>Synthwave Radio 24/7</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- TWITCH -->
+    <div class="sv-section">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg" alt="Twitch"
+            class="sv-platform-logo">
+          <div>
+            <h2 class="sv-platform-title">Twitch</h2>
+            <p class="sv-platform-desc">Gaming, IRL, arte, cocina y todo lo que imagines en streaming en vivo</p>
+          </div>
+        </div>
+        <a href="https://www.twitch.tv" target="_blank" class="btn-sv-visit"><i class="fab fa-twitch"></i> Visitar</a>
+      </div>
+      <p class="text-slate-500 text-sm mb-3">Categorías más populares en Twitch ahora mismo:</p>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=300&q=70"
+            alt="Gaming">
+          <div class="sv-cat-label"><i class="fas fa-gamepad"></i>
+            <h6>Gaming</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=300&q=70"
+            alt="Music">
+          <div class="sv-cat-label"><i class="fas fa-music"></i>
+            <h6>Música</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?w=300&q=70"
+            alt="IRL">
+          <div class="sv-cat-label"><i class="fas fa-street-view"></i>
+            <h6>IRL</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1461344577544-4e5dc9487184?w=300&q=70"
+            alt="Arte">
+          <div class="sv-cat-label"><i class="fas fa-palette"></i>
+            <h6>Arte</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=70"
+            alt="Cocina">
+          <div class="sv-cat-label"><i class="fas fa-utensils"></i>
+            <h6>Cocina</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=70"
+            alt="Chat">
+          <div class="sv-cat-label"><i class="fas fa-comments"></i>
+            <h6>Charlemos</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FB GAMING / VIMEO / KICK -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-4">
+
+      <!-- FB Gaming -->
+      <div class="sv-section flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#1877f2"><i
+              class="fab fa-facebook-f text-white text-sm"></i></span>
+          <div>
+            <h2 class="sv-platform-title m-0 text-base">FB Gaming</h2>
+            <p class="text-xs text-[#94a3b8] m-0">Gaming · Torneos · Comunidad</p>
+          </div>
+          <span class="ml-auto text-xs font-bold text-white px-2 py-0.5 rounded-full" style="background:#1877f2">●
+            LIVE</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-gamepad block mb-1"
+              style="color:#1877f2"></i><small class="text-[0.68rem] text-slate-100 font-bold">Torneos</small></div>
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-users block mb-1"
+              style="color:#1877f2"></i><small class="text-[0.68rem] text-slate-100 font-bold">Comunidad</small></div>
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-trophy block mb-1"
+              style="color:#1877f2"></i><small class="text-[0.68rem] text-slate-100 font-bold">Premios</small></div>
+        </div>
+        <a href="https://www.facebook.com/gaming" target="_blank" class="btn-sv-visit mt-auto"
+          style="background:linear-gradient(135deg,#1877f2,#0d5ecf)"><i class="fab fa-facebook-f"></i> Visitar FB
+          Gaming</a>
+      </div>
+
+      <!-- Vimeo -->
+      <div class="sv-section flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span
+            class="w-8 h-8 rounded-lg flex items-center justify-content-center flex-shrink-0 flex items-center justify-center"
+            style="background:#1ab7ea"><i class="fab fa-vimeo-v text-white text-sm"></i></span>
+          <div>
+            <h2 class="sv-platform-title m-0 text-base">Vimeo</h2>
+            <p class="text-xs text-[#94a3b8] m-0">Cine Indie · Video Pro · 4K</p>
+          </div>
+          <span class="ml-auto text-xs font-bold text-white px-2 py-0.5 rounded-full" style="background:#1ab7ea">HD
+            4K</span>
+        </div>
+        <div class="aspect-video rounded-xl overflow-hidden border border-[rgba(26,183,234,.2)]">
+          <iframe src="https://player.vimeo.com/video/783455878?color=1ab7ea&title=0&byline=0&portrait=0"
+            class="w-full h-full" allowfullscreen allow="autoplay; fullscreen; picture-in-picture"></iframe>
+        </div>
+        <a href="https://vimeo.com" target="_blank" class="btn-sv-visit mt-auto"
+          style="background:linear-gradient(135deg,#1ab7ea,#0d8fb5)"><i class="fab fa-vimeo-v"></i> Visitar Vimeo</a>
+      </div>
+
+      <!-- Kick -->
+      <div class="sv-section flex flex-col gap-4">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background:#53fc18"><i
+              class="fas fa-bolt text-black text-sm"></i></span>
+          <div>
+            <h2 class="sv-platform-title m-0 text-base">Kick.com</h2>
+            <p class="text-xs text-[#94a3b8] m-0">Sin límites · 95% para creadores</p>
+          </div>
+          <span class="ml-auto text-xs font-bold px-2 py-0.5 rounded-full" style="background:#53fc18;color:#000">●
+            LIVE</span>
+        </div>
+        <div class="grid grid-cols-3 gap-2 text-center">
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-dollar-sign block mb-1"
+              style="color:#53fc18"></i><small class="text-[0.68rem] text-slate-100 font-bold">95% Rev</small></div>
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-infinity block mb-1"
+              style="color:#53fc18"></i><small class="text-[0.68rem] text-slate-100 font-bold">Sin Límites</small></div>
+          <div class="p-2 rounded-xl bg-[rgba(15,18,35,.7)]"><i class="fas fa-shield-alt block mb-1"
+              style="color:#53fc18"></i><small class="text-[0.68rem] text-slate-100 font-bold">Libre</small></div>
+        </div>
+        <a href="https://kick.com" target="_blank" class="btn-sv-visit mt-auto"
+          style="background:linear-gradient(135deg,#53fc18,#26a800);color:#000!important"><i class="fas fa-bolt"></i>
+          Visitar Kick</a>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="sv-footer mt-8 pt-12 pb-4 px-4">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-3"><i class="sv-footer-icon fas fa-play-circle"></i><span
+              class="sv-footer-brand-title">StreamVerse</span></div>
+          <p class="sv-footer-desc">Tu portal definitivo para todo el entretenimiento digital.</p>
+          <div class="flex gap-2 mt-3"><a href="#" class="sv-social"><i class="fab fa-facebook"></i></a><a href="#"
+              class="sv-social"><i class="fab fa-twitter"></i></a><a href="#" class="sv-social"><i
+                class="fab fa-instagram"></i></a><a href="#" class="sv-social"><i class="fab fa-youtube"></i></a></div>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Navegación</p><a href="index.html" class="sv-footer-link">Inicio</a><a
+            href="peliculas.html" class="sv-footer-link">Películas</a><a href="musica.html"
+            class="sv-footer-link">Música</a><a href="live.html" class="sv-footer-link">En Vivo</a><a
+            href="deportes.html" class="sv-footer-link">Deportes</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Plataformas</p><a href="https://www.youtube.com" target="_blank"
+            class="sv-footer-link">YouTube</a><a href="https://www.twitch.tv" target="_blank"
+            class="sv-footer-link">Twitch</a><a href="https://kick.com" target="_blank"
+            class="sv-footer-link">Kick</a><a href="https://vimeo.com" target="_blank"
+            class="sv-footer-link">Vimeo</a><a href="https://www.facebook.com/gaming" target="_blank"
+            class="sv-footer-link">FB Gaming</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Soporte</p><a href="#" class="sv-footer-link">Ayuda</a><a href="#"
+            class="sv-footer-link">FAQ</a><a href="#" class="sv-footer-link">Contacto</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Legal</p><a href="#" class="sv-footer-link">Términos</a><a href="#"
+            class="sv-footer-link">Privacidad</a><a href="#" class="sv-footer-link">Cookies</a>
+        </div>
+      </div>
+      <div class="sv-footer-bottom py-3 text-center">
+        <p class="m-0">© 2026 StreamVerse · <strong class="text-slate-200">SAMB</strong> · Todos los derechos reservados
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal-login" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" style="max-width:440px;" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-play-circle mr-1"></i> StreamVerse</span>
+        <h2 class="sv-modal-title">Bienvenido de nuevo</h2>
+        <p class="text-[#94a3b8] text-sm">Inicia sesión para acceder a todo tu entretenimiento</p>
+      </div>
+      <form action="#" class="flex flex-col gap-4">
+        <div><label class="sv-label"><i class="fas fa-envelope mr-1"></i> Correo <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="email" class="sv-input"
+            placeholder="correo@ejemplo.com" required></div>
+        <div><label class="sv-label"><i class="fas fa-key mr-1"></i> Contraseña <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+            placeholder="Tu contraseña" minlength="6" required></div>
+        <label class="sv-check"><input type="checkbox"> Recordar sesión</label>
+        <button class="btn-sv-submit" type="submit"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
+        <button class="btn-sv-reset" type="button"><i class="fas fa-lock"></i> Olvidé mi contraseña</button>
+      </form>
+      <div class="flex items-center gap-3 my-4"><span class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+        <p class="text-[0.74rem] text-[#94a3b8] m-0 whitespace-nowrap">¿No tienes cuenta?</p><span
+          class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+      </div>
+      <a href="#modal-registro" class="sv-register-link"><i class="fas fa-user-plus"></i> Crear cuenta en
+        StreamVerse</a>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL REGISTRO ══════════════ -->
+  <div id="modal-registro" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-user-plus mr-1"></i> Nuevo usuario</span>
+        <h2 class="sv-modal-title">Crea tu cuenta</h2>
+        <p class="text-[#94a3b8] text-sm">Únete a StreamVerse y accede a todo el entretenimiento</p>
+      </div>
+      <form action="#" method="post" enctype="multipart/form-data">
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-id-card"></i> Datos personales</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Nombre <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Juan" required></div>
+            <div><label class="sv-label">Apellido <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Castro" required></div>
+            <div><label class="sv-label">Correo <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="email" class="sv-input" placeholder="correo@ejemplo.com" required></div>
+            <div><label class="sv-label">Teléfono</label><input type="tel" class="sv-input" placeholder="+57 300...">
+            </div>
+            <div><label class="sv-label">Nacimiento <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="date" class="sv-input" required></div>
+            <div><label class="sv-label">País</label><select class="sv-input sv-select">
+                <option>Seleccionar...</option>
+                <option>Colombia</option>
+                <option>México</option>
+                <option>Argentina</option>
+                <option>España</option>
+                <option>Estados Unidos</option>
+                <option>Otro</option>
+              </select></div>
+            <div class="col-span-2"><label class="sv-label">Sitio web</label><input type="url" class="sv-input"
+                placeholder="https://..."></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-lock"></i> Seguridad</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Usuario <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="streamuser99" required></div>
+            <div><label class="sv-label">Contraseña <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="password" class="sv-input" placeholder="Mín. 8 chars" minlength="8" required></div>
+            <div class="col-span-2"><label class="sv-label">Confirmar contraseña <span
+                  class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+                placeholder="Repite tu contraseña" minlength="8" required></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-sliders-h"></i> Preferencias</legend>
+          <div class="flex flex-col gap-3 mt-3">
+            <div><label class="sv-label">Plataformas favoritas</label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="checkbox" value="netflix">
+                  Netflix</label><label class="sv-check"><input type="checkbox" value="prime"> Prime Video</label><label
+                  class="sv-check"><input type="checkbox" value="hbo"> HBO Max</label><label class="sv-check"><input
+                    type="checkbox" value="disney"> Disney+</label><label class="sv-check"><input type="checkbox"
+                    value="spotify"> Spotify</label><label class="sv-check"><input type="checkbox" value="youtube">
+                  YouTube</label><label class="sv-check"><input type="checkbox" value="twitch"> Twitch</label><label
+                  class="sv-check"><input type="checkbox" value="crunchyroll"> Crunchyroll</label></div>
+            </div>
+            <div><label class="sv-label">Plan <span class="text-pink-400 text-[0.65rem]">*</span></label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="radio" name="plan"
+                    value="free" required> Gratuito</label><label class="sv-check"><input type="radio" name="plan"
+                    value="basic"> Básico</label><label class="sv-check"><input type="radio" name="plan" value="pro">
+                  Pro</label><label class="sv-check"><input type="radio" name="plan" value="ultra"> Ultra 4K</label>
+              </div>
+            </div>
+            <div><label class="sv-label">Calidad de video</label>
+              <div class="sv-range mt-2">
+                <input type="radio" name="calidad" id="q0" value="0"><input type="radio" name="calidad" id="q1"
+                  value="1" checked><input type="radio" name="calidad" id="q2" value="2"><input type="radio"
+                  name="calidad" id="q3" value="3">
+                <div class="sv-range-track">
+                  <div class="sv-range-fill"></div><label for="q0" class="sv-rthumb" style="left:0%"></label><label
+                    for="q1" class="sv-rthumb" style="left:33.3%"></label><label for="q2" class="sv-rthumb"
+                    style="left:66.6%"></label><label for="q3" class="sv-rthumb" style="left:100%"></label>
+                </div>
+                <div class="sv-range-labels"><label for="q0">360p</label><label for="q1">720p</label><label
+                    for="q2">1080p</label><label for="q3">4K</label></div>
+              </div>
+            </div>
+            <div><label class="sv-label"><i class="fas fa-palette mr-1"></i>Color de acento</label><input type="color"
+                class="sv-color" value="#6366f1"></div>
+            <div><label class="sv-label">Bio del perfil</label><textarea class="sv-input" rows="2"
+                placeholder="Cuéntanos sobre tus gustos..."></textarea></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-paperclip"></i> Archivos del perfil</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Foto de perfil</label>
+              <div class="sv-dropzone"><input type="file" accept=".jpg,.jpeg,.png,.webp">
+                <div class="sv-drop-ui"><i class="fas fa-user-circle"></i><b>Seleccionar imagen</b><small>JPG, PNG ·
+                    5MB</small></div>
+              </div>
+            </div>
+            <div><label class="sv-label">Documento</label>
+              <div class="sv-dropzone"><input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="sv-drop-ui"><i class="fas fa-file-shield"></i><b>Subir documento</b><small>PDF, JPG ·
+                    10MB</small></div>
+              </div>
+            </div>
+            <div class="col-span-2"><label class="sv-label">Capturas múltiples</label>
+              <div class="sv-dropzone"><input type="file" multiple>
+                <div class="sv-drop-ui"><i class="fas fa-cloud-arrow-up"></i><b>Seleccionar archivos</b><small>JPG, PNG,
+                    PDF, MP4 · 20MB</small></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-circle-check"></i> Confirmación</legend>
+          <div class="flex flex-col gap-2 mt-3">
+            <label class="sv-check w-full"><input type="checkbox" required> Acepto los <a href="#"
+                class="text-indigo-400 hover:underline">Términos de Servicio</a></label>
+            <label class="sv-check w-full"><input type="checkbox" required> He leído la <a href="#"
+                class="text-indigo-400 hover:underline">Política de Privacidad</a></label>
+            <label class="sv-check w-full"><input type="checkbox"> Quiero recibir novedades</label>
+          </div>
+          <div class="mt-3"><label class="sv-label">Código de referido</label><input type="text" class="sv-input"
+              placeholder="STREAM-XXXX"></div>
+        </fieldset>
+        <button class="btn-sv-submit mb-2" type="submit"><i class="fas fa-rocket"></i> Crear mi cuenta en
+          StreamVerse</button>
+        <button class="btn-sv-reset" type="reset"><i class="fas fa-rotate-left"></i> Limpiar formulario</button>
+      </form>
+      <p class="text-center text-[0.78rem] text-[#94a3b8] mt-3">¿Ya tienes cuenta? <a href="#modal-login"
+          class="text-indigo-400 hover:underline">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+</body>
+
+</html>

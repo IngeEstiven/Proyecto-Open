@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Imagenes/logo.png" type="image/png">
+  <title>StreamVerse — Tu Portal de Entretenimiento Total</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#050810] text-slate-100 overflow-x-hidden">
+
+  <!-- ═══ SPLASH INTRO ═══ -->
+  <div class="sv-splash" id="sv-splash">
+    <div class="sv-splash-bg"></div>
+    <div class="sv-splash-rings">
+      <div class="sv-ring sv-ring1"></div>
+      <div class="sv-ring sv-ring2"></div>
+      <div class="sv-ring sv-ring3"></div>
+    </div>
+    <div class="sv-splash-content">
+      <div class="sv-splash-icon">
+        <img src="Imagenes/logo.png" alt="StreamVerse" class="sv-splash-logo-img">
+      </div>
+      <div class="sv-splash-sub">Infinito Entretenimiento</div>
+      <div class="sv-splash-bar">
+        <div class="sv-splash-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FONDO ANIMADO -->
+  <div class="sv-bg">
+    <div class="sv-orb sv-orb1"></div>
+    <div class="sv-orb sv-orb2"></div>
+    <div class="sv-orb sv-orb3"></div>
+    <div class="sv-orb sv-orb4"></div>
+    <div class="sv-particles">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="sv-grid-lines"></div>
+  </div>
+
+  <!-- ═══ NAVBAR ═══ -->
+  <input type="checkbox" id="nav-toggle" class="sv-nav-check">
+  <nav class="sv-navbar sticky top-0 z-50 px-4 lg:px-6">
+    <div class="max-w-[1600px] mx-auto flex items-center justify-between py-3 gap-3">
+      <a href="index.html" class="flex items-center gap-2 no-underline flex-shrink-0">
+        <span class="sv-brand-icon text-[2rem]"><i class="fas fa-play-circle"></i></span>
+        <div>
+          <p class="sv-brand-title text-2xl font-black tracking-widest m-0 leading-none">StreamVerse</p>
+          <p class="text-[0.68rem] text-[#94a3b8] tracking-wider m-0">Infinito Entretenimiento</p>
+        </div>
+      </a>
+      <ul class="hidden lg:flex items-center gap-1 list-none m-0 p-0">
+        <li><a href="index.html" class="nav-link active"><i class="fas fa-home mr-1"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link"><i class="fas fa-film mr-1"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link"><i class="fas fa-music mr-1"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link"><i class="fas fa-satellite-dish mr-1"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link"><i class="fas fa-futbol mr-1"></i>Deportes</a></li>
+        <li><a href="#modal-ubicacion" class="nav-link"><i class="fas fa-map-marker-alt mr-1"></i>Ubícanos</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <div class="sv-search-wrap">
+          <input type="search" id="search-bar" class="sv-search-input" placeholder="Buscar plataforma…">
+          <label for="search-bar" class="sv-icon-btn cursor-pointer"><i class="fas fa-search"></i></label>
+        </div>
+        <a href="#modal-login" class="sv-icon-btn"><i class="fas fa-user-circle"></i></a>
+        <label for="nav-toggle" class="sv-hamburger sv-icon-btn cursor-pointer"><i class="fas fa-bars"></i></label>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div class="sv-mobile-menu border-t border-[rgba(102,126,234,.2)] py-3 px-2">
+      <ul class="list-none m-0 p-0 flex flex-col gap-1">
+        <li><a href="index.html" class="nav-link block"><i class="fas fa-home mr-2"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link block"><i class="fas fa-film mr-2"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link block"><i class="fas fa-music mr-2"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link block"><i class="fas fa-satellite-dish mr-2"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link block"><i class="fas fa-futbol mr-2"></i>Deportes</a></li>
+        <li><a href="#modal-ubicacion" class="nav-link block"><i class="fas fa-map-marker-alt mr-2"></i>Ubícanos</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="sv-hero-section" id="inicio">
+    <!-- Lado izquierdo: texto -->
+    <div class="sv-hero-text">
+      <span
+        class="sv-hero-badge inline-flex items-center gap-2 px-4 py-1 rounded-full text-[0.73rem] font-bold uppercase tracking-widest mb-4">
+        <i class="fas fa-bolt"></i> Nuevo · Todo en un lugar
+      </span>
+      <h1 class="sv-hero-title font-black leading-tight mb-5">
+        Todas tus plataformas favoritas en un solo lugar
+      </h1>
+      <p class="text-[#94a3b8] text-lg leading-relaxed mb-8">
+        Accede a Netflix, Prime Video, HBO Max, Disney+, Apple TV+, Paramount+, Peacock, YouTube, Spotify y muchas más
+        desde un único portal.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <a href="#modal-login" class="btn-sv-primary"><i class="fas fa-play"></i> Comenzar Ahora</a>
+        <a href="#modal-info" class="btn-sv-secondary"><i class="fas fa-info-circle"></i> Más Info</a>
+      </div>
+    </div>
+    <!-- Lado derecho: logo grande que llena todo -->
+    <div class="sv-hero-visual-wrap">
+      <div class="sv-hv-bg-glow"></div>
+      <!-- Logo central con iconos adentro -->
+      <div class="sv-hv-center-logo">
+        <img src="Imagenes/logo.png" alt="StreamVerse Logo" class="sv-hv-logo-main">
+        <div class="sv-hv-logo-glow"></div>
+        <!-- Logos plataformas — relativo al logo -->
+        <div class="sv-hv-logo sv-hv-l1"><img
+            src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=80"
+            alt="Netflix"></div>
+        <div class="sv-hv-logo sv-hv-l2"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify"></div>
+        <div class="sv-hv-logo sv-hv-l3"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+            alt="YouTube"></div>
+        <div class="sv-hv-logo sv-hv-l4"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="Prime"></div>
+        <div class="sv-hv-logo sv-hv-l5"><img
+            src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg" alt="Twitch"></div>
+        <div class="sv-hv-logo sv-hv-l6"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg"
+            alt="HBO"></div>
+        <!-- Badges -->
+        <div class="sv-hv-badge sv-hv-b1"><i class="fas fa-users"></i><span>600M+ usuarios</span></div>
+        <div class="sv-hv-badge sv-hv-b2"><i class="fas fa-star"></i><span>15+ plataformas</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ ACCESOS RÁPIDOS ═══ -->
+  <section class="py-6 px-4">
+    <div class="max-w-[1600px] mx-auto grid grid-cols-3 sm:grid-cols-6 gap-3">
+      <a href="#peliculas" class="sv-quick-card"><span class="sv-quick-icon"><i class="fas fa-film"></i></span><span
+          class="text-[0.83rem] font-bold">Películas</span></a>
+      <a href="#musica" class="sv-quick-card"><span class="sv-quick-icon"><i class="fas fa-music"></i></span><span
+          class="text-[0.83rem] font-bold">Música</span></a>
+      <a href="#live" class="sv-quick-card"><span class="sv-quick-icon"><i
+            class="fas fa-satellite-dish"></i></span><span class="text-[0.83rem] font-bold">En Vivo</span></a>
+      <a href="deportes.html" class="sv-quick-card"><span class="sv-quick-icon"><i
+            class="fas fa-futbol"></i></span><span class="text-[0.83rem] font-bold">Deportes</span></a>
+      <a href="#modal-registro" class="sv-quick-card"><span class="sv-quick-icon"><i
+            class="fas fa-user-plus"></i></span><span class="text-[0.83rem] font-bold">Registro</span></a>
+      <a href="#modal-login" class="sv-quick-card"><span class="sv-quick-icon"><i
+            class="fas fa-right-to-bracket"></i></span><span class="text-[0.83rem] font-bold">Ingresar</span></a>
+    </div>
+  </section>
+
+  <!-- ═══ LAYOUT PRINCIPAL ═══ -->
+  <div class="max-w-[1600px] mx-auto px-4 lg:px-6 py-6 flex gap-6">
+
+    <!-- SIDEBAR -->
+    <aside class="sv-sidebar hidden lg:flex flex-col w-52 flex-shrink-0 sticky top-[76px] self-start">
+      <p class="uppercase font-bold text-[0.68rem] tracking-[1.5px] text-[#94a3b8] mb-4 flex items-center gap-2">
+        <i class="fas fa-list text-[#6366f1]"></i>Categorías
+      </p>
+      <nav class="flex flex-col gap-1">
+        <a href="#peliculas" class="sv-sidebar-link"><i class="fas fa-film text-[#6366f1]"></i> Películas y Series</a>
+        <a href="#musica" class="sv-sidebar-link"><i class="fas fa-music text-[#8b5cf6]"></i> Música</a>
+        <a href="#live" class="sv-sidebar-link"><i class="fas fa-satellite-dish text-[#ec4899]"></i> En Vivo</a>
+        <a href="deportes.html" class="sv-sidebar-link"><i class="fas fa-futbol text-cyan-400"></i> Deportes</a>
+        <a href="peliculas.html" class="sv-sidebar-link"><i class="fas fa-th text-lime-400"></i> Ver Todo</a>
+      </nav>
+      <div class="sv-sidebar-promo mt-5 p-5 rounded-xl text-center text-white">
+        <i class="fas fa-star text-lg mb-2 block"></i>
+        <p class="font-bold text-sm mb-1">Explora más</p>
+        <p class="text-[0.78rem] opacity-80 mb-4">Descubre todas las plataformas</p>
+        <a href="peliculas.html" class="btn-sv-visit block text-center text-sm"><i
+            class="fas fa-arrow-right mr-1"></i>Ver Todo</a>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO -->
+    <div class="flex-1 min-w-0">
+
+      <!-- ══ VIDEO STREAMING ══ -->
+      <section id="peliculas" class="mb-12">
+        <div class="pb-4 mb-6 border-b border-[rgba(102,126,234,.2)]">
+          <h1 class="sv-section-title mb-1"><i class="fas fa-film mr-2 sv-text-gradient"></i>Plataformas de Video
+            Streaming</h1>
+          <p class="text-[#94a3b8] text-sm m-0">Pasa el cursor sobre la tarjeta para ver más detalles</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-5">
+
+          <!-- Netflix -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=400"
+                    alt="Netflix">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=200"
+                      alt="Netflix" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(229,9,20,.18);color:#f87171;">Video</span></div>
+                  <p class="sv-card-title">Netflix</p>
+                  <p class="sv-card-desc">Series, películas originales, documentales y contenido para toda la familia.
+                  </p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img
+                  src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=200"
+                  alt="Netflix" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(229,9,20,.18);color:#f87171;border:1px solid rgba(229,9,20,.25);">Video</span>
+                <p class="sv-back-title">Netflix</p>
+                <p class="sv-back-desc">Series originales, películas, documentales. HD, 4K y Dolby Atmos.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>300M+</span><small>Suscriptores</small></div>
+                  <div class="sv-stat"><span>4K</span><small>Dolby Atmos</small></div>
+                  <div class="sv-stat"><span>190+</span><small>Países</small></div>
+                </div>
+                <a href="#imgmodal-netflix" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.netflix.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=60"
+                    alt="">Visitar Netflix <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prime Video -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShHjdc5f_ym3yh14jG8UkBivrdxLSGyVf-SQ&s"
+                    alt="Prime Video">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg"
+                      alt="Prime Video" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(0,168,225,.15);color:#38bdf8;">Video</span></div>
+                  <p class="sv-card-title">Prime Video</p>
+                  <p class="sv-card-desc">Contenido original de Amazon, películas y series exclusivas.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg"
+                  alt="Prime Video" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(0,168,225,.15);color:#38bdf8;border:1px solid rgba(0,168,225,.25);">Video</span>
+                <p class="sv-back-title">Prime Video</p>
+                <p class="sv-back-desc">Amazon Studios, offline en 240+ países. Incluido en Prime.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>200M+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>240+</span><small>Países</small></div>
+                  <div class="sv-stat"><span>4K</span><small>HDR10+</small></div>
+                </div>
+                <a href="#imgmodal-prime" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.primevideo.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="">Visitar
+                  Prime <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- HBO Max -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=400"
+                    alt="HBO">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="HBO Max"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(91,33,182,.2);color:#c4b5fd;">Video</span></div>
+                  <p class="sv-card-title">HBO Max</p>
+                  <p class="sv-card-desc">Lo mejor de HBO, Warner Bros y contenido premium exclusivo.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="HBO Max"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(91,33,182,.2);color:#c4b5fd;border:1px solid rgba(91,33,182,.3);">Video</span>
+                <p class="sv-back-title">HBO Max</p>
+                <p class="sv-back-desc">HBO, Warner Bros y DC. Estrenos el mismo día que en cines.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>95M+</span><small>Suscriptores</small></div>
+                  <div class="sv-stat"><span>4K</span><small>HDR Dolby</small></div>
+                  <div class="sv-stat"><span>50+</span><small>Países</small></div>
+                </div>
+                <a href="#imgmodal-hbo" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.max.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="">Visitar HBO Max <i
+                    class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Disney+ -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=400"
+                    alt="Disney">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(29,78,216,.18);color:#93c5fd;">Video</span></div>
+                  <p class="sv-card-title">Disney+</p>
+                  <p class="sv-card-desc">Disney, Pixar, Marvel, Star Wars y National Geographic.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(29,78,216,.18);color:#93c5fd;border:1px solid rgba(29,78,216,.28);">Video</span>
+                <p class="sv-back-title">Disney+</p>
+                <p class="sv-back-desc">Disney, Pixar, Marvel, Star Wars y Nat Geo. 4K HDR semanal.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>150M+</span><small>Suscriptores</small></div>
+                  <div class="sv-stat"><span>500+</span><small>Títulos Marvel</small></div>
+                  <div class="sv-stat"><span>4K</span><small>HDR</small></div>
+                </div>
+                <a href="#imgmodal-disney" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.disneyplus.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="">Visitar Disney+
+                  <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Apple TV+ -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1512070679279-8988d32161be?w=400"
+                    alt="Apple TV">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg" alt="Apple TV+"
+                      class="sv-logo sv-logo-apple"><span class="sv-badge"
+                      style="background:rgba(255,255,255,.08);color:#e2e8f0;">Video</span></div>
+                  <p class="sv-card-title">Apple TV+</p>
+                  <p class="sv-card-desc">Producciones originales de Apple, exclusivo de calidad.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg" alt="Apple TV+"
+                  class="sv-back-logo sv-logo-apple">
+                <span class="sv-back-badge"
+                  style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.12);">Video</span>
+                <p class="sv-back-title">Apple TV+</p>
+                <p class="sv-back-desc">Calidad cinematográfica en todos tus dispositivos Apple.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>50+</span><small>Originales</small></div>
+                  <div class="sv-stat"><span>4K</span><small>Dolby Vision</small></div>
+                  <div class="sv-stat"><span>100+</span><small>Países</small></div>
+                </div>
+                <a href="#imgmodal-apple" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://tv.apple.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg" alt=""
+                    class="sv-logo-apple">Visitar Apple TV+ <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Paramount+ -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=400"
+                    alt="Paramount">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Paramount_Plus.svg" alt="Paramount+"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(14,116,144,.18);color:#67e8f9;">Video</span></div>
+                  <p class="sv-card-title">Paramount+</p>
+                  <p class="sv-card-desc">CBS, MTV, Nickelodeon y más contenido de ViacomCBS.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Paramount_Plus.svg" alt="Paramount+"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(14,116,144,.18);color:#67e8f9;border:1px solid rgba(14,116,144,.28);">Video</span>
+                <p class="sv-back-title">Paramount+</p>
+                <p class="sv-back-desc">CBS, MTV, Nickelodeon. Deportes en vivo y noticias 24/7.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>67M+</span><small>Suscriptores</small></div>
+                  <div class="sv-stat"><span>24/7</span><small>Noticias CBS</small></div>
+                  <div class="sv-stat"><span>4K</span><small>Streaming</small></div>
+                </div>
+                <a href="#imgmodal-paramount" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.paramountplus.com" target="_blank" rel="noopener noreferrer"
+                  class="sv-btn-visit"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Paramount_Plus.svg"
+                    alt="">Visitar Paramount+ <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Peacock -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=400"
+                    alt="Peacock">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg"
+                      alt="Peacock" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(21,128,61,.18);color:#86efac;">Video</span></div>
+                  <p class="sv-card-title">Peacock</p>
+                  <p class="sv-card-desc">NBC Universal: series clásicas, deportes y contenido original.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg"
+                  alt="Peacock" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(21,128,61,.18);color:#86efac;border:1px solid rgba(21,128,61,.28);">Video</span>
+                <p class="sv-back-title">Peacock</p>
+                <p class="sv-back-desc">NBC Universal: NFL, F1 y Premier League. Plan gratuito disponible.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>30M+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>NFL</span><small>En vivo</small></div>
+                  <div class="sv-stat"><span>FREE</span><small>Plan gratis</small></div>
+                </div>
+                <a href="#imgmodal-peacock" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.peacocktv.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg"
+                    alt="">Visitar Peacock <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Crunchyroll -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=400"
+                    alt="Anime">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/08/Crunchyroll_Logo.png" alt="Crunchyroll"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(234,88,12,.18);color:#fdba74;">Anime</span></div>
+                  <p class="sv-card-title">Crunchyroll</p>
+                  <p class="sv-card-desc">La plataforma líder de anime, manga y cultura japonesa.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Crunchyroll_Logo.png" alt="Crunchyroll"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(234,88,12,.18);color:#fdba74;border:1px solid rgba(234,88,12,.28);">Anime</span>
+                <p class="sv-back-title">Crunchyroll</p>
+                <p class="sv-back-desc">1,200+ títulos y 45,000 episodios. Simulcast desde Japón.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>1200+</span><small>Títulos</small></div>
+                  <div class="sv-stat"><span>45K+</span><small>Episodios</small></div>
+                  <div class="sv-stat"><span>200+</span><small>Países</small></div>
+                </div>
+                <a href="#imgmodal-crunchyroll" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver
+                  detalles</a>
+                <a href="https://www.crunchyroll.com" target="_blank" rel="noopener noreferrer"
+                  class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/08/Crunchyroll_Logo.png" alt="">Visitar
+                  Crunchyroll <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ MÚSICA ══ -->
+      <section id="musica" class="mb-12">
+        <div class="pb-4 mb-6 border-b border-[rgba(102,126,234,.2)]">
+          <h1 class="sv-section-title mb-1"><i class="fas fa-music mr-2 sv-text-gradient"></i>Plataformas de Música</h1>
+          <p class="text-[#94a3b8] text-sm m-0">Escucha millones de canciones, podcasts y descubre nuevos artistas</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          <!-- Spotify -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=400"
+                    alt="Spotify">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                      alt="Spotify" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(30,215,96,.15);color:#4ade80;">Música</span></div>
+                  <p class="sv-card-title">Spotify</p>
+                  <p class="sv-card-desc">Más de 100 millones de canciones y 5 millones de podcasts.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                  alt="Spotify" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(30,215,96,.15);color:#4ade80;border:1px solid rgba(30,215,96,.25);">Música</span>
+                <p class="sv-back-title">Spotify</p>
+                <p class="sv-back-desc">100M canciones, 5M podcasts. Playlists IA, offline y 320 kbps.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>602M+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+                  <div class="sv-stat"><span>5M+</span><small>Podcasts</small></div>
+                </div>
+                <a href="#imgmodal-spotify" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                    alt="">Visitar Spotify <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- YouTube Music -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=400"
+                    alt="YouTube Music">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg"
+                      alt="YouTube Music" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(229,9,20,.15);color:#f87171;">Música</span></div>
+                  <p class="sv-card-title">YouTube Music</p>
+                  <p class="sv-card-desc">Música, videos musicales y conciertos en vivo.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg"
+                  alt="YouTube Music" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(229,9,20,.15);color:#f87171;border:1px solid rgba(229,9,20,.25);">Música</span>
+                <p class="sv-back-title">YouTube Music</p>
+                <p class="sv-back-desc">Música oficial y videoclips. Integrado con YouTube Premium.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+                  <div class="sv-stat"><span>80M+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>HD</span><small>Videoclips</small></div>
+                </div>
+                <a href="#imgmodal-ytmusic" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg" alt="">Visitar YT
+                  Music <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Apple Music -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1619983081563-430f63602796?w=400"
+                    alt="Apple Music">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg" alt="Apple Music"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(255,255,255,.08);color:#e2e8f0;">Música</span></div>
+                  <p class="sv-card-title">Apple Music</p>
+                  <p class="sv-card-desc">Más de 100 millones de canciones sin anuncios ni interrupciones.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg" alt="Apple Music"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.12);">Música</span>
+                <p class="sv-back-title">Apple Music</p>
+                <p class="sv-back-desc">100M canciones lossless y Dolby Atmos. Radio 24h sin anuncios.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+                  <div class="sv-stat"><span>Lossless</span><small>Calidad</small></div>
+                  <div class="sv-stat"><span>24h</span><small>Radio</small></div>
+                </div>
+                <a href="#imgmodal-applemusic" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://music.apple.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg" alt="">Visitar Apple
+                  Music <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- SoundCloud -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=400"
+                    alt="SoundCloud">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="SoundCloud"
+                      class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(234,88,12,.15);color:#fdba74;">Indie</span></div>
+                  <p class="sv-card-title">SoundCloud</p>
+                  <p class="sv-card-desc">Descubre música emergente y artistas independientes.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="SoundCloud"
+                  class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(234,88,12,.15);color:#fdba74;border:1px solid rgba(234,88,12,.25);">Indie</span>
+                <p class="sv-back-title">SoundCloud</p>
+                <p class="sv-back-desc">Música emergente y artistas independientes. Favorita de DJs.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>40M+</span><small>Artistas</small></div>
+                  <div class="sv-stat"><span>320M+</span><small>Pistas</small></div>
+                  <div class="sv-stat"><span>FREE</span><small>Plan gratis</small></div>
+                </div>
+                <a href="#imgmodal-soundcloud" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://soundcloud.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="">Visitar
+                  SoundCloud <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ══ VIDEO EN VIVO ══ -->
+      <section id="live" class="mb-12">
+        <div class="pb-4 mb-6 border-b border-[rgba(102,126,234,.2)]">
+          <h1 class="sv-section-title mb-1"><i class="fas fa-satellite-dish mr-2 sv-text-gradient"></i>Video y Contenido
+            en Vivo</h1>
+          <p class="text-[#94a3b8] text-sm m-0">Transmisiones en vivo, tutoriales y entretenimiento sin límites</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+
+          <!-- YouTube destacado -->
+          <div class="sv-flip sv-flip-tall md:col-span-2">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=600"
+                    alt="YouTube" style="height:200px;">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                      alt="YouTube" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(229,9,20,.15);color:#f87171;">Live · Video</span></div>
+                  <p class="sv-card-title">YouTube</p>
+                  <p class="sv-card-desc">Miles de millones de videos: música, tutoriales, gaming, vlogs y transmisiones
+                    en vivo.</p>
+                  <div class="grid grid-cols-3 gap-2 mt-3">
+                    <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-broadcast-tower"></i></span>
+                      <p class="text-[0.7rem] font-bold text-slate-100 m-0">En Vivo</p>
+                      <p class="text-[0.63rem] text-[#94a3b8] m-0">Streams globales</p>
+                    </div>
+                    <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-film"></i></span>
+                      <p class="text-[0.7rem] font-bold text-slate-100 m-0">Millones</p>
+                      <p class="text-[0.63rem] text-[#94a3b8] m-0">de videos</p>
+                    </div>
+                    <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-globe"></i></span>
+                      <p class="text-[0.7rem] font-bold text-slate-100 m-0">Global</p>
+                      <p class="text-[0.63rem] text-[#94a3b8] m-0">200+ países</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                  alt="YouTube" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(229,9,20,.15);color:#f87171;border:1px solid rgba(229,9,20,.25);">Live</span>
+                <p class="sv-back-title">YouTube</p>
+                <p class="sv-back-desc">La plataforma de video más grande del mundo en 200+ países.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>2.7B+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>500h</span><small>Video/min</small></div>
+                  <div class="sv-stat"><span>80+</span><small>Idiomas</small></div>
+                </div>
+                <a href="#imgmodal-youtube" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg"
+                    alt="">Visitar YouTube <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Twitch -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400"
+                    alt="Twitch">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg"
+                      alt="Twitch" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(145,70,255,.2);color:#c4b5fd;">Gaming</span></div>
+                  <p class="sv-card-title">Twitch</p>
+                  <p class="sv-card-desc">Streaming en vivo de gaming, música, deportes y más.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg"
+                  alt="Twitch" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(145,70,255,.2);color:#c4b5fd;border:1px solid rgba(145,70,255,.3);">Gaming</span>
+                <p class="sv-back-title">Twitch</p>
+                <p class="sv-back-desc">Streaming en vivo de gaming y esports. Millones de creadores.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>140M+</span><small>Usuarios</small></div>
+                  <div class="sv-stat"><span>9M+</span><small>Streamers</small></div>
+                  <div class="sv-stat"><span>1080p</span><small>60fps</small></div>
+                </div>
+                <a href="#imgmodal-twitch" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://upload.wikimedia.org/wikipedia/commons/d/d3/Twitch_Glitch_Logo_Purple.svg"
+                    alt="">Visitar Twitch <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Vimeo -->
+          <div class="sv-flip">
+            <div class="sv-flip-inner">
+              <div class="sv-flip-front">
+                <div class="sv-img-wrap"><img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=400"
+                    alt="Vimeo">
+                  <div class="sv-img-overlay"><span class="sv-img-hint"><i class="fas fa-expand-alt"></i> Ver
+                      detalles</span></div>
+                </div>
+                <div class="sv-card-body">
+                  <div class="flex items-center justify-between mb-2"><img
+                      src="https://play-lh.googleusercontent.com/iNaG_KPEUnnq-VsM8PKAfy2U8DWGWgBlUNgZy9LRPRt4klbludgBoKjA-mA_Oz3DPQ"
+                      alt="Vimeo" class="sv-logo"><span class="sv-badge"
+                      style="background:rgba(26,183,234,.15);color:#67e8f9;">Pro</span></div>
+                  <p class="sv-card-title">Vimeo</p>
+                  <p class="sv-card-desc">Plataforma para creadores de video profesional.</p>
+                </div>
+              </div>
+              <div class="sv-flip-back">
+                <img
+                  src="https://play-lh.googleusercontent.com/iNaG_KPEUnnq-VsM8PKAfy2U8DWGWgBlUNgZy9LRPRt4klbludgBoKjA-mA_Oz3DPQ"
+                  alt="Vimeo" class="sv-back-logo">
+                <span class="sv-back-badge"
+                  style="background:rgba(26,183,234,.15);color:#67e8f9;border:1px solid rgba(26,183,234,.25);">Pro</span>
+                <p class="sv-back-title">Vimeo</p>
+                <p class="sv-back-desc">4K sin compresión para cineastas y creadores profesionales.</p>
+                <div class="sv-stats">
+                  <div class="sv-stat"><span>300M+</span><small>Videos</small></div>
+                  <div class="sv-stat"><span>4K</span><small>Sin compresión</small></div>
+                  <div class="sv-stat"><span>Pro</span><small>Creadores</small></div>
+                </div>
+                <a href="#imgmodal-vimeo" class="sv-btn-detail"><i class="fas fa-info-circle"></i> Ver detalles</a>
+                <a href="https://vimeo.com" target="_blank" rel="noopener noreferrer" class="sv-btn-visit"><img
+                    src="https://play-lh.googleusercontent.com/iNaG_KPEUnnq-VsM8PKAfy2U8DWGWgBlUNgZy9LRPRt4klbludgBoKjA-mA_Oz3DPQ"
+                    alt="">Visitar Vimeo <i class="fas fa-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="bg-[rgba(5,8,16,.96)] border-t border-[rgba(102,126,234,.2)] pt-14 pb-6 px-4 mt-6">
+    <div class="max-w-[1600px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr] gap-8 mb-10">
+        <div>
+          <div class="flex items-center gap-2 mb-4">
+            <span class="sv-text-gradient text-2xl"><i class="fas fa-play-circle"></i></span>
+            <span class="font-black text-xl">StreamVerse</span>
+          </div>
+          <p class="text-[#94a3b8] text-sm leading-relaxed mb-5">Tu portal definitivo para todo el entretenimiento
+            digital. Todas tus plataformas favoritas, en un solo lugar.</p>
+          <div class="flex gap-2">
+            <a href="#" class="sv-social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="sv-social"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="sv-social"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="sv-social"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+        <div>
+          <h6 class="text-[0.86rem] font-bold mb-3">Plataformas</h6>
+          <a href="#peliculas" class="sv-footer-link">Películas y Series</a>
+          <a href="#musica" class="sv-footer-link">Música</a>
+          <a href="#live" class="sv-footer-link">En Vivo</a>
+          <a href="deportes.html" class="sv-footer-link">Deportes</a>
+        </div>
+        <div>
+          <h6 class="text-[0.86rem] font-bold mb-3">Soporte</h6>
+          <a href="#" class="sv-footer-link">Ayuda</a>
+          <a href="#" class="sv-footer-link">Preguntas Frecuentes</a>
+          <a href="#" class="sv-footer-link">Contacto</a>
+        </div>
+        <div>
+          <h6 class="text-[0.86rem] font-bold mb-3">Legal</h6>
+          <a href="#" class="sv-footer-link">Términos de Uso</a>
+          <a href="#" class="sv-footer-link">Privacidad</a>
+          <a href="#" class="sv-footer-link">Cookies</a>
+        </div>
+      </div>
+      <div
+        class="flex flex-col sm:flex-row items-center justify-between py-4 border-t border-[rgba(102,126,234,.08)] gap-2">
+        <p class="m-0 text-[#94a3b8] text-sm">© 2026 StreamVerse · Creado por <strong
+            class="text-slate-200">SAMB</strong></p>
+        <p class="m-0 text-[0.72rem] text-slate-600">Todos los derechos reservados</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══════════════ LIGHTBOX MODALES ══════════════ -->
+
+  <div id="imgmodal-netflix" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=820" alt="Netflix" class="sv-lbox-img">
+      <div class="p-5"><img
+          src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=120"
+          alt="Netflix" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(229,9,20,.18);color:#f87171;border:1px solid rgba(229,9,20,.25);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Netflix</h3>
+        <p class="sv-lbox-desc">Series originales, películas de estreno, documentales. Planes desde básico hasta 4K con
+          Dolby Atmos.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>300M+</span><small>Suscriptores</small></div>
+          <div class="sv-stat"><span>4K</span><small>Dolby Atmos</small></div>
+          <div class="sv-stat"><span>190+</span><small>Países</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.netflix.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://images.ctfassets.net/4cd45et68cgf/Rx83JoRDMkYNlMC9MKzcB/2b14d5a59fc3937afd3f03191e19502d/Netflix-Symbol.png?w=60"
+              alt="" class="h-4"> Ir a Netflix</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-prime" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShHjdc5f_ym3yh14jG8UkBivrdxLSGyVf-SQ&s"
+        alt="Prime Video" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg"
+          alt="Prime Video" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(0,168,225,.15);color:#38bdf8;border:1px solid rgba(0,168,225,.25);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Prime Video</h3>
+        <p class="sv-lbox-desc">Contenido original de Amazon Studios incluido en Prime. 240+ países con descarga
+          offline.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>200M+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>240+</span><small>Países</small></div>
+          <div class="sv-stat"><span>4K</span><small>HDR10+</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.primevideo.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/11/Amazon_Prime_Video_logo.svg" alt="" class="h-4">
+            Ir a Prime</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-hbo" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1440404653325-ab127d49abc1?w=820" alt="HBO Max" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="HBO Max"
+          class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(91,33,182,.2);color:#c4b5fd;border:1px solid rgba(91,33,182,.3);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">HBO Max</h3>
+        <p class="sv-lbox-desc">HBO, Warner Bros y DC. Series icónicas y estrenos el mismo día que en cines en 4K HDR.
+        </p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>95M+</span><small>Suscriptores</small></div>
+          <div class="sv-stat"><span>4K</span><small>HDR Dolby</small></div>
+          <div class="sv-stat"><span>50+</span><small>Países</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.max.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/17/HBO_Max_Logo.svg" alt="" class="h-4"> Ir a HBO
+            Max</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-disney" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=820" alt="Disney+" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="Disney+"
+          class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(29,78,216,.18);color:#93c5fd;border:1px solid rgba(29,78,216,.28);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Disney+</h3>
+        <p class="sv-lbox-desc">Disney, Pixar, Marvel, Star Wars y National Geographic. Contenido nuevo cada semana en
+          4K HDR.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>150M+</span><small>Suscriptores</small></div>
+          <div class="sv-stat"><span>500+</span><small>Títulos Marvel</small></div>
+          <div class="sv-stat"><span>4K</span><small>HDR</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.disneyplus.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg" alt="" class="h-4"> Ir a
+            Disney+</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-apple" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1512070679279-8988d32161be?w=820" alt="Apple TV+" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg"
+          alt="Apple TV+" class="h-6 mb-3 block sv-logo-apple"><span class="sv-lbox-tag"
+          style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.12);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Apple TV+</h3>
+        <p class="sv-lbox-desc">Producciones originales en Dolby Vision y Dolby Atmos. Disponible en todos tus
+          dispositivos Apple.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>50+</span><small>Originales</small></div>
+          <div class="sv-stat"><span>4K</span><small>Dolby Vision</small></div>
+          <div class="sv-stat"><span>100+</span><small>Países</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://tv.apple.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/28/Apple_TV_Plus_Logo.svg" alt=""
+              class="h-4 sv-logo-apple"> Ir a Apple TV+</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-paramount" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=820" alt="Paramount+" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Paramount_Plus.svg"
+          alt="Paramount+" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(14,116,144,.18);color:#67e8f9;border:1px solid rgba(14,116,144,.28);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Paramount+</h3>
+        <p class="sv-lbox-desc">CBS, MTV, Nickelodeon y catálogo Paramount Pictures. Deportes en vivo y noticias 24/7.
+        </p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>67M+</span><small>Suscriptores</small></div>
+          <div class="sv-stat"><span>24/7</span><small>Noticias CBS</small></div>
+          <div class="sv-stat"><span>4K</span><small>Streaming</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.paramountplus.com" target="_blank"
+            rel="noopener noreferrer" class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Paramount_Plus.svg" alt="" class="h-4"> Ir a
+            Paramount+</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-peacock" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1485846234645-a62644f84728?w=820" alt="Peacock" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg"
+          alt="Peacock" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(21,128,61,.18);color:#86efac;border:1px solid rgba(21,128,61,.28);"><i
+            class="fas fa-film mr-1"></i>Video Streaming</span>
+        <h3 class="sv-lbox-title">Peacock</h3>
+        <p class="sv-lbox-desc">NBC Universal: NFL, F1 y Premier League en vivo. Plan gratuito disponible con clásicos y
+          originales.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>30M+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>NFL</span><small>En vivo</small></div>
+          <div class="sv-stat"><span>FREE</span><small>Plan gratis</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.peacocktv.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/d/d3/NBCUniversal_Peacock_Logo.svg" alt=""
+              class="h-4"> Ir a Peacock</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-crunchyroll" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1578632767115-351597cf2477?w=820" alt="Crunchyroll" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/0/08/Crunchyroll_Logo.png"
+          alt="Crunchyroll" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(234,88,12,.18);color:#fdba74;border:1px solid rgba(234,88,12,.28);"><i
+            class="fas fa-dragon mr-1"></i>Anime</span>
+        <h3 class="sv-lbox-title">Crunchyroll</h3>
+        <p class="sv-lbox-desc">1,200+ títulos y 45,000 episodios anime. Simulcast desde Japón, manga digital y J-Pop.
+        </p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>1200+</span><small>Títulos</small></div>
+          <div class="sv-stat"><span>45K+</span><small>Episodios</small></div>
+          <div class="sv-stat"><span>200+</span><small>Países</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.crunchyroll.com" target="_blank"
+            rel="noopener noreferrer" class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/08/Crunchyroll_Logo.png" alt="" class="h-4"> Ir a
+            Crunchyroll</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i>
+            Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-spotify" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?w=820" alt="Spotify" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+          alt="Spotify" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(30,215,96,.15);color:#4ade80;border:1px solid rgba(30,215,96,.25);"><i
+            class="fas fa-music mr-1"></i>Música</span>
+        <h3 class="sv-lbox-title">Spotify</h3>
+        <p class="sv-lbox-desc">100M canciones, 5M podcasts y audiolibros. Playlists IA, descarga offline y 320 kbps.
+        </p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>602M+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+          <div class="sv-stat"><span>5M+</span><small>Podcasts</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.spotify.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt=""
+              class="h-4"> Ir a Spotify</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-ytmusic" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=820" alt="YouTube Music"
+        class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg"
+          alt="YT Music" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(229,9,20,.15);color:#f87171;border:1px solid rgba(229,9,20,.25);"><i
+            class="fas fa-music mr-1"></i>Música</span>
+        <h3 class="sv-lbox-title">YouTube Music</h3>
+        <p class="sv-lbox-desc">Música oficial, videoclips y conciertos en vivo. Integrado con YouTube Premium.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+          <div class="sv-stat"><span>80M+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>HD</span><small>Videoclips</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://music.youtube.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Youtube_Music_icon.svg" alt="" class="h-4"> Ir a
+            YT Music</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-applemusic" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1619983081563-430f63602796?w=820" alt="Apple Music" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg"
+          alt="Apple Music" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(255,255,255,.08);color:#e2e8f0;border:1px solid rgba(255,255,255,.12);"><i
+            class="fas fa-music mr-1"></i>Música</span>
+        <h3 class="sv-lbox-title">Apple Music</h3>
+        <p class="sv-lbox-desc">100M canciones lossless y Dolby Atmos. Sin anuncios, descarga y radio 24h.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>100M+</span><small>Canciones</small></div>
+          <div class="sv-stat"><span>Lossless</span><small>Calidad</small></div>
+          <div class="sv-stat"><span>24h</span><small>Radio</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://music.apple.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/5/5f/Apple_Music_icon.svg" alt="" class="h-4"> Ir a
+            Apple Music</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i>
+            Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-soundcloud" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=820" alt="SoundCloud" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg"
+          alt="SoundCloud" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(234,88,12,.15);color:#fdba74;border:1px solid rgba(234,88,12,.25);"><i
+            class="fas fa-headphones mr-1"></i>Indie · Música</span>
+        <h3 class="sv-lbox-title">SoundCloud</h3>
+        <p class="sv-lbox-desc">Música emergente y artistas independientes. La favorita de productores y DJs para
+          compartir sonidos únicos.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>40M+</span><small>Artistas</small></div>
+          <div class="sv-stat"><span>320M+</span><small>Pistas</small></div>
+          <div class="sv-stat"><span>FREE</span><small>Plan gratis</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://soundcloud.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/a/a2/Antu_soundcloud.svg" alt="" class="h-4"> Ir a
+            SoundCloud</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-youtube" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=820" alt="YouTube" class="sv-lbox-img">
+      <div class="p-5"><img
+          src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube"
+          class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(229,9,20,.15);color:#f87171;border:1px solid rgba(229,9,20,.25);"><i
+            class="fas fa-broadcast-tower mr-1"></i>Live · Video</span>
+        <h3 class="sv-lbox-title">YouTube</h3>
+        <p class="sv-lbox-desc">La plataforma de video más grande del mundo. Música, gaming, vlogs y streams en 80
+          idiomas y 200+ países.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>2.7B+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>500h</span><small>Video/min</small></div>
+          <div class="sv-stat"><span>80+</span><small>Idiomas</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt=""
+              class="h-4"> Ir a YouTube</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-twitch" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=820" alt="Twitch" class="sv-lbox-img">
+      <div class="p-5"><img src="https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg" alt="Twitch"
+          class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(145,70,255,.2);color:#c4b5fd;border:1px solid rgba(145,70,255,.3);"><i
+            class="fas fa-gamepad mr-1"></i>Gaming · Live</span>
+        <h3 class="sv-lbox-title">Twitch</h3>
+        <p class="sv-lbox-desc">Plataforma líder de streaming en vivo para gaming y esports. Millones de creadores
+          transmitiendo diariamente.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>140M+</span><small>Usuarios</small></div>
+          <div class="sv-stat"><span>9M+</span><small>Streamers</small></div>
+          <div class="sv-stat"><span>1080p</span><small>60fps</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://www.twitch.tv" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg" alt="" class="h-4"> Ir a
+            Twitch</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i class="fas fa-times"></i> Cerrar</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="imgmodal-vimeo" class="sv-imgmodal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-lbox-card"><a class="sv-lbox-close" href="#"><i class="fas fa-times"></i></a><img
+        src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=820" alt="Vimeo" class="sv-lbox-img">
+      <div class="p-5"><img
+          src="https://play-lh.googleusercontent.com/iNaG_KPEUnnq-VsM8PKAfy2U8DWGWgBlUNgZy9LRPRt4klbludgBoKjA-mA_Oz3DPQ"
+          alt="Vimeo" class="h-6 mb-3 block"><span class="sv-lbox-tag"
+          style="background:rgba(26,183,234,.15);color:#67e8f9;border:1px solid rgba(26,183,234,.25);"><i
+            class="fas fa-video mr-1"></i>Video Pro</span>
+        <h3 class="sv-lbox-title">Vimeo</h3>
+        <p class="sv-lbox-desc">4K sin compresión para cineastas y creadores profesionales. Herramientas de colaboración
+          avanzadas.</p>
+        <div class="sv-stats mb-4">
+          <div class="sv-stat"><span>300M+</span><small>Videos</small></div>
+          <div class="sv-stat"><span>4K</span><small>Sin compresión</small></div>
+          <div class="sv-stat"><span>Pro</span><small>Creadores</small></div>
+        </div>
+        <div class="flex gap-3 flex-wrap"><a href="https://vimeo.com" target="_blank" rel="noopener noreferrer"
+            class="btn-sv-primary text-sm py-2 px-5"><img
+              src="https://play-lh.googleusercontent.com/iNaG_KPEUnnq-VsM8PKAfy2U8DWGWgBlUNgZy9LRPRt4klbludgBoKjA-mA_Oz3DPQ"
+              alt="" class="h-4"> Ir a Vimeo</a><a href="#" class="btn-sv-secondary text-sm py-2 px-5"><i
+              class="fas fa-times"></i> Cerrar</a></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL LOGIN ══════════════ -->
+  <div id="modal-login" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" style="max-width:440px;" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-play-circle mr-1"></i> StreamVerse</span>
+        <h2 class="sv-modal-title">Bienvenido de nuevo</h2>
+        <p class="text-[#94a3b8] text-sm">Inicia sesión para acceder a todo tu entretenimiento</p>
+      </div>
+      <form action="#" class="flex flex-col gap-4">
+        <div><label class="sv-label"><i class="fas fa-envelope mr-1"></i> Correo <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="email" class="sv-input"
+            placeholder="correo@ejemplo.com" required></div>
+        <div><label class="sv-label"><i class="fas fa-key mr-1"></i> Contraseña <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+            placeholder="Tu contraseña" minlength="6" required></div>
+        <label class="sv-check"><input type="checkbox"> Recordar sesión</label>
+        <button class="btn-sv-submit" type="submit"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
+        <button class="btn-sv-reset" type="button"><i class="fas fa-lock"></i> Olvidé mi contraseña</button>
+      </form>
+      <div class="flex items-center gap-3 my-4"><span class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+        <p class="text-[0.74rem] text-[#94a3b8] m-0 whitespace-nowrap">¿No tienes cuenta?</p><span
+          class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+      </div>
+      <a href="#modal-registro" class="sv-register-link"><i class="fas fa-user-plus"></i> Crear cuenta en
+        StreamVerse</a>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL REGISTRO ══════════════ -->
+  <div id="modal-registro" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-user-plus mr-1"></i> Nuevo usuario</span>
+        <h2 class="sv-modal-title">Crea tu cuenta</h2>
+        <p class="text-[#94a3b8] text-sm">Únete a StreamVerse y accede a todo el entretenimiento</p>
+      </div>
+      <form action="#" method="post" enctype="multipart/form-data">
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-id-card"></i> Datos personales</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Nombre <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Juan" required></div>
+            <div><label class="sv-label">Apellido <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Castro" required></div>
+            <div><label class="sv-label">Correo <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="email" class="sv-input" placeholder="correo@ejemplo.com" required></div>
+            <div><label class="sv-label">Teléfono</label><input type="tel" class="sv-input" placeholder="+57 300...">
+            </div>
+            <div><label class="sv-label">Nacimiento <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="date" class="sv-input" required></div>
+            <div><label class="sv-label">País</label><select class="sv-input sv-select">
+                <option>Seleccionar...</option>
+                <option>Colombia</option>
+                <option>México</option>
+                <option>Argentina</option>
+                <option>España</option>
+                <option>Estados Unidos</option>
+                <option>Otro</option>
+              </select></div>
+            <div class="col-span-2"><label class="sv-label">Sitio web</label><input type="url" class="sv-input"
+                placeholder="https://..."></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-lock"></i> Seguridad</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Usuario <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="streamuser99" required></div>
+            <div><label class="sv-label">Contraseña <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="password" class="sv-input" placeholder="Mín. 8 chars" minlength="8" required></div>
+            <div class="col-span-2"><label class="sv-label">Confirmar contraseña <span
+                  class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+                placeholder="Repite tu contraseña" minlength="8" required></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-sliders-h"></i> Preferencias</legend>
+          <div class="flex flex-col gap-3 mt-3">
+            <div><label class="sv-label">Plataformas favoritas</label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="checkbox" value="netflix">
+                  Netflix</label><label class="sv-check"><input type="checkbox" value="prime"> Prime Video</label><label
+                  class="sv-check"><input type="checkbox" value="hbo"> HBO Max</label><label class="sv-check"><input
+                    type="checkbox" value="disney"> Disney+</label><label class="sv-check"><input type="checkbox"
+                    value="spotify"> Spotify</label><label class="sv-check"><input type="checkbox" value="youtube">
+                  YouTube</label><label class="sv-check"><input type="checkbox" value="twitch"> Twitch</label><label
+                  class="sv-check"><input type="checkbox" value="crunchyroll"> Crunchyroll</label></div>
+            </div>
+            <div><label class="sv-label">Plan <span class="text-pink-400 text-[0.65rem]">*</span></label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="radio" name="plan"
+                    value="free" required> Gratuito</label><label class="sv-check"><input type="radio" name="plan"
+                    value="basic"> Básico</label><label class="sv-check"><input type="radio" name="plan" value="pro">
+                  Pro</label><label class="sv-check"><input type="radio" name="plan" value="ultra"> Ultra 4K</label>
+              </div>
+            </div>
+            <div><label class="sv-label">Calidad de video</label>
+              <div class="sv-range mt-2">
+                <input type="radio" name="calidad" id="q0" value="0"><input type="radio" name="calidad" id="q1"
+                  value="1" checked><input type="radio" name="calidad" id="q2" value="2"><input type="radio"
+                  name="calidad" id="q3" value="3">
+                <div class="sv-range-track">
+                  <div class="sv-range-fill"></div><label for="q0" class="sv-rthumb" style="left:0%"></label><label
+                    for="q1" class="sv-rthumb" style="left:33.3%"></label><label for="q2" class="sv-rthumb"
+                    style="left:66.6%"></label><label for="q3" class="sv-rthumb" style="left:100%"></label>
+                </div>
+                <div class="sv-range-labels"><label for="q0">360p</label><label for="q1">720p</label><label
+                    for="q2">1080p</label><label for="q3">4K</label></div>
+              </div>
+            </div>
+            <div><label class="sv-label"><i class="fas fa-palette mr-1"></i>Color de acento</label><input type="color"
+                class="sv-color" value="#6366f1"></div>
+            <div><label class="sv-label">Bio del perfil</label><textarea class="sv-input" rows="2"
+                placeholder="Cuéntanos sobre tus gustos..."></textarea></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-paperclip"></i> Archivos del perfil</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Foto de perfil</label>
+              <div class="sv-dropzone"><input type="file" accept=".jpg,.jpeg,.png,.webp">
+                <div class="sv-drop-ui"><i class="fas fa-user-circle"></i><b>Seleccionar imagen</b><small>JPG, PNG ·
+                    5MB</small></div>
+              </div>
+            </div>
+            <div><label class="sv-label">Documento</label>
+              <div class="sv-dropzone"><input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="sv-drop-ui"><i class="fas fa-file-shield"></i><b>Subir documento</b><small>PDF, JPG ·
+                    10MB</small></div>
+              </div>
+            </div>
+            <div class="col-span-2"><label class="sv-label">Capturas múltiples</label>
+              <div class="sv-dropzone"><input type="file" multiple>
+                <div class="sv-drop-ui"><i class="fas fa-cloud-arrow-up"></i><b>Seleccionar archivos</b><small>JPG, PNG,
+                    PDF, MP4 · 20MB</small></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-circle-check"></i> Confirmación</legend>
+          <div class="flex flex-col gap-2 mt-3">
+            <label class="sv-check w-full"><input type="checkbox" required> Acepto los <a href="#"
+                class="text-indigo-400 hover:underline">Términos de Servicio</a></label>
+            <label class="sv-check w-full"><input type="checkbox" required> He leído la <a href="#"
+                class="text-indigo-400 hover:underline">Política de Privacidad</a></label>
+            <label class="sv-check w-full"><input type="checkbox"> Quiero recibir novedades</label>
+          </div>
+          <div class="mt-3"><label class="sv-label">Código de referido</label><input type="text" class="sv-input"
+              placeholder="STREAM-XXXX"></div>
+        </fieldset>
+        <button class="btn-sv-submit mb-2" type="submit"><i class="fas fa-rocket"></i> Crear mi cuenta en
+          StreamVerse</button>
+        <button class="btn-sv-reset" type="reset"><i class="fas fa-rotate-left"></i> Limpiar formulario</button>
+      </form>
+      <p class="text-center text-[0.78rem] text-[#94a3b8] mt-3">¿Ya tienes cuenta? <a href="#modal-login"
+          class="text-indigo-400 hover:underline">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL INFO ══════════════ -->
+  <div id="modal-info" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-circle-info mr-1"></i> Bienvenida</span>
+        <h2 class="sv-modal-title">¿Qué es StreamVerse?</h2>
+        <p class="text-[#94a3b8] text-sm">Tu portal definitivo para todo el entretenimiento digital</p>
+      </div>
+      <div
+        class="bg-[rgba(99,102,241,.08)] border border-[rgba(99,102,241,.18)] rounded-2xl p-5 mb-5 flex items-start gap-3">
+        <span class="sv-text-gradient text-4xl flex-shrink-0"><i class="fas fa-play-circle"></i></span>
+        <p class="text-slate-300 text-sm leading-relaxed m-0">StreamVerse centraliza los accesos a los principales
+          servicios de streaming. No necesitas saltar entre apps: todo organizado en un diseño limpio desde cualquier
+          dispositivo.</p>
+      </div>
+      <div class="flex flex-col gap-3 mb-5">
+        <div class="flex gap-3 items-start"><span class="sv-text-gradient font-black text-2xl min-w-[36px]">01</span>
+          <div>
+            <p class="font-bold text-sm text-slate-100 mb-0">Explora las secciones</p>
+            <p class="text-[#94a3b8] text-xs m-0">Navega por Películas, Música y En Vivo desde el menú.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="sv-text-gradient font-black text-2xl min-w-[36px]">02</span>
+          <div>
+            <p class="font-bold text-sm text-slate-100 mb-0">Pasa el cursor sobre las tarjetas</p>
+            <p class="text-[#94a3b8] text-xs m-0">Cada tarjeta se voltea mostrando detalles y acceso directo.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="sv-text-gradient font-black text-2xl min-w-[36px]">03</span>
+          <div>
+            <p class="font-bold text-sm text-slate-100 mb-0">Crea tu cuenta</p>
+            <p class="text-[#94a3b8] text-xs m-0">Regístrate para personalizar y guardar preferencias.</p>
+          </div>
+        </div>
+        <div class="flex gap-3 items-start"><span class="sv-text-gradient font-black text-2xl min-w-[36px]">04</span>
+          <div>
+            <p class="font-bold text-sm text-slate-100 mb-0">Disfruta sin límites</p>
+            <p class="text-[#94a3b8] text-xs m-0">Todo tu entretenimiento centralizado desde cualquier dispositivo.</p>
+          </div>
+        </div>
+      </div>
+      <div class="grid grid-cols-4 gap-2 mb-5">
+        <div class="sv-info-stat">
+          <p class="sv-text-gradient font-black text-xl m-0">15+</p><small
+            class="text-[#94a3b8] text-[0.65rem]">Plataformas</small>
+        </div>
+        <div class="sv-info-stat">
+          <p class="sv-text-gradient font-black text-xl m-0">3</p><small
+            class="text-[#94a3b8] text-[0.65rem]">Categorías</small>
+        </div>
+        <div class="sv-info-stat">
+          <p class="sv-text-gradient font-black text-xl m-0">100%</p><small
+            class="text-[#94a3b8] text-[0.65rem]">Gratuito</small>
+        </div>
+        <div class="sv-info-stat">
+          <p class="sv-text-gradient font-black text-xl m-0">0</p><small
+            class="text-[#94a3b8] text-[0.65rem]">Anuncios</small>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <a href="#modal-login" class="btn-sv-primary justify-center"><i class="fas fa-rocket"></i> Comenzar ahora</a>
+        <a href="#" class="btn-sv-secondary justify-center"><i class="fas fa-times"></i> Cerrar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL UBICACIÓN ══════════════ -->
+  <div id="modal-ubicacion" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" style="max-width:700px;" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-map-marker-alt mr-1"></i> Nuestra ubicación</span>
+        <h2 class="sv-modal-title">¿Dónde estamos?</h2>
+        <p class="text-[#94a3b8] text-sm">Encuéntranos en el mapa y ven a visitarnos</p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-[rgba(102,126,234,.22)] mb-5">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d86445.89263275213!2d8.515426507079907!3d47.38396155310409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b9749bea219%3A0xe66e8df1e71fdc03!2zWsO6cmljaCwgU3VpemE!5e0!3m2!1ses!2sco!4v1773118959105!5m2!1ses!2sco"
+          width="100%" height="300" style="border:0;display:block;" allowfullscreen loading="lazy"></iframe>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-5">
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-map-pin"></i></span>
+          <p class="text-[0.78rem] font-bold text-slate-100 m-0">Dirección</p>
+          <p class="text-[0.72rem] text-[#94a3b8] m-0">Zürich, Suiza</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-clock"></i></span>
+          <p class="text-[0.78rem] font-bold text-slate-100 m-0">Horario</p>
+          <p class="text-[0.72rem] text-[#94a3b8] m-0">Lun – Vie · 9am – 6pm</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-envelope"></i></span>
+          <p class="text-[0.78rem] font-bold text-slate-100 m-0">Contacto</p>
+          <p class="text-[0.72rem] text-[#94a3b8] m-0">info@streamverse.com</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <a href="https://maps.google.com/?q=Zürich,Suiza" target="_blank" rel="noopener noreferrer"
+          class="btn-sv-primary justify-center"><i class="fas fa-directions"></i> Cómo llegar</a>
+        <a href="#" class="btn-sv-secondary justify-center"><i class="fas fa-times"></i> Cerrar</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

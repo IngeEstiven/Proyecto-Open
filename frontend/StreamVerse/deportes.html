@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="Imagenes/Logo.png" type="image/png">
+  <title>Deportes - StreamVerse</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-[#050810] text-slate-100 overflow-x-hidden">
+
+  <div class="sv-bg sports">
+    <div class="sv-orb sv-orb1"></div>
+    <div class="sv-orb sv-orb2"></div>
+    <div class="sv-orb sv-orb3"></div>
+  </div>
+
+  <!-- NAVBAR -->
+  <input type="checkbox" id="nav-toggle" class="hidden peer/nav">
+  <nav class="sv-navbar sticky top-0 z-50 px-4 lg:px-6">
+    <div class="max-w-[1400px] mx-auto flex items-center justify-between py-3 gap-3">
+      <a href="index.html" class="flex items-center gap-2 no-underline flex-shrink-0">
+        <span class="sv-brand-icon text-[2rem]"><i class="fas fa-play-circle"></i></span>
+        <div>
+          <p class="sv-brand-title text-2xl font-black tracking-widest m-0 leading-none">StreamVerse</p>
+          <p class="text-[0.68rem] text-[#94a3b8] tracking-wider m-0">Infinito Entretenimiento</p>
+        </div>
+      </a>
+      <ul class="hidden lg:flex items-center gap-1 list-none m-0 p-0">
+        <li><a href="index.html" class="nav-link"><i class="fas fa-home mr-1"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link"><i class="fas fa-film mr-1"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link"><i class="fas fa-music mr-1"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link"><i class="fas fa-satellite-dish mr-1"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link active"><i class="fas fa-futbol mr-1"></i>Deportes</a></li>
+        <li><a href="#modal-ubicacion" class="nav-link"><i class="fas fa-map-marker-alt mr-1"></i>Ubícanos</a></li>
+      </ul>
+      <div class="flex items-center gap-2">
+        <div class="sv-search-wrap">
+          <input type="search" id="search-bar" class="sv-search-input" placeholder="Buscar deporte…">
+          <label for="search-bar" class="sv-icon-btn cursor-pointer"><i class="fas fa-search"></i></label>
+        </div>
+        <a href="#modal-login" class="sv-icon-btn"><i class="fas fa-user-circle"></i></a>
+        <label for="nav-toggle" class="lg:hidden sv-icon-btn cursor-pointer"><i class="fas fa-bars"></i></label>
+      </div>
+    </div>
+    <div class="sv-nav-mobile">
+      <ul class="list-none m-0 p-0 flex flex-col gap-1">
+        <li><a href="index.html" class="nav-link block"><i class="fas fa-home mr-2"></i>Inicio</a></li>
+        <li><a href="peliculas.html" class="nav-link block"><i class="fas fa-film mr-2"></i>Películas</a></li>
+        <li><a href="musica.html" class="nav-link block"><i class="fas fa-music mr-2"></i>Música</a></li>
+        <li><a href="live.html" class="nav-link block"><i class="fas fa-satellite-dish mr-2"></i>En Vivo</a></li>
+        <li><a href="deportes.html" class="nav-link active block"><i class="fas fa-futbol mr-2"></i>Deportes</a></li>
+        <li><a href="#modal-ubicacion" class="nav-link block"><i class="fas fa-map-marker-alt mr-2"></i>Ubícanos</a>
+        </li>
+        <li>
+          <div class="sv-search-wrap sv-search-mobile">
+            <input type="search" id="search-bar-m" class="sv-search-input w-full" placeholder="Buscar deporte…">
+            <label for="search-bar-m" class="sv-icon-btn cursor-pointer"><i class="fas fa-search"></i></label>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="max-w-[1400px] mx-auto px-4 lg:px-6 py-6">
+
+    <div class="sv-page-header">
+      <h1><i class="fas fa-futbol mr-2"></i>Deportes en Streaming</h1>
+      <p>Las mejores plataformas deportivas para seguir a tus equipos favoritos</p>
+    </div>
+
+    <!-- CARRUSEL -->
+    <div class="sv-car-wrap">
+      <div class="sv-car-scroll">
+        <div class="sv-car-slide" id="ds1">
+          <img src="https://images.unsplash.com/photo-1560272564-c83b66b1ad12?w=1400&q=85" alt="ESPN+">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#e50914;color:#fff">ESPN+</span>
+            <h5>Todos los Deportes en Un Lugar</h5>
+            <p>NFL, NBA, MLB, UFC, Fútbol y mucho más en vivo</p>
+            <a href="https://www.espn.com/espnplus/" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fas fa-play mr-1"></i>Ver ESPN+</a>
+          </div>
+          <a href="#ds3" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ds2" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="sv-car-slide" id="ds2">
+          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=1400&q=85" alt="NBA LEAGUE PASS">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#1d428a;color:#fff">NBA LEAGUE PASS</span>
+            <h5>Baloncesto Sin Límites</h5>
+            <p>Todos los partidos de la mejor liga del mundo</p>
+            <a href="https://www.nba.com/league-pass" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fas fa-basketball mr-1"></i>Ver NBA</a>
+          </div>
+          <a href="#ds1" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ds3" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+        <div class="sv-car-slide" id="ds3">
+          <img src="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=1400&q=85" alt="F1 TV PRO">
+          <div class="sv-car-cap">
+            <span class="sv-car-badge" style="background:#e50914;color:#fff">F1 TV PRO</span>
+            <h5>Fórmula 1 · La Máxima Velocidad</h5>
+            <p>Todas las carreras, clasificaciones y documentales exclusivos</p>
+            <a href="https://f1tv.formula1.com" target="_blank" class="btn-sv-primary text-sm py-2 px-4"><i
+                class="fas fa-flag-checkered mr-1"></i>Ver F1 TV</a>
+          </div>
+          <a href="#ds2" class="sv-car-arrow sv-car-arrow-prev"><i class="fas fa-chevron-left"></i></a>
+          <a href="#ds1" class="sv-car-arrow sv-car-arrow-next"><i class="fas fa-chevron-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="sv-car-dots">
+      <a href="#ds1" class="sv-car-dot-a" title="Slide 1"></a>
+      <a href="#ds2" class="sv-car-dot-a" title="Slide 2"></a>
+      <a href="#ds3" class="sv-car-dot-a" title="Slide 3"></a>
+    </div>
+
+    ACCESOS RÁPIDOS -->
+    <div class="mb-8">
+      <h5 class="font-bold text-base mb-3 sv-text-gradient"><i class="fas fa-bolt mr-2"></i>Accesos Rápidos</h5>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <a href="https://www.espn.com/espnplus/" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-trophy"></i></span><span class="sv-quick-label">ESPN+</span></a>
+        <a href="https://www.dazn.com" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-broadcast-tower"></i></span><span class="sv-quick-label">DAZN</span></a>
+        <a href="https://www.nba.com/league-pass" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-basketball"></i></span><span class="sv-quick-label">NBA Pass</span></a>
+        <a href="https://www.nfl.com/gamepass/" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-football"></i></span><span class="sv-quick-label">NFL GamePass</span></a>
+        <a href="https://www.fubo.tv" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-satellite"></i></span><span class="sv-quick-label">FuboTV</span></a>
+        <a href="https://f1tv.formula1.com" target="_blank" class="sv-quick-card"><span class="sv-quick-icon"><i
+              class="fas fa-flag-checkered"></i></span><span class="sv-quick-label">F1 TV Pro</span></a>
+      </div>
+    </div>
+
+    <!-- DISCIPLINAS -->
+    <div class="sv-section mb-6">
+      <h4 class="sv-section-title mb-4"><i class="fas fa-medal mr-2 sv-text-gradient"></i>Disciplinas Deportivas</h4>
+      <div class="grid grid-cols-3 sm:grid-cols-6 gap-3">
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1529900748604-07564a03e7a6?w=300&q=70"
+            alt="Fútbol">
+          <div class="sv-cat-label"><i class="fas fa-futbol"></i>
+            <h6>Fútbol</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?w=300&q=70"
+            alt="Basket">
+          <div class="sv-cat-label"><i class="fas fa-basketball"></i>
+            <h6>Basket</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=300&q=70"
+            alt="Tenis">
+          <div class="sv-cat-label"><i class="fas fa-baseball"></i>
+            <h6>Tenis</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1589487391730-58f20eb2c308?w=300&q=70"
+            alt="F1">
+          <div class="sv-cat-label"><i class="fas fa-flag-checkered"></i>
+            <h6>Fórmula 1</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1517649763962-0c623066013b?w=300&q=70"
+            alt="Ciclismo">
+          <div class="sv-cat-label"><i class="fas fa-bicycle"></i>
+            <h6>Ciclismo</h6>
+          </div>
+        </div>
+        <div class="sv-cat-card"><img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?w=300&q=70"
+            alt="Boxeo">
+          <div class="sv-cat-label"><i class="fas fa-fist-raised"></i>
+            <h6>Boxeo/MMA</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESPN+ -->
+    <div class="sv-section">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/ESPN_wordmark.svg" alt="ESPN+"
+            class="sv-platform-logo">
+          <div>
+            <h2 class="sv-platform-title">ESPN+</h2>
+            <p class="sv-platform-desc">NFL, NBA, MLB, NHL, MLS, UFC, golf, tenis y mucho más</p>
+          </div>
+        </div>
+        <a href="https://www.espn.com/espnplus/" target="_blank" class="btn-sv-visit"><i class="fas fa-trophy"></i>
+          Visitar</a>
+      </div>
+      <div class="sv-video-grid">
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/GbpMiJwpBQ8" allowfullscreen></iframe>
+          <h6>NFL Highlights 2024</h6>
+        </div>
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/FXrL33nL4MA" allowfullscreen></iframe>
+          <h6>NBA Best Plays</h6>
+        </div>
+        <div class="sv-video-card"><iframe src="https://www.youtube.com/embed/hGsFCMnc_50" allowfullscreen></iframe>
+          <h6>UFC Best Moments</h6>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAZN -->
+    <div class="sv-section">
+      <div class="flex items-center justify-between flex-wrap gap-3 mb-4">
+        <div class="flex items-center gap-3">
+          <img
+            src="https://play-lh.googleusercontent.com/Ygc_b_RDFJfbMNXPsyFBDiwUsBz-rLrNWyL2f2LxernvBNYYaHFMCY9wnXHk3hEoybvp=w240-h480-rw"
+            alt="DAZN" class="sv-platform-logo">
+          <div>
+            <h2 class="sv-platform-title">DAZN</h2>
+            <p class="sv-platform-desc">Fútbol, boxeo, MMA y los mejores deportes del mundo en directo</p>
+          </div>
+        </div>
+        <a href="https://www.dazn.com" target="_blank" class="btn-sv-visit"><i class="fas fa-broadcast-tower"></i>
+          Visitar</a>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-futbol"></i></span>
+          <h6>LaLiga</h6>
+          <p>Todos los partidos</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-fist-raised"></i></span>
+          <h6>Boxeo</h6>
+          <p>Peleas mundiales</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-broadcast-tower"></i></span>
+          <h6>En Vivo</h6>
+          <p>100+ eventos/mes</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-mobile-alt"></i></span>
+          <h6>Multidispositivo</h6>
+          <p>TV, móvil, tablet</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NBA + F1 -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-4">
+      <div class="sv-section">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://upload.wikimedia.org/wikipedia/en/0/03/National_Basketball_Association_logo.svg" alt="NBA"
+              class="sv-platform-logo">
+            <h2 class="sv-platform-title m-0 text-xl">NBA League Pass</h2>
+          </div>
+          <a href="https://www.nba.com/league-pass" target="_blank" class="btn-sv-visit text-xs py-2 px-3"><i
+              class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-basketball"></i></span>
+            <h6>1,230 Partidos</h6>
+            <p>Toda la temporada</p>
+          </div>
+          <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-clock"></i></span>
+            <h6>On Demand</h6>
+            <p>Revive cualquier partido</p>
+          </div>
+        </div>
+      </div>
+      <div class="sv-section">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/F1.svg" alt="F1" class="sv-platform-logo">
+            <h2 class="sv-platform-title m-0 text-xl">F1 TV Pro</h2>
+          </div>
+          <a href="https://f1tv.formula1.com" target="_blank" class="btn-sv-visit text-xs py-2 px-3"><i
+              class="fas fa-external-link-alt"></i></a>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-flag-checkered"></i></span>
+            <h6>24 Carreras</h6>
+            <p>Calendario completo</p>
+          </div>
+          <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-camera"></i></span>
+            <h6>F1 Driver Cam</h6>
+            <p>Cámara del piloto</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="sv-footer mt-8 pt-12 pb-4 px-4">
+    <div class="max-w-[1400px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr] gap-8 mb-8">
+        <div>
+          <div class="flex items-center gap-2 mb-3"><i class="sv-footer-icon fas fa-play-circle"></i><span
+              class="sv-footer-brand-title">StreamVerse</span></div>
+          <p class="sv-footer-desc">Tu portal definitivo para todo el entretenimiento digital.</p>
+          <div class="flex gap-2 mt-3"><a href="#" class="sv-social"><i class="fab fa-facebook"></i></a><a href="#"
+              class="sv-social"><i class="fab fa-twitter"></i></a><a href="#" class="sv-social"><i
+                class="fab fa-instagram"></i></a><a href="#" class="sv-social"><i class="fab fa-youtube"></i></a></div>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Navegación</p><a href="index.html" class="sv-footer-link">Inicio</a><a
+            href="peliculas.html" class="sv-footer-link">Películas</a><a href="musica.html"
+            class="sv-footer-link">Música</a><a href="live.html" class="sv-footer-link">En Vivo</a><a
+            href="deportes.html" class="sv-footer-link">Deportes</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Plataformas</p><a href="https://www.espn.com/espnplus/" target="_blank"
+            class="sv-footer-link">ESPN+</a><a href="https://www.dazn.com" target="_blank"
+            class="sv-footer-link">DAZN</a><a href="https://www.nba.com/league-pass" target="_blank"
+            class="sv-footer-link">NBA Pass</a><a href="https://www.fubo.tv" target="_blank"
+            class="sv-footer-link">FuboTV</a><a href="https://f1tv.formula1.com" target="_blank"
+            class="sv-footer-link">F1 TV Pro</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Soporte</p><a href="#" class="sv-footer-link">Ayuda</a><a href="#"
+            class="sv-footer-link">FAQ</a><a href="#" class="sv-footer-link">Contacto</a>
+        </div>
+        <div>
+          <p class="sv-footer-heading">Legal</p><a href="#" class="sv-footer-link">Términos</a><a href="#"
+            class="sv-footer-link">Privacidad</a><a href="#" class="sv-footer-link">Cookies</a>
+        </div>
+      </div>
+      <div class="sv-footer-bottom py-3 text-center">
+        <p class="m-0">© 2026 StreamVerse · <strong class="text-slate-200">SAMB</strong> · Todos los derechos reservados
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div id="modal-login" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" style="max-width:440px;" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-play-circle mr-1"></i> StreamVerse</span>
+        <h2 class="sv-modal-title">Bienvenido de nuevo</h2>
+        <p class="text-[#94a3b8] text-sm">Inicia sesión para acceder a todo tu entretenimiento</p>
+      </div>
+      <form action="#" class="flex flex-col gap-4">
+        <div><label class="sv-label"><i class="fas fa-envelope mr-1"></i> Correo <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="email" class="sv-input"
+            placeholder="correo@ejemplo.com" required></div>
+        <div><label class="sv-label"><i class="fas fa-key mr-1"></i> Contraseña <span
+              class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+            placeholder="Tu contraseña" minlength="6" required></div>
+        <label class="sv-check"><input type="checkbox"> Recordar sesión</label>
+        <button class="btn-sv-submit" type="submit"><i class="fas fa-right-to-bracket"></i> Iniciar sesión</button>
+        <button class="btn-sv-reset" type="button"><i class="fas fa-lock"></i> Olvidé mi contraseña</button>
+      </form>
+      <div class="flex items-center gap-3 my-4"><span class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+        <p class="text-[0.74rem] text-[#94a3b8] m-0 whitespace-nowrap">¿No tienes cuenta?</p><span
+          class="flex-1 h-px bg-[rgba(102,126,234,.2)]"></span>
+      </div>
+      <a href="#modal-registro" class="sv-register-link"><i class="fas fa-user-plus"></i> Crear cuenta en
+        StreamVerse</a>
+    </div>
+  </div>
+
+  <!-- ══════════════ MODAL REGISTRO ══════════════ -->
+  <div id="modal-registro" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="text-center mb-5">
+        <span class="sv-modal-badge"><i class="fas fa-user-plus mr-1"></i> Nuevo usuario</span>
+        <h2 class="sv-modal-title">Crea tu cuenta</h2>
+        <p class="text-[#94a3b8] text-sm">Únete a StreamVerse y accede a todo el entretenimiento</p>
+      </div>
+      <form action="#" method="post" enctype="multipart/form-data">
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-id-card"></i> Datos personales</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Nombre <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Juan" required></div>
+            <div><label class="sv-label">Apellido <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="Castro" required></div>
+            <div><label class="sv-label">Correo <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="email" class="sv-input" placeholder="correo@ejemplo.com" required></div>
+            <div><label class="sv-label">Teléfono</label><input type="tel" class="sv-input" placeholder="+57 300...">
+            </div>
+            <div><label class="sv-label">Nacimiento <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="date" class="sv-input" required></div>
+            <div><label class="sv-label">País</label><select class="sv-input sv-select">
+                <option>Seleccionar...</option>
+                <option>Colombia</option>
+                <option>México</option>
+                <option>Argentina</option>
+                <option>España</option>
+                <option>Estados Unidos</option>
+                <option>Otro</option>
+              </select></div>
+            <div class="col-span-2"><label class="sv-label">Sitio web</label><input type="url" class="sv-input"
+                placeholder="https://..."></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-lock"></i> Seguridad</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Usuario <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="text" class="sv-input" placeholder="streamuser99" required></div>
+            <div><label class="sv-label">Contraseña <span class="text-pink-400 text-[0.65rem]">*</span></label><input
+                type="password" class="sv-input" placeholder="Mín. 8 chars" minlength="8" required></div>
+            <div class="col-span-2"><label class="sv-label">Confirmar contraseña <span
+                  class="text-pink-400 text-[0.65rem]">*</span></label><input type="password" class="sv-input"
+                placeholder="Repite tu contraseña" minlength="8" required></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-sliders-h"></i> Preferencias</legend>
+          <div class="flex flex-col gap-3 mt-3">
+            <div><label class="sv-label">Plataformas favoritas</label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="checkbox" value="netflix">
+                  Netflix</label><label class="sv-check"><input type="checkbox" value="prime"> Prime Video</label><label
+                  class="sv-check"><input type="checkbox" value="hbo"> HBO Max</label><label class="sv-check"><input
+                    type="checkbox" value="disney"> Disney+</label><label class="sv-check"><input type="checkbox"
+                    value="spotify"> Spotify</label><label class="sv-check"><input type="checkbox" value="youtube">
+                  YouTube</label><label class="sv-check"><input type="checkbox" value="twitch"> Twitch</label><label
+                  class="sv-check"><input type="checkbox" value="crunchyroll"> Crunchyroll</label></div>
+            </div>
+            <div><label class="sv-label">Plan <span class="text-pink-400 text-[0.65rem]">*</span></label>
+              <div class="flex flex-wrap gap-2 mt-1"><label class="sv-check"><input type="radio" name="plan"
+                    value="free" required> Gratuito</label><label class="sv-check"><input type="radio" name="plan"
+                    value="basic"> Básico</label><label class="sv-check"><input type="radio" name="plan" value="pro">
+                  Pro</label><label class="sv-check"><input type="radio" name="plan" value="ultra"> Ultra 4K</label>
+              </div>
+            </div>
+            <div><label class="sv-label">Calidad de video</label>
+              <div class="sv-range mt-2">
+                <input type="radio" name="calidad" id="q0" value="0"><input type="radio" name="calidad" id="q1"
+                  value="1" checked><input type="radio" name="calidad" id="q2" value="2"><input type="radio"
+                  name="calidad" id="q3" value="3">
+                <div class="sv-range-track">
+                  <div class="sv-range-fill"></div><label for="q0" class="sv-rthumb" style="left:0%"></label><label
+                    for="q1" class="sv-rthumb" style="left:33.3%"></label><label for="q2" class="sv-rthumb"
+                    style="left:66.6%"></label><label for="q3" class="sv-rthumb" style="left:100%"></label>
+                </div>
+                <div class="sv-range-labels"><label for="q0">360p</label><label for="q1">720p</label><label
+                    for="q2">1080p</label><label for="q3">4K</label></div>
+              </div>
+            </div>
+            <div><label class="sv-label"><i class="fas fa-palette mr-1"></i>Color de acento</label><input type="color"
+                class="sv-color" value="#6366f1"></div>
+            <div><label class="sv-label">Bio del perfil</label><textarea class="sv-input" rows="2"
+                placeholder="Cuéntanos sobre tus gustos..."></textarea></div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-paperclip"></i> Archivos del perfil</legend>
+          <div class="grid grid-cols-2 gap-3 mt-3">
+            <div><label class="sv-label">Foto de perfil</label>
+              <div class="sv-dropzone"><input type="file" accept=".jpg,.jpeg,.png,.webp">
+                <div class="sv-drop-ui"><i class="fas fa-user-circle"></i><b>Seleccionar imagen</b><small>JPG, PNG ·
+                    5MB</small></div>
+              </div>
+            </div>
+            <div><label class="sv-label">Documento</label>
+              <div class="sv-dropzone"><input type="file" accept=".pdf,.jpg,.jpeg,.png">
+                <div class="sv-drop-ui"><i class="fas fa-file-shield"></i><b>Subir documento</b><small>PDF, JPG ·
+                    10MB</small></div>
+              </div>
+            </div>
+            <div class="col-span-2"><label class="sv-label">Capturas múltiples</label>
+              <div class="sv-dropzone"><input type="file" multiple>
+                <div class="sv-drop-ui"><i class="fas fa-cloud-arrow-up"></i><b>Seleccionar archivos</b><small>JPG, PNG,
+                    PDF, MP4 · 20MB</small></div>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <fieldset class="sv-fieldset mb-4">
+          <legend class="sv-legend"><i class="fas fa-circle-check"></i> Confirmación</legend>
+          <div class="flex flex-col gap-2 mt-3">
+            <label class="sv-check w-full"><input type="checkbox" required> Acepto los <a href="#"
+                class="text-indigo-400 hover:underline">Términos de Servicio</a></label>
+            <label class="sv-check w-full"><input type="checkbox" required> He leído la <a href="#"
+                class="text-indigo-400 hover:underline">Política de Privacidad</a></label>
+            <label class="sv-check w-full"><input type="checkbox"> Quiero recibir novedades</label>
+          </div>
+          <div class="mt-3"><label class="sv-label">Código de referido</label><input type="text" class="sv-input"
+              placeholder="STREAM-XXXX"></div>
+        </fieldset>
+        <button class="btn-sv-submit mb-2" type="submit"><i class="fas fa-rocket"></i> Crear mi cuenta en
+          StreamVerse</button>
+        <button class="btn-sv-reset" type="reset"><i class="fas fa-rotate-left"></i> Limpiar formulario</button>
+      </form>
+      <p class="text-center text-[0.78rem] text-[#94a3b8] mt-3">¿Ya tienes cuenta? <a href="#modal-login"
+          class="text-indigo-400 hover:underline">Inicia sesión aquí</a></p>
+    </div>
+  </div>
+
+  <div id="modal-ubicacion" class="sv-modal"><a class="sv-modal-bg" href="#"></a>
+    <div class="sv-modal-card" style="max-width:700px;" role="dialog">
+      <a class="sv-modal-close" href="#"><i class="fas fa-times"></i></a>
+      <div class="mb-5"><span class="sv-modal-badge"><i class="fas fa-map-marker-alt mr-1"></i>Nuestra ubicación</span>
+        <h2 class="sv-modal-title">¿Dónde estamos?</h2>
+        <p class="sv-modal-sub">Encuéntranos en el mapa</p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-[rgba(102,126,234,.22)] mb-5"><iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d86445.89263275213!2d8.515426507079907!3d47.38396155310409!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47900b9749bea219%3A0xe66e8df1e71fdc03!2zWsO6cmljaCwgU3VpemE!5e0!3m2!1ses!2sco!4v1773118959105!5m2!1ses!2sco"
+          width="100%" height="280" style="border:0;display:block;" allowfullscreen loading="lazy"></iframe></div>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-map-pin"></i></span>
+          <h6>Dirección</h6>
+          <p>Zürich, Suiza</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-clock"></i></span>
+          <h6>Horario</h6>
+          <p>Lun – Vie · 9am – 6pm</p>
+        </div>
+        <div class="sv-feat"><span class="sv-feat-icon"><i class="fas fa-envelope"></i></span>
+          <h6>Contacto</h6>
+          <p>hola@streamverse.com</p>
+        </div>
+      </div>
+      <div class="flex flex-col gap-2">
+        <a href="https://maps.google.com/?q=Zürich,Suiza" target="_blank" class="btn-sv-primary justify-center"><i
+            class="fas fa-directions"></i> Cómo llegar</a>
+        <a href="#" class="btn-sv-secondary justify-center"><i class="fas fa-times"></i> Cerrar</a>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
