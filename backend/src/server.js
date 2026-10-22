@@ -64,10 +64,10 @@ app.use('/api/auditoria', auditRoutes);
 // Manejo de errores (por ejemplo, archivos rechazados por multer)
 app.use((err, req, res, next) => {
   if (err.code === 'LIMIT_FILE_SIZE') {
-    return res.status(400).json({ error: 'El archivo supera el tamaño máximo de 5 MB' });
+    return res.status(400).json({ error: 'La imagen supera los 5 MB. Elige un archivo más liviano.' });
   }
   if (err.type === 'entity.parse.failed') {
-    return res.status(400).json({ error: 'El cuerpo de la solicitud no es JSON válido' });
+    return res.status(400).json({ error: 'No pudimos leer los datos enviados. Recarga la página e intenta de nuevo.' });
   }
   return sendError(res, err);
 });

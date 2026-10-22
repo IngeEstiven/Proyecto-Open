@@ -1,4 +1,5 @@
 import { supabaseAdmin } from '../config/supabase.js';
+import { AppError } from '../middlewares/errorMiddleware.js';
 
 
 const PEDIDO_SELECT = `
@@ -23,8 +24,10 @@ export async function createPedido(usuarioId, pedidoData) {
 
 
   if (juegoError) throw new Error(juegoError.message);
-  if (!juegos || juegos.length === 0) throw new Error('Juego no encontrado');
-  if (juegos[0].estado !== 'publicado') throw new Error('El juego no está publicado');
+  if (!juegos || juegos.length === 0) throw new AppError(404, 'El juego que quieres pedir ya no está disponible.');
+  if (juegos[0].estado !== 'publicado') {
+    throw new AppError(400, 'Este juego no está disponible para pedidos en este momento.');
+  }
 
 
   const { data, error } = await supabaseAdmin

@@ -18,6 +18,7 @@ const LOGOS_HERO = ['netflix', 'spotify', 'youtube', 'twitch', 'hbo', 'prime']
   .map((p) => p.logo);
 
 // Portadas locales de /img/juegos para el bloque GameZone (contenido escrito, sin API).
+
 const PORTADAS_GAMEZONE = [
   { slug: 'gow', portada: '/img/juegos/gow.png', titulo: 'God of War Ragnarök', extra: 'Acción · ⭐ 9.8' },
   { slug: 'callofduty', portada: '/img/juegos/callofduty.jpg', titulo: 'Call of Duty WWII', extra: 'Acción · ⭐ 7.0' },

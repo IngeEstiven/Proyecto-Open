@@ -1,4 +1,4 @@
-import axiosClient, { extraerError } from '../api/axiosClient.js';
+import axiosClient, { crearErrorApi } from '../api/axiosClient.js';
 
 // Edad mínima requerida para registrarse (misma que define el backend).
 export const EDAD_MINIMA = 18;
@@ -37,7 +37,7 @@ export async function login(email, password) {
     const { data } = await axiosClient.post('/auth/login', { email, password });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -46,7 +46,7 @@ export async function register(datos) {
     const { data } = await axiosClient.post('/auth/register', datos);
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -55,7 +55,7 @@ export async function verifyEmail(email, code) {
     const { data } = await axiosClient.post('/auth/verify-email', { email, code });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -64,7 +64,7 @@ export async function resendVerification(email) {
     const { data } = await axiosClient.post('/auth/resend-verification', { email });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -73,7 +73,7 @@ export async function actualizarPerfil(datos) {
     const { data } = await axiosClient.patch('/auth/me', datos);
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -86,7 +86,7 @@ export async function actualizarAvatar(archivo) {
     });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -95,7 +95,7 @@ export async function cambiarPassword(currentPassword, newPassword) {
     const { data } = await axiosClient.patch('/auth/change-my-password', { currentPassword, newPassword });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -104,7 +104,7 @@ export async function solicitarCambioCorreo(newEmail, password) {
     const { data } = await axiosClient.post('/auth/me/email', { newEmail, password });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -113,7 +113,7 @@ export async function confirmarCambioCorreo(code) {
     const { data } = await axiosClient.post('/auth/me/email/confirm', { code });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -122,7 +122,7 @@ export async function olvidarPassword(email) {
     const { data } = await axiosClient.post('/auth/forgot-password', { email });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }
 
@@ -131,6 +131,6 @@ export async function restablecerPassword(email, code, newPassword) {
     const { data } = await axiosClient.post('/auth/reset-password', { email, code, newPassword });
     return data;
   } catch (error) {
-    throw new Error(extraerError(error));
+    throw crearErrorApi(error);
   }
 }

@@ -352,7 +352,7 @@ export async function confirmEmailChange(req, res) {
 export async function updateAvatar(req, res) {
   try {
     if (!req.file) {
-      return res.status(400).json({ error: 'Debes enviar una imagen en el campo file' });
+      return res.status(400).json({ error: 'Selecciona una imagen para tu perfil antes de guardar.' });
     }
 
 

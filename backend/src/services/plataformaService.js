@@ -1,4 +1,5 @@
 import { supabaseAdmin } from '../config/supabase.js';
+import { AppError } from '../middlewares/errorMiddleware.js';
 
 
 const PLATAFORMA_SELECT = `
@@ -7,9 +8,37 @@ const PLATAFORMA_SELECT = `
 `;
 
 
+const MENSAJE_DUPLICADO = 'Ya existe una plataforma con ese título. Usa un nombre distinto.';
+
+
+// Recorta extremos, colapsa espacios repetidos y pasa a minúsculas para
+// comparar nombres sin importar mayúsculas ni espacios de más.
+function normalizarTitulo(valor) {
+  return String(valor ?? '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
+
+// Devuelve true si ya existe una plataforma con el mismo nombre normalizado.
+// La tabla mantiene además su restricción única global sobre "nombre".
+export async function existeTitulo(nombre, idExcluir = null) {
+  const clave = normalizarTitulo(nombre);
+  if (!clave) return false;
+
+  let query = supabaseAdmin.from('plataformas').select('id, nombre');
+  if (idExcluir) query = query.neq('id', idExcluir);
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data || []).some((fila) => normalizarTitulo(fila.nombre) === clave);
+}
+
+
 function extraerErrorDuplicado(error) {
   if (error.message.includes('plataformas_nombre_key')) {
-    return new Error('El nombre de la plataforma ya existe');
+    return new AppError(409, MENSAJE_DUPLICADO);
   }
   return null;
 }
@@ -33,6 +62,10 @@ export async function getPlataformas(user, { seccion } = {}) {
 
 
 export async function createPlataforma(plataformaData) {
+  if (await existeTitulo(plataformaData.nombre)) {
+    throw new AppError(409, MENSAJE_DUPLICADO);
+  }
+
   const { data, error } = await supabaseAdmin
     .from('plataformas')
     .insert([
@@ -61,6 +94,10 @@ export async function createPlataforma(plataformaData) {
 
 
 export async function updatePlataforma(id, plataformaData) {
+  if (plataformaData.nombre !== undefined && (await existeTitulo(plataformaData.nombre, id))) {
+    throw new AppError(409, MENSAJE_DUPLICADO);
+  }
+
   const campos = {
     updated_at: new Date().toISOString()
   };

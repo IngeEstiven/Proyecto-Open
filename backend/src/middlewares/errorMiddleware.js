@@ -18,9 +18,15 @@ export class AppError extends Error {
 // sin filtrar detalles internos ni stack traces.
 export function sendError(res, error) {
   if (error instanceof AppError) {
-    const cuerpo = { error: error.message };
+    // Nunca se responde un mensaje vacío: siempre hay un texto en español.
+    const mensaje =
+      typeof error.message === 'string' && error.message.trim()
+        ? error.message
+        : 'Ocurrió un error inesperado. Intenta de nuevo.';
+    const estado = Number.isInteger(error.status) && error.status >= 400 ? error.status : 500;
+    const cuerpo = { error: mensaje };
     if (error.code) cuerpo.code = error.code;
-    return res.status(error.status).json(cuerpo);
+    return res.status(estado).json(cuerpo);
   }
 
 

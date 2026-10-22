@@ -70,7 +70,27 @@ axiosClient.interceptors.response.use(
 );
 
 export function extraerError(error) {
-  return error.response?.data?.error || 'Ocurrió un error inesperado. Intenta de nuevo.';
+  const mensajeServidor = error?.response?.data?.error;
+  if (typeof mensajeServidor === 'string' && mensajeServidor.trim()) {
+    return mensajeServidor;
+  }
+  // Sin respuesta del servidor: casi siempre es falta de conexión o el backend caído.
+  if (error && !error.response) {
+    return 'No pudimos conectar con el servidor. Revisa tu conexión e intenta de nuevo.';
+  }
+  // Con respuesta pero sin mensaje útil: no exponemos el texto técnico en inglés.
+  return 'Ocurrió un error inesperado. Intenta de nuevo.';
+}
+
+// crearErrorApi: conserva el status y la respuesta original al lanzar un error
+// ya traducido, para que las páginas puedan reaccionar a códigos (400/409/etc.)
+// sin volver a leer el mensaje crudo del navegador.
+export function crearErrorApi(error) {
+  const aviso = new Error(extraerError(error));
+  aviso.status = error?.response?.status ?? null;
+  aviso.response = error?.response ?? null;
+  aviso.code = error?.response?.data?.code ?? null;
+  return aviso;
 }
 
 export default axiosClient;

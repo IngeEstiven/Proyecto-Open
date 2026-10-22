@@ -2,6 +2,7 @@ import { createPedido, getPedidosMios, getPedidos, changeEstadoPedido } from '..
 
 
 import { createAuditLog } from '../services/auditService.js';
+import { sendError } from '../middlewares/errorMiddleware.js';
 
 
 const plataformasPedido = ['pc', 'consola'];
@@ -27,7 +28,7 @@ export async function addPedido(req, res) {
       return res.status(400).json({ error: 'El correo no tiene un formato válido' });
     }
     if (!plataformasPedido.includes(plataforma)) {
-      return res.status(400).json({ error: 'Plataforma inválida. Use: pc o consola' });
+      return res.status(400).json({ error: 'Selecciona una plataforma válida (PC o consola).' });
     }
 
 
@@ -53,13 +54,7 @@ export async function addPedido(req, res) {
 
     res.status(201).json({ message: 'Pedido creado correctamente', pedido });
   } catch (error) {
-    if (error.message === 'Juego no encontrado') {
-      return res.status(404).json({ error: error.message });
-    }
-    if (error.message === 'El juego no está publicado') {
-      return res.status(400).json({ error: error.message });
-    }
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -69,7 +64,7 @@ export async function listPedidosMios(req, res) {
     const pedidos = await getPedidosMios(req.user.id);
     res.json(pedidos);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -79,7 +74,7 @@ export async function listPedidos(req, res) {
     const pedidos = await getPedidos();
     res.json(pedidos);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -90,7 +85,7 @@ export async function updateEstadoPedido(req, res) {
 
 
     if (!estado || !estadosPedido.includes(estado)) {
-      return res.status(400).json({ error: 'Estado inválido. Use: pendiente, atendido o cancelado' });
+      return res.status(400).json({ error: 'Selecciona un estado de pedido válido.' });
     }
 
 
@@ -114,6 +109,6 @@ export async function updateEstadoPedido(req, res) {
 
     res.json({ message: 'Estado del pedido actualizado correctamente', pedido });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }

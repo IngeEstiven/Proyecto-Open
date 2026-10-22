@@ -1,5 +1,32 @@
 import { supabaseAdmin } from '../config/supabase.js';
+import { AppError } from '../middlewares/errorMiddleware.js';
 import { extraerIdSpotify, urlEmbedSpotify } from './catalogoConstantes.js';
+
+
+// Recorta extremos, colapsa espacios repetidos y pasa a minúsculas para
+// comparar títulos sin importar mayúsculas ni espacios de más.
+function normalizarTitulo(valor) {
+  return String(valor ?? '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
+
+// Devuelve true si ya existe un contenido con el mismo título normalizado en
+// la misma sección, excluyendo el id propio cuando se edita.
+export async function existeTitulo(titulo, idExcluir = null, seccion = null) {
+  const clave = normalizarTitulo(titulo);
+  if (!clave) return false;
+
+  let query = supabaseAdmin.from('contenidos').select('id, titulo');
+  if (seccion) query = query.eq('seccion', seccion);
+  if (idExcluir) query = query.neq('id', idExcluir);
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data || []).some((fila) => normalizarTitulo(fila.titulo) === clave);
+}
 
 
 const CONTENIDO_SELECT = `
@@ -60,6 +87,10 @@ export async function getContenidoById(id, user) {
 
 export async function createContenido(contenidoData, userId) {
   const datos = normalizarSpotify(contenidoData);
+  if (await existeTitulo(datos.titulo, null, datos.seccion)) {
+    throw new AppError(409, 'Ya existe un contenido con ese título. Usa un nombre distinto.');
+  }
+
   const { data, error } = await supabaseAdmin
     .from('contenidos')
     .insert([
@@ -86,6 +117,24 @@ export async function createContenido(contenidoData, userId) {
 
 export async function updateContenido(id, contenidoData) {
   const datos = normalizarSpotify(contenidoData);
+
+  // Solo se valida cuando llega un título; se excluye el propio registro.
+  if (datos.titulo !== undefined) {
+    let seccion = datos.seccion;
+    if (seccion === undefined) {
+      const { data: actual, error: errorActual } = await supabaseAdmin
+        .from('contenidos')
+        .select('seccion')
+        .eq('id', id)
+        .limit(1);
+      if (errorActual) throw new Error(errorActual.message);
+      seccion = actual?.[0]?.seccion;
+    }
+    if (await existeTitulo(datos.titulo, id, seccion)) {
+      throw new AppError(409, 'Ya existe un contenido con ese título. Usa un nombre distinto.');
+    }
+  }
+
   const campos = { updated_at: new Date().toISOString() };
 
 

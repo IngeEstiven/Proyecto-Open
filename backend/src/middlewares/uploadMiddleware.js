@@ -1,4 +1,5 @@
 import multer from 'multer';
+import { AppError } from './errorMiddleware.js';
 
 
 const storage = multer.memoryStorage();
@@ -9,7 +10,10 @@ const allowedMimeTypes = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
 
 function fileFilter(req, file, cb) {
   if (!allowedMimeTypes.includes(file.mimetype)) {
-    return cb(new Error('Tipo de archivo no permitido. Use imágenes JPG, PNG, WEBP o GIF.'), false);
+    return cb(
+      new AppError(400, 'La imagen debe ser JPG, PNG, WEBP o GIF. Elige otro archivo.'),
+      false
+    );
   }
   cb(null, true);
 }

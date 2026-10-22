@@ -15,6 +15,12 @@ import {
 const CATEGORIAS = ['accion', 'terror', 'deportes', 'cooperativo'];
 const ESTADOS = ['borrador', 'publicado', 'despublicado'];
 
+// Misma normalización que aplica el backend: recorta, colapsa espacios y
+// compara en minúsculas. Solo sirve para la advertencia temprana.
+function normalizarTitulo(valor) {
+  return String(valor ?? '').trim().replace(/\s+/g, ' ').toLowerCase();
+}
+
 const FORM_VACIO = {
   id: null,
   titulo: '',
@@ -40,6 +46,9 @@ export default function JuegosPage() {
   const [confirmacion, setConfirmacion] = useState(null);
   const [procesando, setProcesando] = useState(false);
   const [errorConfirmacion, setErrorConfirmacion] = useState('');
+  const [errorTitulo, setErrorTitulo] = useState('');
+  const [advertenciaTitulo, setAdvertenciaTitulo] = useState('');
+  const [estadoGuardando, setEstadoGuardando] = useState({});
 
   const cargar = () => {
     setCargando(true);
@@ -62,11 +71,34 @@ export default function JuegosPage() {
 
   const cambiar = (evento) => {
     const { name, value, type, checked } = evento.target;
+    if (name === 'titulo') {
+      setErrorTitulo('');
+      setAdvertenciaTitulo('');
+    }
+    if (name === 'categoria') setAdvertenciaTitulo('');
     setForm((previo) => ({ ...previo, [name]: type === 'checkbox' ? checked : value }));
+  };
+
+  // Advertencia temprana (no bloquea): compara contra los juegos ya cargados.
+  const avisarTitulo = () => {
+    const clave = normalizarTitulo(form.titulo);
+    if (clave.length <= 2) {
+      setAdvertenciaTitulo('');
+      return;
+    }
+    const repetido = juegos.some(
+      (juego) =>
+        juego.id !== form.id &&
+        juego.categoria === form.categoria &&
+        normalizarTitulo(juego.titulo) === clave
+    );
+    setAdvertenciaTitulo(repetido ? 'Ya existe un juego con ese título en esta categoría.' : '');
   };
 
   const abrirCrear = () => {
     setForm(FORM_VACIO);
+    setErrorTitulo('');
+    setAdvertenciaTitulo('');
     setMostrarForm(true);
   };
 
@@ -83,12 +115,15 @@ export default function JuegosPage() {
       destacado: Boolean(juego.destacado),
       estado: juego.estado || 'borrador'
     });
+    setErrorTitulo('');
+    setAdvertenciaTitulo('');
     setMostrarForm(true);
   };
 
   const enviar = async (evento) => {
     evento.preventDefault();
     setGuardando(true);
+    setErrorTitulo('');
     const datos = {
       titulo: form.titulo,
       categoria: form.categoria,
@@ -112,19 +147,35 @@ export default function JuegosPage() {
       setForm(FORM_VACIO);
       refrescar();
     } catch (err) {
-      toast.error(err.message);
+      const mensaje = err.message;
+      if (err.status === 409) {
+        setErrorTitulo(mensaje);
+      } else {
+        toast.error(mensaje);
+      }
     } finally {
       setGuardando(false);
     }
   };
 
+  // Cambio rápido de estado desde la fila: actualiza solo ese registro sin
+  // recargar la tabla. Si falla, se restaura el valor anterior y se avisa.
   const cambiarEstado = async (juego, estado) => {
+    const anterior = juego.estado;
+    setJuegos((previos) =>
+      previos.map((item) => (item.id === juego.id ? { ...item, estado } : item))
+    );
+    setEstadoGuardando((previos) => ({ ...previos, [juego.id]: true }));
     try {
       await cambiarEstadoJuego(juego.id, estado);
       toast.exito('Estado actualizado correctamente');
-      refrescar();
     } catch (err) {
+      setJuegos((previos) =>
+        previos.map((item) => (item.id === juego.id ? { ...item, estado: anterior } : item))
+      );
       toast.error(err.message);
+    } finally {
+      setEstadoGuardando((previos) => ({ ...previos, [juego.id]: false }));
     }
   };
 
@@ -178,7 +229,20 @@ export default function JuegosPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div className="sm:col-span-2 lg:col-span-3">
               <label className="text-[#94a3b8] text-xs block mb-1">Título</label>
-              <input name="titulo" value={form.titulo} onChange={cambiar} className="sv-input" required />
+              <input
+                name="titulo"
+                value={form.titulo}
+                onChange={cambiar}
+                onBlur={avisarTitulo}
+                className="sv-input"
+                aria-invalid={Boolean(errorTitulo)}
+                required
+              />
+              {errorTitulo ? (
+                <p className="text-rose-400 text-xs mt-1 mb-0"><i className="fas fa-circle-exclamation mr-1"></i>{errorTitulo}</p>
+              ) : advertenciaTitulo ? (
+                <p className="text-amber-300 text-xs mt-1 mb-0"><i className="fas fa-triangle-exclamation mr-1"></i>{advertenciaTitulo}</p>
+              ) : null}
             </div>
             <div>
               <label className="text-[#94a3b8] text-xs block mb-1">Categoría</label>
@@ -251,9 +315,20 @@ export default function JuegosPage() {
                   <td className="capitalize">{juego.categoria}</td>
                   <td>{juego.puntuacion ?? '—'}</td>
                   <td>
-                    <select value={juego.estado} onChange={(e) => cambiarEstado(juego, e.target.value)} className="sv-input py-1 text-xs">
-                      {ESTADOS.map((e) => <option key={e} value={e}>{e}</option>)}
-                    </select>
+                    <div className="flex items-center gap-1">
+                      <select
+                        value={juego.estado}
+                        disabled={Boolean(estadoGuardando[juego.id])}
+                        onChange={(e) => cambiarEstado(juego, e.target.value)}
+                        className="sv-input py-1 text-xs disabled:opacity-60"
+                        aria-label={`Cambiar estado de ${juego.titulo}`}
+                      >
+                        {ESTADOS.map((e) => <option key={e} value={e}>{e}</option>)}
+                      </select>
+                      {estadoGuardando[juego.id] && (
+                        <i className="fas fa-spinner fa-spin text-[#94a3b8] text-xs" title="Guardando…"></i>
+                      )}
+                    </div>
                   </td>
                   <td>
                     <label className="sv-admin-mini cursor-pointer">

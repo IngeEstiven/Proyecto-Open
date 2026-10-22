@@ -11,6 +11,7 @@ import {
 
 import { uploadFileToStorage, createArchivo } from '../services/archivoService.js';
 import { createAuditLog } from '../services/auditService.js';
+import { sendError } from '../middlewares/errorMiddleware.js';
 
 
 const categoriasPermitidas = ['accion', 'terror', 'deportes', 'cooperativo'];
@@ -50,7 +51,7 @@ export async function listJuegos(req, res) {
     const juegos = await getJuegos(req.user, { categoria, q });
     res.json(juegos);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -67,7 +68,7 @@ export async function getJuegoDetail(req, res) {
 
     res.json(juego);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -95,7 +96,7 @@ export async function addJuego(req, res) {
 
     res.status(201).json({ message: 'Juego creado correctamente', juego });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -128,7 +129,7 @@ export async function editJuego(req, res) {
 
     res.json({ message: 'Juego actualizado correctamente', juego });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -163,7 +164,7 @@ export async function updateEstadoJuego(req, res) {
 
     res.json({ message: 'Estado del juego actualizado correctamente', juego });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -190,7 +191,7 @@ export async function removeJuego(req, res) {
 
     res.json({ message: 'Juego eliminado correctamente', juego });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -201,7 +202,7 @@ export async function uploadJuegoImagen(req, res) {
 
 
     if (!req.file) {
-      return res.status(400).json({ error: 'Debes enviar una imagen en el campo file' });
+      return res.status(400).json({ error: 'Selecciona una imagen del juego antes de subirla.' });
     }
 
 
@@ -230,6 +231,6 @@ export async function uploadJuegoImagen(req, res) {
 
     res.json({ message: 'Imagen del juego actualizada correctamente', archivo, juego });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }

@@ -1,4 +1,31 @@
 import { supabaseAdmin } from '../config/supabase.js';
+import { AppError } from '../middlewares/errorMiddleware.js';
+
+
+// Recorta extremos, colapsa espacios repetidos y pasa a minúsculas para
+// comparar títulos sin importar mayúsculas ni espacios de más.
+function normalizarTitulo(valor) {
+  return String(valor ?? '')
+    .trim()
+    .replace(/\s+/g, ' ')
+    .toLowerCase();
+}
+
+
+// Devuelve true si ya existe un juego con el mismo título normalizado dentro
+// de la misma categoría, excluyendo el id propio cuando se edita.
+export async function existeTitulo(titulo, idExcluir = null, categoria = null) {
+  const clave = normalizarTitulo(titulo);
+  if (!clave) return false;
+
+  let query = supabaseAdmin.from('juegos').select('id, titulo');
+  if (categoria) query = query.eq('categoria', categoria);
+  if (idExcluir) query = query.neq('id', idExcluir);
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return (data || []).some((fila) => normalizarTitulo(fila.titulo) === clave);
+}
 
 
 function generateSlug(text) {
@@ -83,6 +110,10 @@ export async function getJuegoBySlug(slug, user) {
 
 
 export async function createJuego(juegoData) {
+  if (await existeTitulo(juegoData.titulo, null, juegoData.categoria)) {
+    throw new AppError(409, 'Ya existe un juego con ese título. Usa un nombre distinto.');
+  }
+
   const slug = await generateUniqueSlug(juegoData.titulo);
 
 
@@ -111,6 +142,24 @@ export async function createJuego(juegoData) {
 
 
 export async function updateJuego(id, juegoData) {
+  let categoria = juegoData.categoria;
+
+  // Solo se valida cuando llega un título; se excluye el propio registro.
+  if (juegoData.titulo !== undefined) {
+    if (categoria === undefined) {
+      const { data: actual, error: errorActual } = await supabaseAdmin
+        .from('juegos')
+        .select('categoria')
+        .eq('id', id)
+        .limit(1);
+      if (errorActual) throw new Error(errorActual.message);
+      categoria = actual?.[0]?.categoria;
+    }
+    if (await existeTitulo(juegoData.titulo, id, categoria)) {
+      throw new AppError(409, 'Ya existe un juego con ese título. Usa un nombre distinto.');
+    }
+  }
+
   const slug = await generateUniqueSlug(juegoData.titulo, id);
 
 

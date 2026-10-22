@@ -31,10 +31,10 @@ function validarCancion(cancion) {
   const audio = typeof cancion.audio === 'string' ? cancion.audio.trim() : '';
 
   if (!id || !nombre || !audio) {
-    throw new AppError(400, 'Cada canción debe incluir id, nombre y audio');
+    throw new AppError(400, 'Cada canción debe tener identificador, nombre y enlace de audio.');
   }
   if (!esUrlHttps(audio)) {
-    throw new AppError(400, `El audio de "${nombre}" no es una URL https válida`);
+    throw new AppError(400, `El enlace de audio de "${nombre}" no es válido. Debe comenzar con https://.`);
   }
 
   const genero = esGeneroDeSeccion('musica', cancion.genero) ? cancion.genero : 'otros';

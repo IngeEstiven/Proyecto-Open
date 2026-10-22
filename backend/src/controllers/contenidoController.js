@@ -9,6 +9,7 @@ import {
 
 import { createAuditLog } from '../services/auditService.js';
 import { esGeneroDeSeccion, SECCIONES, FUENTES, extraerIdSpotify } from '../services/catalogoConstantes.js';
+import { sendError } from '../middlewares/errorMiddleware.js';
 
 
 const seccionesPermitidas = SECCIONES;
@@ -33,7 +34,7 @@ function validarSpotify(body) {
   // Si pegan la URL de Spotify en cualquiera de los dos campos, se acepta.
   const id = extraerIdSpotify(embedValor) || extraerIdSpotify(externalValor);
   if (!id) {
-    return 'Para Spotify, pega un enlace open.spotify.com/track/... o el ID de la canción (solo letras y números)';
+    return 'Para Spotify pega el enlace de la canción (open.spotify.com/...) o su identificador, que solo tiene letras y números.';
   }
   return null;
 }
@@ -44,17 +45,17 @@ function validarEmbed(embed_url) {
   try {
     parsed = new URL(embed_url);
   } catch {
-    return 'La URL del embed no es válida';
+    return 'El enlace del video no es válido. Revísalo e intenta de nuevo.';
   }
 
 
   if (parsed.protocol !== 'https:') {
-    return 'La URL del embed debe comenzar con https://';
+    return 'El enlace debe comenzar con https://';
   }
 
 
   if (!hostsPermitidos.includes(parsed.hostname) && !esHostAudioPermitido(parsed.hostname)) {
-    return 'El host del embed no está permitido. Use YouTube, Twitch, archive.org, un audio de Jamendo o Spotify';
+    return 'Solo aceptamos enlaces de YouTube, Twitch, archive.org, Jamendo o Spotify. Usa uno de esos enlaces.';
   }
 
 
@@ -65,7 +66,7 @@ function validarEmbed(embed_url) {
 function validarGenero(seccion, genero) {
   if (genero === null || genero === undefined || genero === '') return null;
   if (!seccion) return null;
-  if (!esGeneroDeSeccion(seccion, genero)) return 'Género inválido para esta sección';
+  if (!esGeneroDeSeccion(seccion, genero)) return 'Ese género no corresponde a la sección elegida.';
   return null;
 }
 
@@ -75,19 +76,19 @@ function validateRequiredFields(body, requiereTodo = true) {
 
 
   if (requiereTodo && (!seccion || !titulo || !fuente || !estado)) {
-    return 'Sección, título, fuente y estado son obligatorios';
+    return 'Completa la sección, el título, la fuente y el estado.';
   }
   if (titulo !== undefined && !titulo) {
-    return 'El título es obligatorio';
+    return 'El título es obligatorio.';
   }
   if (seccion && !seccionesPermitidas.includes(seccion)) {
-    return 'Sección inválida. Use: peliculas, musica, en_vivo o deportes';
+    return 'Elige una sección válida: películas, música, en vivo o deportes.';
   }
   if (fuente && !fuentesPermitidas.includes(fuente)) {
-    return 'Fuente inválida. Use: youtube, twitch, otro o spotify';
+    return 'Elige una fuente válida: YouTube, Twitch, Spotify u otro.';
   }
   if (estado && !estadosPermitidos.includes(estado)) {
-    return 'Estado inválido. Use: borrador, publicado o despublicado';
+    return 'Elige un estado válido: borrador, publicado o despublicado.';
   }
 
 
@@ -110,10 +111,10 @@ function validateRequiredFields(body, requiereTodo = true) {
     (!body.fuente && (extraerIdSpotify(embedValor) || extraerIdSpotify(externalValor)) !== '');
   if (esSpotify) {
     if (requiereTodo && !externalValor && !embedValor) {
-      return 'Debes enviar el enlace o el ID de Spotify';
+      return 'Pega el enlace o el identificador de la canción de Spotify.';
     }
     if (!requiereTodo && (embedEnviado || externalEnviado) && !externalValor && !embedValor) {
-      return 'Debes enviar el enlace o el ID de Spotify';
+      return 'Pega el enlace o el identificador de la canción de Spotify.';
     }
     if (embedValor || externalValor) {
       const errorSpotify = validarSpotify(body);
@@ -124,12 +125,12 @@ function validateRequiredFields(body, requiereTodo = true) {
 
 
   if (requiereTodo && !externalValor && !embedValor) {
-    return 'Debes enviar external_id o embed_url';
+    return 'Agrega el enlace del video o su identificador para el reproductor.';
   }
 
 
   if (!requiereTodo && (embedEnviado || externalEnviado) && !externalValor && !embedValor) {
-    return 'Debes enviar external_id o embed_url';
+    return 'Agrega el enlace del video o su identificador para el reproductor.';
   }
 
 
@@ -140,11 +141,6 @@ function validateRequiredFields(body, requiereTodo = true) {
 
 
   return null;
-}
-
-
-function responderError(res, error) {
-  return res.status(500).json({ error: error.message });
 }
 
 
@@ -166,7 +162,7 @@ export async function listContenidos(req, res) {
     const contenidos = await getContenidos(req.user, { seccion, q, genero });
     res.json(contenidos);
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -183,7 +179,7 @@ export async function getContenidoDetail(req, res) {
 
     res.json(contenido);
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -211,7 +207,7 @@ export async function addContenido(req, res) {
 
     res.status(201).json({ message: 'Contenido creado correctamente', contenido });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -257,7 +253,7 @@ export async function editContenido(req, res) {
 
     res.json({ message: 'Contenido actualizado correctamente', contenido });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -284,6 +280,6 @@ export async function removeContenido(req, res) {
 
     res.json({ message: 'Contenido eliminado correctamente', contenido });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }

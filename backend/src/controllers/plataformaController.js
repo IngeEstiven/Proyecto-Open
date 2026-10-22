@@ -9,11 +9,11 @@ import {
 
 import { uploadFileToStorage, createArchivo } from '../services/archivoService.js';
 import { createAuditLog } from '../services/auditService.js';
+import { sendError } from '../middlewares/errorMiddleware.js';
 
 
 const seccionesPermitidas = ['peliculas', 'musica', 'en_vivo', 'deportes'];
 const estadosPermitidos = ['activo', 'inactivo'];
-const mensajesDuplicados = ['El nombre de la plataforma ya existe'];
 
 
 function validateRequiredFields(body, requiereTodo = true) {
@@ -42,14 +42,6 @@ function validateRequiredFields(body, requiereTodo = true) {
 }
 
 
-function responderError(res, error) {
-  if (mensajesDuplicados.includes(error.message)) {
-    return res.status(409).json({ error: error.message });
-  }
-  return res.status(500).json({ error: error.message });
-}
-
-
 export async function listPlataformas(req, res) {
   try {
     const { seccion } = req.query;
@@ -63,7 +55,7 @@ export async function listPlataformas(req, res) {
     const plataformas = await getPlataformas(req.user, { seccion });
     res.json(plataformas);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -91,7 +83,7 @@ export async function addPlataforma(req, res) {
 
     res.status(201).json({ message: 'Plataforma creada correctamente', plataforma });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -124,7 +116,7 @@ export async function editPlataforma(req, res) {
 
     res.json({ message: 'Plataforma actualizada correctamente', plataforma });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -151,7 +143,7 @@ export async function removePlataforma(req, res) {
 
     res.json({ message: 'Plataforma eliminada correctamente', plataforma });
   } catch (error) {
-    responderError(res, error);
+    sendError(res, error);
   }
 }
 
@@ -162,7 +154,7 @@ export async function uploadPlataformaImagen(req, res) {
 
 
     if (!req.file) {
-      return res.status(400).json({ error: 'Debes enviar una imagen en el campo file' });
+      return res.status(400).json({ error: 'Selecciona una imagen de la plataforma antes de subirla.' });
     }
 
 
@@ -191,6 +183,6 @@ export async function uploadPlataformaImagen(req, res) {
 
     res.json({ message: 'Imagen de la plataforma actualizada correctamente', archivo, plataforma });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }

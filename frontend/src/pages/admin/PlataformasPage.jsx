@@ -4,6 +4,7 @@ import ConfirmModal from '../../components/admin/ConfirmModal.jsx';
 import { useToast } from '../../components/admin/Toast.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import {
+  cambiarEstadoPlataforma,
   crearPlataforma,
   editarPlataforma,
   eliminarPlataforma,
@@ -13,6 +14,12 @@ import {
 
 const SECCIONES = ['peliculas', 'musica', 'en_vivo', 'deportes'];
 const ESTADOS = ['activo', 'inactivo'];
+
+// Misma normalización que aplica el backend: recorta, colapsa espacios y
+// compara en minúsculas. Solo sirve para la advertencia temprana.
+function normalizarTitulo(valor) {
+  return String(valor ?? '').trim().replace(/\s+/g, ' ').toLowerCase();
+}
 
 const FORM_VACIO = {
   id: null,
@@ -37,6 +44,9 @@ export default function PlataformasPage() {
   const [confirmacion, setConfirmacion] = useState(null);
   const [procesando, setProcesando] = useState(false);
   const [errorConfirmacion, setErrorConfirmacion] = useState('');
+  const [errorTitulo, setErrorTitulo] = useState('');
+  const [advertenciaTitulo, setAdvertenciaTitulo] = useState('');
+  const [estadoGuardando, setEstadoGuardando] = useState({});
 
   const cargar = () => {
     setCargando(true);
@@ -59,11 +69,31 @@ export default function PlataformasPage() {
 
   const cambiar = (evento) => {
     const { name, value } = evento.target;
+    if (name === 'nombre') {
+      setErrorTitulo('');
+      setAdvertenciaTitulo('');
+    }
     setForm((previo) => ({ ...previo, [name]: value }));
+  };
+
+  // Advertencia temprana (no bloquea): compara contra las plataformas cargadas.
+  const avisarTitulo = () => {
+    const clave = normalizarTitulo(form.nombre);
+    if (clave.length <= 2) {
+      setAdvertenciaTitulo('');
+      return;
+    }
+    const repetido = plataformas.some(
+      (plataforma) =>
+        plataforma.id !== form.id && normalizarTitulo(plataforma.nombre) === clave
+    );
+    setAdvertenciaTitulo(repetido ? 'Ya existe una plataforma con ese nombre.' : '');
   };
 
   const abrirCrear = () => {
     setForm(FORM_VACIO);
+    setErrorTitulo('');
+    setAdvertenciaTitulo('');
     setMostrarForm(true);
   };
 
@@ -78,12 +108,15 @@ export default function PlataformasPage() {
       imagen_url: plataforma.imagen_url || '',
       estado: plataforma.estado || 'activo'
     });
+    setErrorTitulo('');
+    setAdvertenciaTitulo('');
     setMostrarForm(true);
   };
 
   const enviar = async (evento) => {
     evento.preventDefault();
     setGuardando(true);
+    setErrorTitulo('');
     const datos = {
       nombre: form.nombre,
       seccion: form.seccion,
@@ -105,7 +138,12 @@ export default function PlataformasPage() {
       setForm(FORM_VACIO);
       refrescar();
     } catch (err) {
-      toast.error(err.message);
+      const mensaje = err.message;
+      if (err.status === 409) {
+        setErrorTitulo(mensaje);
+      } else {
+        toast.error(mensaje);
+      }
     } finally {
       setGuardando(false);
     }
@@ -137,6 +175,27 @@ export default function PlataformasPage() {
     }
   };
 
+  // Cambio rápido de estado desde la fila: actualiza solo ese registro sin
+  // recargar la tabla. Si falla, se restaura el valor anterior y se avisa.
+  const cambiarEstadoFila = async (plataforma, nuevoEstado) => {
+    const anterior = plataforma.estado;
+    setPlataformas((previos) =>
+      previos.map((item) => (item.id === plataforma.id ? { ...item, estado: nuevoEstado } : item))
+    );
+    setEstadoGuardando((previos) => ({ ...previos, [plataforma.id]: true }));
+    try {
+      await cambiarEstadoPlataforma(plataforma.id, nuevoEstado);
+      toast.exito('Estado actualizado correctamente');
+    } catch (err) {
+      setPlataformas((previos) =>
+        previos.map((item) => (item.id === plataforma.id ? { ...item, estado: anterior } : item))
+      );
+      toast.error(err.message);
+    } finally {
+      setEstadoGuardando((previos) => ({ ...previos, [plataforma.id]: false }));
+    }
+  };
+
   const subirImagen = async (plataforma, archivo) => {
     if (!archivo) return;
     try {
@@ -164,7 +223,20 @@ export default function PlataformasPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             <div>
               <label className="text-[#94a3b8] text-xs block mb-1">Nombre</label>
-              <input name="nombre" value={form.nombre} onChange={cambiar} className="sv-input" required />
+              <input
+                name="nombre"
+                value={form.nombre}
+                onChange={cambiar}
+                onBlur={avisarTitulo}
+                className="sv-input"
+                aria-invalid={Boolean(errorTitulo)}
+                required
+              />
+              {errorTitulo ? (
+                <p className="text-rose-400 text-xs mt-1 mb-0"><i className="fas fa-circle-exclamation mr-1"></i>{errorTitulo}</p>
+              ) : advertenciaTitulo ? (
+                <p className="text-amber-300 text-xs mt-1 mb-0"><i className="fas fa-triangle-exclamation mr-1"></i>{advertenciaTitulo}</p>
+              ) : null}
             </div>
             <div>
               <label className="text-[#94a3b8] text-xs block mb-1">Sección</label>
@@ -226,7 +298,23 @@ export default function PlataformasPage() {
                     <div className="text-[#64748b] text-xs">{plataforma.sitio_url || '—'}</div>
                   </td>
                   <td>{plataforma.seccion}</td>
-                  <td><span className={`sv-admin-chip ${colorEstado(plataforma.estado)}`}>{plataforma.estado}</span></td>
+                  <td>
+                    <span className={`sv-admin-chip ${colorEstado(plataforma.estado)}`}>{plataforma.estado}</span>
+                    <div className="mt-1 flex items-center gap-1">
+                      <select
+                        value={plataforma.estado}
+                        disabled={Boolean(estadoGuardando[plataforma.id])}
+                        onChange={(e) => cambiarEstadoFila(plataforma, e.target.value)}
+                        className="sv-input py-1 text-xs disabled:opacity-60"
+                        aria-label={`Cambiar estado de ${plataforma.nombre}`}
+                      >
+                        {ESTADOS.map((e) => <option key={e} value={e}>{e}</option>)}
+                      </select>
+                      {estadoGuardando[plataforma.id] && (
+                        <i className="fas fa-spinner fa-spin text-[#94a3b8] text-xs" title="Guardando…"></i>
+                      )}
+                    </div>
+                  </td>
                   <td>
                     <label className="sv-admin-mini cursor-pointer">
                       <i className="fas fa-image"></i>Subir

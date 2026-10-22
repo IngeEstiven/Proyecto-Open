@@ -1,4 +1,5 @@
 import { supabaseAdmin } from '../config/supabase.js';
+import { AppError } from '../middlewares/errorMiddleware.js';
 
 
 const FAVORITO_SELECT = `
@@ -49,7 +50,7 @@ export async function createFavorito(usuarioId, tipo, itemId) {
 
 
   if (itemError) throw new Error(itemError.message);
-  if (!item || item.length === 0) throw new Error('El ítem no existe');
+  if (!item || item.length === 0) throw new AppError(404, 'Ese contenido ya no está disponible.');
 
 
   const { data: existente, error: existenteError } = await supabaseAdmin
@@ -62,7 +63,7 @@ export async function createFavorito(usuarioId, tipo, itemId) {
 
   if (existenteError) throw new Error(existenteError.message);
   if (existente && existente.length > 0) {
-    throw new Error('El ítem ya está en tus favoritos');
+    throw new AppError(409, 'Ese contenido ya está en tus favoritos.');
   }
 
 
@@ -97,7 +98,7 @@ export async function deleteFavorito(id, usuarioId) {
 
 
   if (String(existente[0].usuario_id) !== String(usuarioId)) {
-    throw new Error('Este favorito no te pertenece');
+    throw new AppError(403, 'No puedes eliminar un favorito que no es tuyo.');
   }
 
 

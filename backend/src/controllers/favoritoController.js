@@ -2,6 +2,7 @@ import { getFavoritos, createFavorito, deleteFavorito } from '../services/favori
 
 
 import { createAuditLog } from '../services/auditService.js';
+import { sendError } from '../middlewares/errorMiddleware.js';
 
 
 const tiposPermitidos = ['juego', 'contenido', 'plataforma'];
@@ -12,7 +13,7 @@ export async function listFavoritos(req, res) {
     const favoritos = await getFavoritos(req.user.id);
     res.json(favoritos);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -23,10 +24,10 @@ export async function addFavorito(req, res) {
 
 
     if (!tipo || !tiposPermitidos.includes(tipo)) {
-      return res.status(400).json({ error: 'Tipo inválido. Use: juego, contenido o plataforma' });
+      return res.status(400).json({ error: 'Selecciona un tipo de favorito válido.' });
     }
     if (!item_id) {
-      return res.status(400).json({ error: 'El identificador del ítem es obligatorio' });
+      return res.status(400).json({ error: 'No pudimos identificar el contenido que quieres guardar. Recarga la página e intenta de nuevo.' });
     }
 
 
@@ -45,13 +46,7 @@ export async function addFavorito(req, res) {
 
     res.status(201).json({ message: 'Añadido a favoritos correctamente', favorito });
   } catch (error) {
-    if (error.message === 'El ítem ya está en tus favoritos') {
-      return res.status(409).json({ error: error.message });
-    }
-    if (error.message === 'El ítem no existe') {
-      return res.status(404).json({ error: error.message });
-    }
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }
 
@@ -78,9 +73,6 @@ export async function removeFavorito(req, res) {
 
     res.json({ message: 'Favorito eliminado correctamente', favorito });
   } catch (error) {
-    if (error.message === 'Este favorito no te pertenece') {
-      return res.status(403).json({ error: error.message });
-    }
-    res.status(500).json({ error: error.message });
+    sendError(res, error);
   }
 }

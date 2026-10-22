@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import axiosClient, { borrarSesion, extraerError, obtenerToken } from '../api/axiosClient.js';
+import axiosClient, { borrarSesion, crearErrorApi, obtenerToken } from '../api/axiosClient.js';
 
 const AuthContext = createContext(null);
 
@@ -90,10 +90,9 @@ export function AuthProvider({ children }) {
     } catch (error) {
       // El login responde 403 cuando la cuenta aún no verificó su correo
       // (needs_verification) o cuando la cuenta fue desactivada (account_inactive).
-      const aviso = new Error(extraerError(error));
+      const aviso = crearErrorApi(error);
       aviso.needsVerificacion = Boolean(error.response?.data?.needs_verification);
       aviso.email = error.response?.data?.email || email;
-      aviso.code = error.response?.data?.code || null;
       throw aviso;
     }
   }, []);
@@ -103,7 +102,7 @@ export function AuthProvider({ children }) {
       const { data } = await axiosClient.post('/auth/register', datos);
       return data;
     } catch (error) {
-      throw new Error(extraerError(error));
+      throw crearErrorApi(error);
     }
   }, []);
 
@@ -115,7 +114,7 @@ export function AuthProvider({ children }) {
       setUsuario(u);
       return u;
     } catch (error) {
-      throw new Error(extraerError(error));
+      throw crearErrorApi(error);
     }
   }, []);
 

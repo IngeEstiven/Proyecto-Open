@@ -34,7 +34,7 @@ function obtenerClientId() {
   if (!clientId || !clientId.trim()) {
     throw new AppError(
       503,
-      'La búsqueda en Jamendo no está configurada. Falta JAMENDO_CLIENT_ID en backend/.env.'
+      'La búsqueda de música no está disponible en este momento. Intenta más tarde.'
     );
   }
   return clientId.trim();
@@ -141,18 +141,16 @@ async function consultarJamendo(parametros) {
       signal: AbortSignal.timeout(TIMEOUT_MS)
     });
   } catch {
-    throw new Error('No se pudo conectar con la API de Jamendo');
+    throw new AppError(503, 'No pudimos conectar con el servicio de música. Intenta de nuevo en unos segundos.');
   }
 
   if (!respuesta.ok) {
-    throw new Error(`La API de Jamendo respondió con estado ${respuesta.status}`);
+    throw new AppError(503, 'El servicio de música no respondió bien. Intenta de nuevo en unos segundos.');
   }
 
   const datos = await respuesta.json();
   if (datos?.headers?.status !== 'success') {
-    throw new Error(
-      `La API de Jamendo devolvió un error: ${datos?.headers?.error_message || 'desconocido'}`
-    );
+    throw new AppError(503, 'El servicio de música devolvió un error. Intenta de nuevo en unos segundos.');
   }
 
   return Array.isArray(datos.results) ? datos.results : [];
