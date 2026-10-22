@@ -26,7 +26,7 @@ const PORTADAS_GAMEZONE = [
 ];
 
 const QUE_PUEDES_HACER = [
-  { titulo: 'Películas y Series chill', icono: 'fas fa-film', seccion: 'peliculas', descripcion: 'Netflix, Prime Video, HBO Max, Disney+ y mucho más.' },
+  { titulo: 'Películas y Series', icono: 'fas fa-film', seccion: 'peliculas', descripcion: 'Netflix, Prime Video, HBO Max, Disney+ y mucho más.' },
   { titulo: 'Música', icono: 'fas fa-music', seccion: 'musica', descripcion: 'Spotify, Apple Music, YouTube Music y SoundCloud.' },
   { titulo: 'En Vivo', icono: 'fas fa-satellite-dish', seccion: 'en_vivo', descripcion: 'YouTube, Twitch y Vimeo en directo.' },
   { titulo: 'Deportes', icono: 'fas fa-futbol', seccion: 'deportes', descripcion: 'ESPN+, DAZN, NBA League Pass y F1 TV Pro.' },
