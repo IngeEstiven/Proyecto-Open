@@ -18,6 +18,35 @@ function escapeHtml(text) {
 }
 
 async function sendEmail({ to, subject, text, html }) {
+  // Brevo permite enviar a cualquier destinatario verificando un correo de
+  // remitente, sin necesidad de comprar y verificar un dominio propio.
+  if (process.env.BREVO_API_KEY) {
+    const response = await fetch('https://api.brevo.com/v3/smtp/email', {
+      method: 'POST',
+      headers: {
+        'api-key': process.env.BREVO_API_KEY,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        sender: {
+          name: process.env.BREVO_FROM_NAME || 'OpenLeaf',
+          email: process.env.BREVO_FROM_EMAIL || 'openleaf.app@gmail.com'
+        },
+        to: [{ email: to }],
+        subject,
+        textContent: text,
+        htmlContent: html
+      })
+    });
+
+    const data = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(`Brevo ${response.status}: ${data.message || JSON.stringify(data)}`);
+    }
+    return data;
+  }
+
   if (process.env.RESEND_API_KEY) {
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -42,7 +71,7 @@ async function sendEmail({ to, subject, text, html }) {
   }
 
   if (!transporter) {
-    throw new Error('No hay proveedor de correo configurado (falta RESEND_API_KEY o SMTP_HOST)');
+    throw new Error('No hay proveedor de correo configurado (falta BREVO_API_KEY, RESEND_API_KEY o SMTP_HOST)');
   }
 
   return transporter.sendMail({
