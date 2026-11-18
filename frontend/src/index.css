@@ -1,4 +1,8 @@
 @import "tailwindcss";
+/* Tailwind v4 no lee tailwind.config.js automáticamente: hay que cargarlo
+   aquí para que las utilidades de GameZone (font-display, font-sans,
+   text-primary, text-accent, etc.) usen la paleta y tipografías originales. */
+@config "../tailwind.config.js";
 
 :root {
   font-family: Inter, "Segoe UI", sans-serif;
