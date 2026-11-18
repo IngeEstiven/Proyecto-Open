@@ -364,6 +364,18 @@ html.gz-scroll {
   animation: gzPulseRing 3.5s ease-in-out 1.2s infinite;
 }
 
+/* El mando se centra en el hueco entre el buscador (w-[340px], centrado)
+   y el borde derecho. En pantallas pequeñas ese hueco no existe y se
+   conserva el posicionamiento original (right-20). */
+@media (min-width: 1100px) {
+
+  .gz-root .header-deco {
+    left: calc(50% + 170px);
+    right: 0;
+    text-align: center;
+  }
+}
+
 /* Search bar: input:focus ~ .search-icon (selector hermano) */
 .gz-root .search-box input:focus~.search-icon {
   color: #bb86fc;

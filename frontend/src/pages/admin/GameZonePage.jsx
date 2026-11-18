@@ -232,7 +232,9 @@ export default function GameZonePage() {
         </div>
 
         {/* FLOATING DECO */}
-        <div className="header-deco absolute right-20 top-1/2 -translate-y-1/2 z-[3]">
+        {/* El keyframe gzDecoReveal ya centra con translateY(-50%); añadir
+            -translate-y-1/2 duplicaría el desplazamiento en Tailwind v4. */}
+        <div className="header-deco absolute right-20 top-1/2 z-[3]">
           <div className="header-deco-ring"></div>
           <div className="header-deco-ring2"></div>
           <i className="bi bi-controller header-deco-icon"></i>
