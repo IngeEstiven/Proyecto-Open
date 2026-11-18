@@ -48,6 +48,9 @@ export default function TarjetaPlataforma({ p }) {
   const estiloImagen = convertirEstilo(p.imagenEstilo);
   const textoVisita = p.sitioTexto || `Visitar ${p.nombre}`;
   const textoIr = `Ir a ${textoVisita.replace('Visitar ', '')}`;
+  // El id de favoritos es el UUID de la base; para los anclajes del lightbox
+  // conservamos la clave estática original (netflix, spotify...).
+  const ancla = p.clave || p.id;
 
   return (
     <>
@@ -124,7 +127,7 @@ export default function TarjetaPlataforma({ p }) {
                 ))}
               </div>
             )}
-            <a href={`#imgmodal-${p.id}`} className="sv-btn-detail">
+            <a href={`#imgmodal-${ancla}`} className="sv-btn-detail">
               <i className="fas fa-info-circle"></i> Ver detalles
             </a>
             <a href={p.sitio} target="_blank" rel="noopener noreferrer" className="sv-btn-visit">
@@ -134,7 +137,7 @@ export default function TarjetaPlataforma({ p }) {
         </div>
       </div>
 
-      <div id={`imgmodal-${p.id}`} className="sv-imgmodal">
+      <div id={`imgmodal-${ancla}`} className="sv-imgmodal">
         <a className="sv-modal-bg" href="#"></a>
         <div className="sv-lbox-card">
           <a className="sv-lbox-close" href="#"><i className="fas fa-times"></i></a>

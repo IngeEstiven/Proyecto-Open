@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link, Navigate, useParams } from 'react-router-dom';
 
 import GameZoneSidebar from '../../components/public/GameZoneSidebar.jsx';
+import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { nombreCategoria } from '../../services/categoriasGZ.js';
 import { FICHAS } from '../../services/fichasEstaticas.js';
@@ -101,6 +102,14 @@ export default function GameZoneCategoriaPage() {
                     >
                       <img src={ficha.caratula} alt={juego.titulo} className={IMAGEN} />
                     </button>
+                    <BotonFavorito
+                      tipo="juego"
+                      slug={juego.slug}
+                      iconSet="bi"
+                      className="gz-fav-btn"
+                      textoAnadir={`Guardar ${juego.titulo} en favoritos`}
+                      textoQuitar={`Quitar ${juego.titulo} de favoritos`}
+                    />
                   </div>
                   <div className="flex flex-col flex-1 gap-2 p-4">
                     <span className={`${BADGE} self-start`}>{nombreCategoria(categoria)}</span>

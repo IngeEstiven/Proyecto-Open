@@ -2,7 +2,24 @@ import { Link } from 'react-router-dom';
 
 import { useFavoritos } from '../../context/FavoritosContext.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
+import { FICHAS } from '../../services/fichasEstaticas.js';
 import { LOGO_URL } from '../../services/informacionSitio.js';
+
+// Miniatura de respaldo para contenidos sin imagen propia (por ejemplo,
+// canciones o videos importados de YouTube).
+function imagenDeContenido(contenido) {
+  if (contenido.miniatura_url) return contenido.miniatura_url;
+  if (contenido.fuente === 'youtube' && contenido.external_id) {
+    return `https://img.youtube.com/vi/${contenido.external_id}/hqdefault.jpg`;
+  }
+  return LOGO_URL;
+}
+
+function nombreSeccion(seccion) {
+  if (!seccion) return '';
+  const texto = seccion.replace(/_/g, ' ');
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
 
 const RUTA_SECCION = {
   peliculas: '/peliculas',
@@ -23,26 +40,35 @@ function TarjetaBiblioteca({ favorito, onQuitar }) {
 
   if (juego) {
     destino = `/gamezone/${juego.slug}`;
-    imagen = juego.imagen_url || LOGO_URL;
+    // Si el juego no tiene imagen cargada en la base, usamos la carátula
+    // estática de GameZone para que la tarjeta nunca quede sin imagen.
+    imagen = juego.imagen_url || FICHAS[juego.slug]?.caratula || LOGO_URL;
     titulo = juego.titulo;
     etiqueta = `Juego · ${juego.categoria}`;
   } else if (contenido) {
     destino = `/reproductor/${contenido.id}`;
-    imagen = contenido.miniatura_url || LOGO_URL;
+    imagen = imagenDeContenido(contenido);
     titulo = contenido.titulo;
-    etiqueta = `Contenido · ${contenido.seccion?.replace('_', ' ')}`;
+    etiqueta = `Contenido · ${nombreSeccion(contenido.seccion)}`;
   } else if (plataforma) {
     destino = RUTA_SECCION[plataforma.seccion] || '#';
     imagen = plataforma.logo_url || LOGO_URL;
     titulo = plataforma.nombre;
-    etiqueta = `Plataforma · ${plataforma.seccion?.replace('_', ' ')}`;
+    etiqueta = `Plataforma · ${nombreSeccion(plataforma.seccion)}`;
   }
 
   return (
     <div className="sv-section relative flex flex-col">
       <Link to={destino} className="no-underline block">
-        <div className="sv-video-card">
-          <img src={imagen} alt={titulo} />
+        <div className="sv-video-card sv-bib-card">
+          <img
+            src={imagen}
+            alt={titulo}
+            onError={(evento) => {
+              evento.currentTarget.onerror = null;
+              evento.currentTarget.src = LOGO_URL;
+            }}
+          />
           <p className="sv-video-title">{titulo}</p>
         </div>
       </Link>

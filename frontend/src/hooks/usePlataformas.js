@@ -16,7 +16,10 @@ function buscarEstatica(nombre) {
 export function enriquecerPlataforma(fila, seccion) {
   const est = buscarEstatica(fila.nombre);
   return {
-    id: est?.id ?? fila.id,
+    // El id real de la base es el que usa el backend de favoritos. La clave
+    // estática (netflix, spotify...) solo se usa como sufijo del lightbox.
+    id: fila.id,
+    clave: est?.id ?? fila.id,
     seccion: est?.seccion ?? seccion,
     nombre: fila.nombre,
     logo: fila.logo_url || est?.logo || '',

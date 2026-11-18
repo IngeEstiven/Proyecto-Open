@@ -5,6 +5,7 @@ import { listarContenidos } from '../../services/contenidosService.js';
 import { obtenerFiltros } from '../../services/filtrosService.js';
 import { GENEROS_POR_SECCION, etiquetaGenero } from '../../services/generos.js';
 import { usePlayer } from '../../hooks/usePlayer.js';
+import BotonFavorito from '../public/BotonFavorito.jsx';
 
 // Miniatura con respaldo al fondo del sitio si la imagen falla.
 function Miniatura({ url, alt }) {
@@ -150,7 +151,16 @@ export default function BloqueContenidos({ seccion, conGenero = false }) {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {contenidos.map((c) => (
             <article key={c.id} className="sv-video-card flex flex-col">
-              <Miniatura url={c.miniatura_url} alt={c.titulo} />
+              <div className="relative">
+                <Miniatura url={c.miniatura_url} alt={c.titulo} />
+                <BotonFavorito
+                  tipo="contenido"
+                  itemId={c.id}
+                  className="sv-fav-float"
+                  textoAnadir={`Guardar "${c.titulo}" en favoritos`}
+                  textoQuitar={`Quitar "${c.titulo}" de favoritos`}
+                />
+              </div>
               <div className="p-3 flex flex-col flex-1 gap-2">
                 <h6 className="p-0 m-0 text-slate-100 font-bold text-base">{c.titulo}</h6>
                 {c.descripcion && (

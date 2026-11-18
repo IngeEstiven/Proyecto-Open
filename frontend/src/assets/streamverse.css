@@ -433,6 +433,10 @@ textarea.sv-input { resize:vertical; }
 .sv-video-card { background:rgba(5,8,16,.6);border:1px solid var(--sv-border);border-radius:14px;overflow:hidden; }
 .sv-video-card iframe { width:100%;aspect-ratio:16/9;display:block; }
 .sv-video-card h6 { padding:.6rem .8rem;margin:0;font-size:.8rem;color:#cbd5e1;font-weight:600; }
+/* Biblioteca: unifica la proporción de las portadas (juegos verticales,
+   contenidos horizontales, logos) para que la rejilla quede pareja. */
+.sv-bib-card img { width:100%;aspect-ratio:16/9;object-fit:cover;display:block; }
+.sv-bib-card .sv-video-title { padding:.55rem .8rem .7rem;margin:0; }
 .sv-music-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem; }
 .sv-music-card { background:rgba(5,8,16,.6);border:1px solid var(--sv-border);border-radius:14px;overflow:hidden; }
 .sv-music-card h6 { padding:.5rem .8rem .2rem;margin:0;font-size:.82rem;color:var(--sv-accent-light);font-weight:700; }
@@ -513,6 +517,11 @@ textarea.form-control { resize:vertical; }
 .sv-btn-fav { display:flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:9px;background:rgba(var(--sv-accent-rgb),.12);border:1px solid var(--sv-border);color:#94a3b8;font-size:.82rem;cursor:pointer;transition:all .2s;padding:0; }
 .sv-btn-fav:hover { background:rgba(225,29,72,.2);color:#fb7185;border-color:rgba(225,29,72,.45); }
 .sv-btn-fav:disabled { opacity:.55;cursor:not-allowed; }
+/* Corazón flotante sobre las miniaturas de contenido (música, películas, etc.) */
+.sv-fav-float { position:absolute;top:10px;right:10px;z-index:5;display:inline-flex;align-items:center;justify-content:center;gap:6px;width:38px;height:38px;border-radius:999px;background:rgba(8,12,24,.72);border:1px solid rgba(255,255,255,.22);color:#e2e8f0;font-size:.95rem;cursor:pointer;backdrop-filter:blur(8px);transition:all .2s;padding:0; }
+.sv-fav-float:hover { background:rgba(225,29,72,.85);border-color:rgba(251,113,133,.7);color:#fff;transform:scale(1.07); }
+.sv-fav-float.is-active { background:linear-gradient(135deg,#e11d48,#be123c);border-color:rgba(255,182,193,.7);color:#fff;box-shadow:0 0 16px rgba(225,29,72,.45); }
+.sv-fav-float.is-saving { opacity:.7;cursor:wait;transform:none; }
 
 /* ══════════════════════════════════════
    DRAWER LATERAL (menú) + MENÚ DE USUARIO

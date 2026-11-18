@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import GameZoneSidebar from '../../components/public/GameZoneSidebar.jsx';
+import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { FICHAS } from '../../services/fichasEstaticas.js';
 
@@ -306,6 +307,14 @@ export default function GameZonePage() {
                       />
                     </button>
                     <div className="gcard-overlay absolute inset-0 bg-gradient-to-t from-black/93 via-black/48 to-black/5 pointer-events-none"></div>
+                    <BotonFavorito
+                      tipo="juego"
+                      slug={item.slug}
+                      iconSet="bi"
+                      className="gz-fav-btn"
+                      textoAnadir={`Guardar ${ficha.titulo} en favoritos`}
+                      textoQuitar={`Quitar ${ficha.titulo} de favoritos`}
+                    />
                     <div className={`absolute bottom-0 left-0 right-0 ${item.padding}`}>
                       <span className={BADGE_CATEGORIA}>{item.categoria}</span>
                       <h3

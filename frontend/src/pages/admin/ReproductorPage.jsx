@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useFavoritos } from '../../context/FavoritosContext.jsx';
+import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { obtenerContenido } from '../../services/contenidosService.js';
 
@@ -18,8 +18,6 @@ export default function ReproductorPage() {
   const [contenido, setContenido] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error, setError] = useState('');
-  const { esFavorito, alternar } = useFavoritos();
-  const [errorFavorito, setErrorFavorito] = useState('');
 
   useTituloPagina(contenido ? `${contenido.titulo} · OpenLeaf` : 'Reproductor · OpenLeaf');
 
@@ -45,16 +43,6 @@ export default function ReproductorPage() {
   }, [id]);
 
   const embed = contenido ? urlEmbed(contenido) : null;
-  const esFav = contenido ? esFavorito('contenido', contenido.id) : false;
-
-  const alternarFavorito = async () => {
-    setErrorFavorito('');
-    try {
-      await alternar('contenido', contenido.id);
-    } catch (err) {
-      setErrorFavorito(err.message);
-    }
-  };
 
   return (
     <main className="max-w-[1100px] mx-auto px-4 lg:px-6 py-6 min-h-[50vh]">
@@ -100,17 +88,16 @@ export default function ReproductorPage() {
                 <span className="text-[0.7rem] uppercase tracking-widest text-[#94a3b8]">{contenido.seccion?.replace('_', ' ')}</span>
                 <h1 className="sv-section-title mb-2">{contenido.titulo}</h1>
               </div>
-              <button
-                type="button"
-                onClick={alternarFavorito}
+              <BotonFavorito
+                tipo="contenido"
+                itemId={contenido.id}
+                mostrarTexto
                 className="btn-sv-secondary text-sm py-2 px-4 inline-flex items-center gap-2"
-              >
-                <i className={esFav ? 'fas fa-heart' : 'far fa-heart'}></i>
-                {esFav ? 'En tu biblioteca' : 'Añadir a favoritos'}
-              </button>
+                textoAnadir="Añadir a favoritos"
+                textoQuitar="En tu biblioteca"
+              />
             </div>
             {contenido.descripcion && <p className="text-[#cbd5e1] leading-relaxed mb-0">{contenido.descripcion}</p>}
-            {errorFavorito && <p className="text-[0.8rem] text-rose-400 mt-2 mb-0">{errorFavorito}</p>}
           </div>
         </>
       )}

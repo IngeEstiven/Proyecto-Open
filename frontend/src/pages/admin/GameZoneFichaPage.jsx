@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
-import { useFavoritos } from '../../context/FavoritosContext.jsx';
+import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { FICHAS } from '../../services/fichasEstaticas.js';
 import { obtenerJuego } from '../../services/juegosService.js';
@@ -23,7 +23,6 @@ export default function GameZoneFichaPage() {
   const [juegoApi, setJuegoApi] = useState(null);
   const [indice, setIndice] = useState(0);
   const [lightbox, setLightbox] = useState(null);
-  const { esFavorito, alternar } = useFavoritos();
 
   useEffect(() => {
     let vivo = true;
@@ -79,7 +78,6 @@ export default function GameZoneFichaPage() {
     );
   }
 
-  const esFavoritoJuego = juegoApi ? esFavorito('juego', juegoApi.id) : false;
   const total = datos.galeria.imagenes.length;
   const alAnterior = () => setIndice((i) => (i - 1 + total) % total);
   const alSiguiente = () => setIndice((i) => (i + 1) % total);
@@ -146,17 +144,16 @@ export default function GameZoneFichaPage() {
                 >
                   {datos.titulo}
                 </h1>
-                {juegoApi && (
-                  <button
-                    type="button"
-                    onClick={() => alternar('juego', juegoApi.id)}
-                    className={`shrink-0 text-2xl transition-colors cursor-pointer p-1 mt-1 ${esFavoritoJuego ? 'text-pink-500' : 'text-gray-500 hover:text-pink-500'}`}
-                    title={esFavoritoJuego ? 'Quitar de favoritos' : 'Añadir a favoritos'}
-                    aria-label={esFavoritoJuego ? 'Quitar de favoritos' : 'Añadir a favoritos'}
-                  >
-                    <i className={`bi ${esFavoritoJuego ? 'bi-heart-fill' : 'bi-heart'}`}></i>
-                  </button>
-                )}
+                <BotonFavorito
+                  tipo="juego"
+                  itemId={juegoApi?.id ?? null}
+                  slug={slug}
+                  iconSet="bi"
+                  mostrarTexto
+                  className="gz-fav-inline shrink-0 mt-1"
+                  textoAnadir="Añadir a favoritos"
+                  textoQuitar="En tu biblioteca"
+                />
               </div>
               <div className="flex flex-wrap gap-2 mb-4">
                 {datos.etiquetas.map((etiqueta) => (
