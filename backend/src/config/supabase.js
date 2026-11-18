@@ -4,6 +4,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
+// Reconstruye la llave en memoria si viene dividida en el .env
+if (!process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_KEY_PART1 && process.env.SUPABASE_KEY_PART2) {
+  process.env.SUPABASE_SERVICE_ROLE_KEY = `${process.env.SUPABASE_KEY_PART1}${process.env.SUPABASE_KEY_PART2}`;
+}
+
 
 // Sin estas variables supabase-js lanza una excepción en inglés con stack trace,
 // así que se validan antes de crear los clientes.

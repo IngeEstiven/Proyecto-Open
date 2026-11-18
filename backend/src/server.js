@@ -19,6 +19,10 @@ import { sendError } from './middlewares/errorMiddleware.js';
 
 dotenv.config();
 
+// Reconstruye la llave en memoria si viene dividida en el .env
+if (!process.env.SUPABASE_SERVICE_ROLE_KEY && process.env.SUPABASE_KEY_PART1 && process.env.SUPABASE_KEY_PART2) {
+  process.env.SUPABASE_SERVICE_ROLE_KEY = `${process.env.SUPABASE_KEY_PART1}${process.env.SUPABASE_KEY_PART2}`;
+}
 
 const required = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY', 'JWT_SECRET'];
 for (const name of required) {
