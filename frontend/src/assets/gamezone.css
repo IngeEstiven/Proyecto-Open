@@ -818,3 +818,101 @@ html.gz-scroll {
   background: rgba(248, 113, 113, .12);
   color: #fecaca;
 }
+
+/* ════════════════════════════════════════════════════════════════════
+   HEADER RESPONSIVE DE GAMEZONE (≤1365px)
+   El diseño original coloca el buscador y el deco en position:absolute.
+   A partir de ~1330px de ancho el buscador centrado se monta sobre el
+   título y la descripción (en celular se veía "cruzado"). Por debajo de
+   1366px el header pasa a fluir en columnas: contenido y buscador lado a
+   lado en tablet/laptop, apilados en móvil; el deco se oculta y la franja
+   de datos cierra el header. ≥1366px conserva el diseño original.
+   Solo aplica al diseño de GameZone bajo .gz-root.
+   ════════════════════════════════════════════════════════════════════ */
+@media (max-width:1365px) {
+  .gz-root .site-header {
+    min-height: 0;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    align-content: start;
+  }
+
+  .gz-root .site-header .header-content {
+    max-width: 100%;
+    padding: 28px 20px 4px;
+  }
+
+  /* El buscador deja de flotar centrado y entra en el flujo. Se anulan
+     también left/top y translate: Tailwind v4 aplica translate como
+     propiedad propia, así que solo con transform no bastaba. */
+  .gz-root .header-search-wrap {
+    position: static;
+    left: auto;
+    top: auto;
+    transform: none;
+    translate: none;
+    width: 100%;
+    padding: 16px 20px 0;
+  }
+
+  /* Los anillos y el ícono gigante tapaban el texto: se ocultan. */
+  .gz-root .header-deco {
+    display: none;
+  }
+
+  /* La franja de datos deja de ser absoluta y cierra el header. */
+  .gz-root .header-stats-strip {
+    position: static;
+    margin-top: 18px;
+  }
+
+  .gz-root .header-stats-strip>div {
+    padding: 10px 3px;
+  }
+
+  .gz-root .header-stats-strip>div>span:first-child {
+    font-size: 1.2rem;
+  }
+
+  .gz-root .header-stats-strip>div>span:last-child {
+    font-size: .5rem;
+    letter-spacing: .08em;
+  }
+}
+
+/* Tablet / laptop pequeña: contenido a la izquierda y buscador a la
+   derecha, con la franja de datos a todo el ancho debajo. */
+@media (min-width:769px) and (max-width:1365px) {
+  .gz-root .site-header {
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 340px);
+    column-gap: 32px;
+    align-items: center;
+  }
+
+  .gz-root .site-header .header-content {
+    padding: 40px 0 32px 40px;
+  }
+
+  .gz-root .header-search-wrap {
+    padding: 0 40px 0 0;
+  }
+
+  .gz-root .header-stats-strip {
+    grid-column: 1 / -1;
+    margin-top: 4px;
+  }
+}
+
+@media (max-width:768px) {
+  /* La barra superior: menos relleno y marca algo más pequeña para que
+     no se apriete en teléfonos angostos. */
+  .gz-root .gz-navbar>div {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .gz-root .gz-navbar a.font-display {
+    font-size: 1.35rem;
+    letter-spacing: .08em;
+  }
+}
