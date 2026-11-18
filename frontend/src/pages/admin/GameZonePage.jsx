@@ -5,6 +5,7 @@ import GameZoneSidebar from '../../components/public/GameZoneSidebar.jsx';
 import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { FICHAS } from '../../services/fichasEstaticas.js';
+import { slugCategoria } from '../../services/categoriasGZ.js';
 
 const TARJETA_BASE =
   'gcard relative overflow-hidden rounded-[14px] border border-white/[.07] h-full transition-all duration-300 hover:border-accent hover:shadow-[0_0_30px_rgba(3,218,198,.22)] hover:-translate-y-[3px] hover:z-[5]';
@@ -311,6 +312,9 @@ export default function GameZonePage() {
                       tipo="juego"
                       slug={item.slug}
                       titulo={ficha.titulo}
+                      categoria={slugCategoria(item.categoria)}
+                      descripcion={item.desc || ficha.sinopsis}
+                      imagen={ficha.caratula}
                       iconSet="bi"
                       className="gz-fav-btn"
                       textoAnadir={`Guardar ${ficha.titulo} en favoritos`}

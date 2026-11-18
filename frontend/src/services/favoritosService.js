@@ -9,15 +9,19 @@ export async function listarFavoritos() {
   }
 }
 
-// itemId es el id interno del catálogo. Para juegos también se acepta `slug`
-// y `titulo`: las tarjetas estáticas de GameZone no manejan el id de la base
-// y sus slugs cortos (gow, horizon...) no coinciden con el slug real.
-export async function agregarFavorito(tipo, itemId, slug, titulo) {
+// itemId es el id interno del catálogo. Para juegos también se aceptan `slug`,
+// `titulo` y los datos de la ficha (categoria/descripcion/imagen): las tarjetas
+// de GameZone son estáticas y sus slugs cortos (gow, horizon...) no coinciden
+// con el slug real de la base.
+export async function agregarFavorito(tipo, itemId, datos = {}) {
   try {
     const cuerpo = { tipo };
     if (itemId != null) cuerpo.item_id = itemId;
-    if (slug) cuerpo.slug = slug;
-    if (titulo) cuerpo.titulo = titulo;
+    if (datos.slug) cuerpo.slug = datos.slug;
+    if (datos.titulo) cuerpo.titulo = datos.titulo;
+    if (datos.categoria) cuerpo.categoria = datos.categoria;
+    if (datos.descripcion) cuerpo.descripcion = datos.descripcion;
+    if (datos.imagen) cuerpo.imagen = datos.imagen;
 
     const { data } = await axiosClient.post('/favoritos', cuerpo);
     return data.favorito;

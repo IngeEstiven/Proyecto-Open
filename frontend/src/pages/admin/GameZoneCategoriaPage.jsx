@@ -106,6 +106,9 @@ export default function GameZoneCategoriaPage() {
                       tipo="juego"
                       slug={juego.slug}
                       titulo={ficha.titulo}
+                      categoria={categoria}
+                      descripcion={juego.desc || ficha.sinopsis}
+                      imagen={ficha.caratula}
                       iconSet="bi"
                       className="gz-fav-btn"
                       textoAnadir={`Guardar ${juego.titulo} en favoritos`}

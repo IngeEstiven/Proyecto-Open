@@ -16,6 +16,9 @@ export default function BotonFavorito({
   itemId = null,
   slug = null,
   titulo = null,
+  categoria = null,
+  descripcion = null,
+  imagen = null,
   className = '',
   iconSet = 'fa',
   mostrarTexto = false,
@@ -58,7 +61,13 @@ export default function BotonFavorito({
     setError('');
     setGuardando(true);
     try {
-      const guardado = await alternar(tipo, itemId, slug, titulo);
+      const guardado = await alternar(tipo, itemId, {
+        slug,
+        titulo,
+        categoria,
+        descripcion,
+        imagen
+      });
       toast.exito(guardado ? 'Guardado en tu biblioteca' : 'Quitado de tu biblioteca');
     } catch (err) {
       const mensaje = err.message || 'No pudimos actualizar tus favoritos.';

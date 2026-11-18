@@ -20,7 +20,7 @@ export async function listFavoritos(req, res) {
 
 export async function addFavorito(req, res) {
   try {
-    const { tipo, item_id, slug, titulo } = req.body;
+    const { tipo, item_id, slug, titulo, categoria, descripcion, imagen } = req.body;
 
 
     if (!tipo || !tiposPermitidos.includes(tipo)) {
@@ -33,13 +33,14 @@ export async function addFavorito(req, res) {
     }
 
 
-    const favorito = await createFavorito(
-      req.user.id,
-      tipo,
-      item_id ?? null,
-      slug ?? null,
-      titulo ?? null
-    );
+    const favorito = await createFavorito(req.user.id, tipo, {
+      itemId: item_id ?? null,
+      slug: slug ?? null,
+      titulo: titulo ?? null,
+      categoria: categoria ?? null,
+      descripcion: descripcion ?? null,
+      imagen: imagen ?? null
+    });
 
 
     await createAuditLog({

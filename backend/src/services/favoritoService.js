@@ -146,7 +146,79 @@ async function resolverItemId(tipo, itemId, itemSlug, itemTitulo) {
 }
 
 
-export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, itemTitulo = null) {
+// Igual que en juegoService: el slug se genera a partir del título.
+function slugDesdeTexto(texto) {
+  return (texto || '')
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
+}
+
+
+async function slugUnico(base) {
+  const inicio = base || `juego-${Date.now()}`;
+  let slug = inicio;
+  let contador = 1;
+
+  while (true) {
+    const { data, error } = await supabaseAdmin
+      .from('juegos')
+      .select('id')
+      .eq('slug', slug)
+      .limit(1);
+
+    if (error) throw new Error(error.message);
+    if (!data || data.length === 0) return slug;
+
+    slug = `${inicio}-${contador}`;
+    contador += 1;
+  }
+}
+
+
+const CATEGORIAS_VALIDAS = ['accion', 'terror', 'deportes', 'cooperativo'];
+
+
+// GameZone muestra fichas estáticas que pueden no estar todavía en el
+// catálogo. Para que el favorito tenga a qué apuntar, se crea el juego con los
+// datos de la ficha; después aparece en el panel de administración y se puede
+// editar o borrar como cualquier otro.
+async function crearJuegoDesdeFicha(referencia) {
+  const titulo = (referencia?.titulo || '').trim();
+  if (!titulo) return null;
+
+  const categoria = CATEGORIAS_VALIDAS.includes(referencia.categoria)
+    ? referencia.categoria
+    : 'accion';
+
+  const slug = await slugUnico(slugDesdeTexto(titulo));
+
+  const { data, error } = await supabaseAdmin
+    .from('juegos')
+    .insert([
+      {
+        titulo,
+        slug,
+        categoria,
+        descripcion: referencia.descripcion || null,
+        imagen_url: referencia.imagen || null,
+        destacado: false,
+        estado: 'publicado'
+      }
+    ])
+    .select('id');
+
+  if (error) throw new Error(error.message);
+  return data?.[0]?.id ?? null;
+}
+
+
+export async function createFavorito(usuarioId, tipo, referencia = {}) {
   const columna = columnasPorTipo[tipo];
   const tabla = tablasPorTipo[tipo];
 
@@ -154,7 +226,17 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, i
     throw new AppError(400, 'Selecciona un tipo de favorito válido.');
   }
 
-  const referencia = await resolverItemId(tipo, itemId, itemSlug, itemTitulo);
+  const { itemId = null, slug = null, titulo = null } = referencia;
+  const referenciado = await resolverItemId(tipo, itemId, slug, titulo);
+
+  if (referenciado == null && tipo === 'juego') {
+    // El juego no está en el catálogo: se crea a partir de la ficha y se
+    // vuelve a intentar con su id ya real.
+    const creado = await crearJuegoDesdeFicha(referencia);
+    if (creado) {
+      return createFavorito(usuarioId, tipo, { ...referencia, itemId: creado });
+    }
+  }
 
   const mensajes = {
     juego: 'Este juego todavía no está en el catálogo de OpenLeaf, así que no se puede guardar en favoritos.',
@@ -162,14 +244,14 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, i
     plataforma: 'Esa plataforma ya no está disponible.'
   };
 
-  if (referencia == null) {
+  if (referenciado == null) {
     throw new AppError(404, mensajes[tipo]);
   }
 
   const { data: item, error: itemError } = await supabaseAdmin
     .from(tabla)
     .select('id')
-    .eq('id', referencia)
+    .eq('id', referenciado)
     .limit(1);
 
 
@@ -181,7 +263,7 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, i
     .from('favoritos')
     .select(FAVORITO_SELECT)
     .eq('usuario_id', usuarioId)
-    .eq(columna, referencia)
+    .eq(columna, referenciado)
     .limit(1);
 
 
@@ -196,9 +278,9 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, i
     .insert([
       {
         usuario_id: usuarioId,
-        juego_id: tipo === 'juego' ? referencia : null,
-        contenido_id: tipo === 'contenido' ? referencia : null,
-        plataforma_id: tipo === 'plataforma' ? referencia : null
+        juego_id: tipo === 'juego' ? referenciado : null,
+        contenido_id: tipo === 'contenido' ? referenciado : null,
+        plataforma_id: tipo === 'plataforma' ? referenciado : null
       }
     ])
     .select(FAVORITO_SELECT);
@@ -212,7 +294,7 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, i
         .from('favoritos')
         .select(FAVORITO_SELECT)
         .eq('usuario_id', usuarioId)
-        .eq(columna, referencia)
+        .eq(columna, referenciado)
         .limit(1);
       if (reintentoError) throw new Error(reintentoError.message);
       if (yaGuardado?.[0]) return yaGuardado[0];

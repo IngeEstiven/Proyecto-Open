@@ -32,7 +32,7 @@ export default function TarjetaPlataforma({ p }) {
     setErrorFavorito('');
     setGuardando(true);
     try {
-      await alternar('plataforma', p.id, null, p.nombre);
+      await alternar('plataforma', p.id, { titulo: p.nombre });
     } catch (error) {
       setErrorFavorito(error.message);
     } finally {

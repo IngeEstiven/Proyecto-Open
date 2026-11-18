@@ -4,6 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import BotonFavorito from '../../components/public/BotonFavorito.jsx';
 import useTituloPagina from '../../hooks/useTituloPagina.js';
 import { FICHAS } from '../../services/fichasEstaticas.js';
+import { slugCategoria } from '../../services/categoriasGZ.js';
 import { obtenerJuego } from '../../services/juegosService.js';
 
 const ETIQUETA =
@@ -149,6 +150,9 @@ export default function GameZoneFichaPage() {
                   itemId={juegoApi?.id ?? null}
                   slug={slug}
                   titulo={datos.titulo}
+                  categoria={slugCategoria(fichaEstatica.etiquetas?.[0])}
+                  descripcion={datos.sinopsis}
+                  imagen={datos.caratula}
                   iconSet="bi"
                   mostrarTexto
                   className="gz-fav-inline shrink-0 mt-1"

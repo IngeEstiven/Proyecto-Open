@@ -128,8 +128,8 @@ export function FavoritosProvider({ children }) {
   );
 
   const alternar = useCallback(
-    async (tipo, itemId, slug = null, titulo = null) => {
-      const actual = favoritoDe(tipo, itemId, slug, titulo);
+    async (tipo, itemId, datos = {}) => {
+      const actual = favoritoDe(tipo, itemId, datos.slug ?? null, datos.titulo ?? null);
 
       if (actual) {
         await eliminarFavorito(actual.id);
@@ -137,7 +137,7 @@ export function FavoritosProvider({ children }) {
         return false;
       }
 
-      const nuevo = await agregarFavorito(tipo, itemId, slug, titulo);
+      const nuevo = await agregarFavorito(tipo, itemId, datos);
       // El backend es idempotente: si ya existía, devuelve el mismo registro.
       setFavoritos((prev) => {
         if (prev.some((f) => f.id === nuevo.id)) return prev;
