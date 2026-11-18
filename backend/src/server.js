@@ -36,28 +36,15 @@ for (const name of required) {
 const app = express();
 
 
-app.set('trust proxy', 1);
+app.set('trust proxy', true);
 
 
 const allowedOrigins = (process.env.FRONTEND_URL || 'http://localhost:5173')
   .split(',')
-  .map((origin) => origin.trim())
-  .filter(Boolean);
+  .map((origin) => origin.trim());
 
-// Permite patrones con * (por ejemplo https://openleaf-frontend-*.vercel.app)
-// para no depender del hash que Vercel asigna a cada deployment.
-function esOrigenPermitido(origin) {
-  if (!origin) return false;
-  return allowedOrigins.some((permitido) => {
-    if (!permitido.includes('*')) return permitido === origin;
-    const patron = permitido
-      .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
-      .replace(/\*/g, '.*');
-    return new RegExp(`^${patron}$`).test(origin);
-  });
-}
 
-app.use(cors({ origin: esOrigenPermitido }));
+app.use(cors({ origin: allowedOrigins }));
 app.use(express.json({ limit: '1mb' }));
 
 
@@ -93,6 +80,6 @@ app.use((err, req, res, next) => {
 const PORT = process.env.PORT || 3001;
 
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Servidor corriendo en http://0.0.0.0:${PORT}`);
+app.listen(PORT, () => {
+  console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
