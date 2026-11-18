@@ -20,20 +20,26 @@ export async function listFavoritos(req, res) {
 
 export async function addFavorito(req, res) {
   try {
-    const { tipo, item_id, slug } = req.body;
+    const { tipo, item_id, slug, titulo } = req.body;
 
 
     if (!tipo || !tiposPermitidos.includes(tipo)) {
       return res.status(400).json({ error: 'Selecciona un tipo de favorito válido.' });
     }
-    // Los juegos se pueden identificar por id o por slug (GameZone usa fichas
-    // estáticas y no siempre conoce el id interno del catálogo).
-    if (!item_id && !slug) {
+    // Los juegos se pueden identificar por id, por slug o por título (GameZone
+    // usa fichas estáticas y no siempre conoce el id interno del catálogo).
+    if (!item_id && !slug && !titulo) {
       return res.status(400).json({ error: 'No pudimos identificar el contenido que quieres guardar. Recarga la página e intenta de nuevo.' });
     }
 
 
-    const favorito = await createFavorito(req.user.id, tipo, item_id ?? null, slug ?? null);
+    const favorito = await createFavorito(
+      req.user.id,
+      tipo,
+      item_id ?? null,
+      slug ?? null,
+      titulo ?? null
+    );
 
 
     await createAuditLog({

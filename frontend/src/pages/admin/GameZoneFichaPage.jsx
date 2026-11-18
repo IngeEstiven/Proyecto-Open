@@ -148,6 +148,7 @@ export default function GameZoneFichaPage() {
                   tipo="juego"
                   itemId={juegoApi?.id ?? null}
                   slug={slug}
+                  titulo={datos.titulo}
                   iconSet="bi"
                   mostrarTexto
                   className="gz-fav-inline shrink-0 mt-1"

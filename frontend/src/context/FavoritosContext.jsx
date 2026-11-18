@@ -11,6 +11,39 @@ const COLUMNA_POR_TIPO = {
   plataforma: 'plataforma_id'
 };
 
+// Relación que devuelve la API para poder comparar por slug o por título.
+const RELACION_POR_TIPO = {
+  juego: 'juego',
+  plataforma: 'plataforma'
+};
+
+// Misma normalización que aplica el backend: minúsculas, sin acentos y sin
+// signos. GameZone guarda las fichas con un slug corto (gow, horizon...) y la
+// base genera otro a partir del título (god-of-war-ragnarok), así que el
+// corazón se reconoce comparando títulos.
+function normalizarTexto(texto) {
+  return (texto || '')
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function titulosParecidos(uno, otro) {
+  if (!uno || !otro) return false;
+  if (uno === otro) return true;
+
+  const corto = uno.length <= otro.length ? uno : otro;
+  const largo = corto === uno ? otro : uno;
+  const palabras = corto.split(' ').length;
+
+  if (palabras >= 2 && largo.startsWith(`${corto} `)) return true;
+  return palabras >= 3 && largo.includes(corto);
+}
+
 export function FavoritosProvider({ children }) {
   const { autenticado } = useAuth();
   const [favoritos, setFavoritos] = useState([]);
@@ -61,14 +94,25 @@ export function FavoritosProvider({ children }) {
     };
   }, [autenticado]);
 
-  // Busca un favorito por id (contenido/plataforma) o, en el caso de los
-  // juegos, también por slug. Así las fichas estáticas de GameZone pueden
+  // Busca un favorito por id (contenido/plataforma) o, para juegos y
+  // plataformas, también por slug o título. Así las fichas estáticas de
+  // GameZone y las tarjetas de plataforma previas a la carga de la API pueden
   // marcar el corazón sin conocer el id interno del catálogo.
   const favoritoDe = useCallback(
-    (tipo, itemId, slug = null) => {
-      if (tipo === 'juego' && slug) {
-        const porSlug = favoritos.find((f) => f.juego?.slug === slug);
-        if (porSlug) return porSlug;
+    (tipo, itemId, slug = null, titulo = null) => {
+      const relacion = RELACION_POR_TIPO[tipo];
+      if (relacion) {
+        const tituloNormalizado = normalizarTexto(titulo);
+        const porTitulo = favoritos.find((f) => {
+          const item = f[relacion];
+          if (!item) return false;
+          if (slug && item.slug === slug) return true;
+          return titulosParecidos(
+            normalizarTexto(item.titulo || item.nombre),
+            tituloNormalizado
+          );
+        });
+        if (porTitulo) return porTitulo;
       }
 
       const columna = COLUMNA_POR_TIPO[tipo];
@@ -79,13 +123,13 @@ export function FavoritosProvider({ children }) {
   );
 
   const esFavorito = useCallback(
-    (tipo, itemId, slug = null) => Boolean(favoritoDe(tipo, itemId, slug)),
+    (tipo, itemId, slug = null, titulo = null) => Boolean(favoritoDe(tipo, itemId, slug, titulo)),
     [favoritoDe]
   );
 
   const alternar = useCallback(
-    async (tipo, itemId, slug = null) => {
-      const actual = favoritoDe(tipo, itemId, slug);
+    async (tipo, itemId, slug = null, titulo = null) => {
+      const actual = favoritoDe(tipo, itemId, slug, titulo);
 
       if (actual) {
         await eliminarFavorito(actual.id);
@@ -93,7 +137,7 @@ export function FavoritosProvider({ children }) {
         return false;
       }
 
-      const nuevo = await agregarFavorito(tipo, itemId, slug);
+      const nuevo = await agregarFavorito(tipo, itemId, slug, titulo);
       // El backend es idempotente: si ya existía, devuelve el mismo registro.
       setFavoritos((prev) => {
         if (prev.some((f) => f.id === nuevo.id)) return prev;

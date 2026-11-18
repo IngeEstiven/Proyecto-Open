@@ -26,13 +26,13 @@ export default function TarjetaPlataforma({ p }) {
   const { esFavorito, alternar } = useFavoritos();
   const [guardando, setGuardando] = useState(false);
   const [errorFavorito, setErrorFavorito] = useState('');
-  const esFav = esFavorito('plataforma', p.id);
+  const esFav = esFavorito('plataforma', p.id, null, p.nombre);
 
   const alternarFavorito = async () => {
     setErrorFavorito('');
     setGuardando(true);
     try {
-      await alternar('plataforma', p.id);
+      await alternar('plataforma', p.id, null, p.nombre);
     } catch (error) {
       setErrorFavorito(error.message);
     } finally {

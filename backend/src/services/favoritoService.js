@@ -37,25 +37,116 @@ export async function getFavoritos(usuarioId) {
 }
 
 
-// Resuelve el id real del ítem. Las tarjetas de GameZone viven en el frontend
-// como fichas estáticas, así que el navegador puede enviar el slug del juego
-// en lugar del id de la base de datos.
-async function resolverItemId(tipo, itemId, itemSlug) {
-  if (itemId != null && itemId !== '') return itemId;
-  if (tipo !== 'juego' || !itemSlug) return null;
-
-  const { data, error } = await supabaseAdmin
-    .from('juegos')
-    .select('id')
-    .eq('slug', itemSlug)
-    .limit(1);
-
-  if (error) throw new Error(error.message);
-  return data?.[0]?.id ?? null;
+// Normaliza texto para comparar títulos: minúsculas, sin acentos y con
+// espacios simples. Evita que "Ragnarök" y "ragnarok" se traten distinto.
+function normalizarTexto(texto) {
+  return (texto || '')
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9\s]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 
-export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null) {
+// Campo que hace de "título" en cada tabla para poder resolver un ítem que
+// llega sin id (fichas estáticas de GameZone, plataformas antes de cargar).
+const CAMPOS_TITULO = {
+  juego: 'titulo',
+  contenido: 'titulo',
+  plataforma: 'nombre'
+};
+
+
+// Compara dos títulos ya normalizados. Solo se acepta coincidencia parcial
+// cuando es segura: el texto corto debe empezar el largo con 2+ palabras, o
+// estar contenido en él con 3+ palabras. Así se enlazan "Horizon Zero Dawn" y
+// "Horizon Zero Dawn Remastered", pero no "Max" con "HBO Max".
+function titulosEquivalentes(uno, otro) {
+  if (!uno || !otro) return false;
+  if (uno === otro) return true;
+
+  const corto = uno.length <= otro.length ? uno : otro;
+  const largo = corto === uno ? otro : uno;
+  const palabras = corto.split(' ').length;
+
+  if (palabras >= 2 && largo.startsWith(`${corto} `)) return true;
+  return palabras >= 3 && largo.includes(corto);
+}
+
+
+// Las fichas estáticas de GameZone usan slugs cortos (gow, horizon, fc...) que
+// no tienen por qué coincidir con el slug que genera la base a partir del
+// título (god-of-war-ragnarok). Buscamos por título normalizado para poder
+// enlazar el corazón con el ítem real del catálogo.
+async function buscarPorTitulo(tipo, texto) {
+  const campo = CAMPOS_TITULO[tipo];
+  const buscado = normalizarTexto(texto);
+  if (!campo || !buscado) return null;
+
+  const { data, error } = await supabaseAdmin
+    .from(tablasPorTipo[tipo])
+    .select(`id, ${campo}`);
+
+  if (error) throw new Error(error.message);
+
+  const candidatos = (data || []).map((fila) => ({
+    id: fila.id,
+    normalizado: normalizarTexto(fila[campo])
+  }));
+
+  const exacto = candidatos.find((fila) => fila.normalizado === buscado);
+  if (exacto) return exacto.id;
+
+  // Se ordena por diferencia de longitud para quedarse con el más parecido.
+  const parecidos = candidatos
+    .filter((fila) => titulosEquivalentes(fila.normalizado, buscado))
+    .sort(
+      (a, b) =>
+        Math.abs(a.normalizado.length - buscado.length) -
+        Math.abs(b.normalizado.length - buscado.length)
+    );
+
+  return parecidos[0]?.id ?? null;
+}
+
+
+// Resuelve el id real del ítem probando, en orden: id directo, slug (juegos)
+// y título/nombre. Las tarjetas de GameZone viven en el frontend como fichas
+// estáticas y las plataformas se pintan con datos locales antes de que llegue
+// la respuesta de la API, así que el navegador no siempre conoce el id real.
+async function resolverItemId(tipo, itemId, itemSlug, itemTitulo) {
+  if (itemId != null && itemId !== '') {
+    const { data, error } = await supabaseAdmin
+      .from(tablasPorTipo[tipo])
+      .select('id')
+      .eq('id', itemId)
+      .limit(1);
+
+    // 22P02 = el id no tiene formato válido (por ejemplo, un id estático que
+    // todavía no se ha cargado desde la base). Se ignora y se sigue probando.
+    if (error && error.code !== '22P02') throw new Error(error.message);
+    if (data?.[0]?.id) return data[0].id;
+  }
+
+  if (tipo === 'juego' && itemSlug) {
+    const { data, error } = await supabaseAdmin
+      .from('juegos')
+      .select('id')
+      .eq('slug', itemSlug)
+      .limit(1);
+
+    if (error) throw new Error(error.message);
+    if (data?.[0]?.id) return data[0].id;
+  }
+
+  return buscarPorTitulo(tipo, itemTitulo);
+}
+
+
+export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null, itemTitulo = null) {
   const columna = columnasPorTipo[tipo];
   const tabla = tablasPorTipo[tipo];
 
@@ -63,10 +154,16 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null) {
     throw new AppError(400, 'Selecciona un tipo de favorito válido.');
   }
 
-  const referencia = await resolverItemId(tipo, itemId, itemSlug);
+  const referencia = await resolverItemId(tipo, itemId, itemSlug, itemTitulo);
+
+  const mensajes = {
+    juego: 'Este juego todavía no está en el catálogo de OpenLeaf, así que no se puede guardar en favoritos.',
+    contenido: 'Ese contenido ya no está disponible.',
+    plataforma: 'Esa plataforma ya no está disponible.'
+  };
 
   if (referencia == null) {
-    throw new AppError(400, 'No pudimos identificar el contenido que quieres guardar. Recarga la página e intenta de nuevo.');
+    throw new AppError(404, mensajes[tipo]);
   }
 
   const { data: item, error: itemError } = await supabaseAdmin
@@ -77,7 +174,7 @@ export async function createFavorito(usuarioId, tipo, itemId, itemSlug = null) {
 
 
   if (itemError) throw new Error(itemError.message);
-  if (!item || item.length === 0) throw new AppError(404, 'Ese contenido ya no está disponible.');
+  if (!item || item.length === 0) throw new AppError(404, mensajes[tipo]);
 
 
   const { data: existente, error: existenteError } = await supabaseAdmin

@@ -310,6 +310,7 @@ export default function GameZonePage() {
                     <BotonFavorito
                       tipo="juego"
                       slug={item.slug}
+                      titulo={ficha.titulo}
                       iconSet="bi"
                       className="gz-fav-btn"
                       textoAnadir={`Guardar ${ficha.titulo} en favoritos`}
